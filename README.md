@@ -17,8 +17,8 @@ bash git clone https://github.com/Spark4444/FandomAdBlocker
 
 ## Usage
 
-1. `🍪 Disable  Cookies` **button** disables all cookies on the fandom that you've clicked it on (after page is refreshed).
-2. `⏸️ Pause ad blocking on this fandom` **button** pauses ad blocking on the fandom that you've clicked it on (after page is refreshed).
+* `🍪 Disable  Cookies` **button** disables all cookies on the fandom that you've clicked it on (after page is refreshed).
+* `⏸️ Pause ad blocking on this fandom` **button** pauses ad blocking on the fandom that you've clicked it on (after page is refreshed).
 
 
 ## Current state of this project
