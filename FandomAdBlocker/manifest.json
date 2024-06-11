@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Fandom ad blocker",
+    "name": "FAdBlock — block ads across the fandoms",
     "version": "1.0.0",
-    "description": "This extension removes all ads from fandom.com website",
+    "description": "Block pop-ups and intrusive ads across Fandom with FAdBlock",
     "action": {
         "default_popup": "index.html"
     },

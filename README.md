@@ -1,2 +1,2 @@
 # FandomAdBlocker
-Chromium extension which removes all ads from any fandom on fandom.com
+Block pop-ups and intrusive ads across Fandom with FAdBlock
