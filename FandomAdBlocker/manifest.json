@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "FAdBlock — block ads across the fandoms",
+    "name": "FADBlock — block ads across the fandoms",
     "version": "1.0.0",
-    "description": "Block pop-ups and intrusive ads across Fandom with FAdBlock",
+    "description": "Block pop-ups and intrusive ads across Fandom with FADBlock",
     "action": {
         "default_popup": "index.html"
     },
