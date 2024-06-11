@@ -12,7 +12,8 @@ Use the git clone command to copy it onto your computer
 ```
 bash git clone https://github.com/Spark4444/FandomAdBlocker
 ```
-3. Load the extension into your browser of choice(Your browser should have chromium extension support)
+3. Load the extension into your browser of choice 
+<br>(Your browser should have chromium extension support).
 
 ## Usage
 
