@@ -1,0 +1,184 @@
+body {
+    align-items: center;
+    background: #520143;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: helvetica;
+    height: 408px;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    user-select: none;
+    width: 320px;
+}
+
+.header {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 0 0 5px 0;
+}
+
+.FABlogo {
+    width: 40px;
+}
+
+.LogoText {
+    display: flex;
+    font-size: 25px;
+    padding: 0 0 0 10px;
+}
+
+.boldText {
+    font-weight: 600;
+}
+
+.main {
+    align-items: center;
+    background: #ffc500;
+    border: black 1.34px solid;
+    border-radius: 5px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    height: 316px;
+    justify-content: space-evenly;
+    width: 290px;
+}
+
+.websiteName {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.adsCountWrap {
+    align-items: center;
+    border: black solid 1.34px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    height: 72px;
+    justify-content: space-between;
+    padding: 5px;
+    width: 240px;
+}
+
+.firstSection {
+    align-items: center;
+    display: flex;
+    height: 35px;
+    justify-content: flex-start;
+    width: 240px;
+} 
+
+.FABlogo2 {
+    padding: 0 5px 0 2px;
+    width: 24px;
+}
+
+.seperator {
+    background: black;
+    height: 1.34px;
+    width: 240px;
+}
+
+.secondSection {
+    align-items: center;
+    display: flex;
+    height: 36px;
+    justify-content: space-between;
+    width: 240px;
+}
+
+.adsBlcoked {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 144px;
+}
+
+.count {
+    color: #520143;
+    padding: 0 5px 0 0;
+}
+
+.totalAdsBlocked {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 94px;
+}
+
+.count2 {
+    color: #520143;
+    padding: 0 5px 0 0;
+}
+
+.disableCookiesbtn {
+    align-items: center;
+    background: #c39600;
+    border: solid 1.8px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    font-weight: 550;
+    height: 30px;
+    justify-content: center;
+    transition: 0.5s;
+    width: 240px;
+}
+
+.cookieIcon {
+    padding: 0 5px 0 0;
+}
+
+.pauseOnThisFandombtn{
+    align-items: center;
+    background: #c39600;
+    border: solid 1.8px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    font-weight: 550;
+    height: 30px;
+    justify-content: center;
+    transition: 0.5s;
+    width: 240px;
+}
+
+.pauseIcon {
+    padding: 0 2px 0 0;
+    width: 17px;
+}
+
+.disableCookiesbtn:hover, .pauseOnThisFandombtn:hover{
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.buttons {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 128px;
+    justify-content: space-around;
+    width: 290px;
+}
+
+.warning {
+    font-size: 9px;
+    color: #520143;
+    font-weight: 550;
+}
+
+.nothingText {
+    font-size: 20px;
+    font-weight: 550;
+}
+
+.nothingToBlockImage {
+    width: 262px;
+}
