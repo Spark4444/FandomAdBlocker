@@ -10,7 +10,7 @@ body {
     margin: 0;
     overflow: hidden;
     padding: 0;
-    user-select: none;
+    user-select: text;
     width: 320px;
 }
 
@@ -129,6 +129,7 @@ body {
     height: 30px;
     justify-content: center;
     transition: 0.5s;
+    user-select: none;
     width: 240px;
 }
 
@@ -147,6 +148,7 @@ body {
     height: 30px;
     justify-content: center;
     transition: 0.5s;
+    user-select: none;
     width: 240px;
 }
 
