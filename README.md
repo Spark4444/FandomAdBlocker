@@ -1,5 +1,6 @@
 # FandomAdBlocker
 Block pop-ups and intrusive ads across Fandom.com with FAdBlock
+[Chrome Web Store link](https://chromewebstore.google.com/detail/fadblock-%E2%80%94-block-ads-acro/lmbjbgfkcnbgkmolfnhhblgnhkmjkead)
 
 ## Instalation
 
