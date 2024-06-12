@@ -71,6 +71,7 @@ if(!window.location.href.includes("chrome-extension")){
             deleteElement(".bottom-ads-container");
             deleteElement(".top-ads-container");
             deleteElement(".top_boxad");
+            deleteElement(".ad-slot-placeholder");
             deleteElement(".gpt-ad");
             deleteElement(".featured-video-player-container");
         }
