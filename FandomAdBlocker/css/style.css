@@ -38,8 +38,8 @@ body {
 .main {
     align-items: center;
     background: #ffc500;
-    border: black 1.34px solid;
     border-radius: 5px;
+    border: black 1.34px solid;
     color: black;
     display: flex;
     flex-direction: column;
@@ -55,8 +55,8 @@ body {
 
 .adsCountWrap {
     align-items: center;
-    border: black solid 1.34px;
     border-radius: 5px;
+    border: black solid 1.34px;
     display: flex;
     flex-direction: column;
     height: 72px;
@@ -71,7 +71,7 @@ body {
     height: 35px;
     justify-content: flex-start;
     width: 240px;
-} 
+}
 
 .FABlogo2 {
     padding: 0 5px 0 2px;
@@ -121,8 +121,8 @@ body {
 .disableCookiesbtn {
     align-items: center;
     background: #c39600;
-    border: solid 1.8px;
     border-radius: 5px;
+    border: solid 1.8px;
     cursor: pointer;
     display: flex;
     font-weight: 550;
@@ -137,11 +137,11 @@ body {
     padding: 0 5px 0 0;
 }
 
-.pauseOnThisFandombtn{
+.pauseOnThisFandombtn {
     align-items: center;
     background: #c39600;
-    border: solid 1.8px;
     border-radius: 5px;
+    border: solid 1.8px;
     cursor: pointer;
     display: flex;
     font-weight: 550;
@@ -157,7 +157,7 @@ body {
     width: 17px;
 }
 
-.disableCookiesbtn:hover, .pauseOnThisFandombtn:hover{
+.disableCookiesbtn:hover, .pauseOnThisFandombtn:hover {
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -171,8 +171,8 @@ body {
 }
 
 .warning {
-    font-size: 9px;
     color: #520143;
+    font-size: 9px;
     font-weight: 550;
 }
 
@@ -184,3 +184,4 @@ body {
 .nothingToBlockImage {
     width: 262px;
 }
+
