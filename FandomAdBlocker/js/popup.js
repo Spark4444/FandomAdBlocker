@@ -107,6 +107,7 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                         enableStylesForButton(disableCookiesbtn, cookieIcon, false);
                     }
 
+                    chrome.tabs.sendMessage(tabs[0].id, {action: "updatePage"});
                     saveToChromeStorage("cookiesBlockedOn", cookiesBlockedOn);
                 }
             });
@@ -127,6 +128,7 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                         enableStylesForButton(pauseOnThisFandombtn, pauseIcon, false);
                     }
 
+                    chrome.tabs.sendMessage(tabs[0].id, {action: "updatePage"});
                     saveToChromeStorage("websitesPausedOn", websitesPausedOn);
                 }
             });

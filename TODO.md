@@ -5,4 +5,4 @@
 5. The pages should be separate for the todo 2
 6. (If possible) Add a button to add a new unblocked site/ blocked cookie site to one of the pages
 7. Update all the descriptions and readme file to reflect the changes above
-8. Change version to 1.7.5 in manifest.json
+8. Add developer testing page with list of all the ad elements that were blocked with selectors on the current page

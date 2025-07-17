@@ -75,6 +75,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             cookiesBlockedOn: cookiesBlockedOn
         });
     }
+
+
+    if (request.action == "updatePage") {
+        window.location.reload();
+    }
 });
 
 // Function to remove ads and cookies from the website (if not paused and if cookies are blocked on this website)
@@ -82,6 +87,7 @@ function removeAdsCookies(){
     // Check if the website is paused and delete the ads
     if(!websitesPausedOn.includes(websiteHostName)){
         // Element class names to delete
+        // Add more ad elements as needed
         let elementNames = [
             ".cnx",
             ".WikiaBarWrapper",
@@ -90,7 +96,11 @@ function removeAdsCookies(){
             ".top_boxad",
             ".ad-slot-placeholder",
             ".gpt-ad",
-            ".featured-video-player-container"
+            ".featured-video-player-container",
+            "#top_boxad",
+            "#mid_boxad",
+            "#incontent_boxad",
+            ".incontent_leaderboard"
         ];
         deleteElements(...elementNames);
     }
