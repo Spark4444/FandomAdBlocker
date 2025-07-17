@@ -13,6 +13,7 @@ let pauseOnThisFandombtn = document.querySelector(".pauseOnThisFandombtn");
 let disableCookiesbtn = document.querySelector(".disableCookiesbtn");
 let cookieIcon = document.querySelector(".cookieIcon");
 let pauseIcon = document.querySelector(".pauseIcon");
+let settingsIcon = document.querySelector(".settingsIcon");
 
 // Imports
 import { getFromChromeStorage, saveToChromeStorage, checkIfAValueIsSet} from "./functions.js";
@@ -134,4 +135,9 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             });
         }
     });
+});
+
+// Open settings page in new tab
+settingsIcon.addEventListener("click", function() {
+    chrome.tabs.create({ url: chrome.runtime.getURL("settings/index.html") });
 });

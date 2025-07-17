@@ -6,7 +6,7 @@ body {
     flex-direction: column;
     font-family: helvetica;
     height: 408px;
-    justify-content: center;
+    justify-content: space-evenly;
     margin: 0;
     overflow: hidden;
     padding: 0;
@@ -18,7 +18,8 @@ body {
     align-items: center;
     display: flex;
     justify-content: center;
-    padding: 0 0 5px 0;
+    padding: 0 16px;
+    height: 40px;
 }
 
 .FABlogo {
@@ -157,6 +158,26 @@ body {
     width: 17px;
 }
 
+.topRightMenu {
+
+display: flex;
+
+width: 126px;
+
+align-items: center;
+
+justify-content: flex-end;
+}
+
+.topLeftLogo {
+
+display: flex;
+
+align-items: center;
+
+justify-content: flex-start;
+}
+
 .disableCookiesbtn:hover, .pauseOnThisFandombtn:hover {
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
 }
@@ -185,3 +206,21 @@ body {
     width: 262px;
 }
 
+.settingsIcon {
+    width: 19px;
+    cursor: pointer;
+}
+
+.settingsIcon:hover {
+    filter: brightness(1.5);
+    animation: rotate 1s;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(180deg);
+    }
+}
