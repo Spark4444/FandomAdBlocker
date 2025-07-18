@@ -1,10 +1,21 @@
 const fandomInput = document.querySelector(".fandomInput");
 const message = document.querySelector(".message");
 const listSections = document.querySelectorAll(".listSection");
+const allowedLists = document.querySelectorAll(".allowedList");
 
 // Explanation: this varaible determines which mode is user in Allowed List/Blocked cookie list
 // I used a boolean since it only has two states and perfectly fits the use case
 let currentMode = true;
+let messageTimeout;
+
+function startMessageTimeout() {
+    if (messageTimeout) {
+        clearTimeout(messageTimeout);
+    }
+    messageTimeout = setTimeout(() => {
+        message.innerHTML = "";
+    }, 3000);
+}
 
 // Function to validate the fandom URL input
 fandomInput.addEventListener("keyup", function(event) {
@@ -12,14 +23,29 @@ fandomInput.addEventListener("keyup", function(event) {
     if (key === "enter") {
         // *://*.fandom.com/* regex
         const fandomUrl = fandomInput.value.trim();
-        const fandomRegex = /^https?:\/\/.*\.fandom\.com\/.*$/i;
+        const fandomRegex = /^(https?:\/\/)?([\w-]+\.)?fandom\.com(\/.*)?$/i;
         if (fandomRegex.test(fandomUrl)) {
             message.innerHTML = "Success! The fandom URL is valid.";
             message.style.color = "green";
+            startMessageTimeout();
+
+            // Extract the hostname from the URL
+            const url = new URL(fandomUrl);
+            const hostname = url.hostname.replace(/^www\./, ""); // Remove "www."
+            const key = currentMode ? "websitesPausedOn" : "cookiesBlockedOn";
+
+
+            // Get prev allowed list from Chrome storage and add the new hostname if not already present
+            getFromChromeStorage(key, function(value) {
+                const currentList = value || [];
+                // Use a set to avoid duplicates
+                saveToChromeStorage(key, [...new Set([...currentList, hostname])]);
+            });
         }
         else {
             message.innerHTML = "Error! Please enter a valid fandom URL. e.g. https://www.fandom.com/";
             message.style.color = "red";
+            startMessageTimeout();
         }
     }
 });
@@ -32,12 +58,56 @@ fandomInput.addEventListener("input", function() {
 // Add click event listeners to each section in the list to toggle between Allowed List and Blocked Cookie List
 listSections.forEach((section, index) => {
     section.addEventListener("click", function(event) {
+        message.innerHTML = ""; // Clear the message when switching sections
         listSections.forEach((sec, idx) => {
             sec.classList.remove("active");
+            allowedLists[idx].style.display = "none";
             if (idx === index) {
                 sec.classList.add("active");
+                allowedLists[idx].style.display = "";
                 idx === 0 ? currentMode = true : currentMode = false;
             }
         });
     });
 });
+
+// Generate the allowed list based on the current mode
+function generateAllowedList(listType) {
+    const listKey = listType ? "websitesPausedOn" : "cookiesBlockedOn";
+    const listIndex = listType ? 0 : 1;
+    getFromChromeStorage(listKey, function(value) {
+        allowedLists[listIndex].innerHTML = value.map(item => `<div class="listItemContainer"><div class="listItem">${item}</div><div class="removeItem" key="${item}">Remove</div></div>`).join("");
+        
+        // Add event listeners to the remove buttons
+        const removeItems = document.querySelectorAll(".removeItem");
+
+        removeItems.forEach(item => {
+            item.addEventListener("click", function(event) {
+                const itemKey = event.target.getAttribute("key");
+
+                getFromChromeStorage(listKey, function(value) {
+                    const updatedList = value.filter(i => i !== itemKey);
+                    saveToChromeStorage(listKey, updatedList);
+                    generateAllowedList(listType); // Regenerate the list after removal
+                });
+            });
+        });
+    });
+}
+
+// Initial render of both allowed lists
+generateAllowedList(true);
+generateAllowedList(false);
+
+// Update the allowed list when the storage changes
+chrome.storage.onChanged.addListener(function(changes, areaName) {
+    if (areaName === "sync") {
+        if (changes.websitesPausedOn) {
+            generateAllowedList(true);
+        }
+        if (changes.cookiesBlockedOn) {
+            generateAllowedList(false);
+        }
+    }
+});
+

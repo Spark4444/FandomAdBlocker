@@ -14,7 +14,7 @@ body {
     font-family: helvetica;
     justify-content: flex-end;
     margin: 0;
-    overflow: hidden;
+    overflow: scroll;
     width: 100vw;
     height: 100vh;
     padding: 0;
@@ -94,7 +94,7 @@ a:hover {
 }
 
 .section:hover {
-    background: var(--darker-purple);
+    background: var(--main-purple);
     transition: 0.5s !important;
 }
 
@@ -163,8 +163,34 @@ input[type="checkbox"] {
     height: min-content;
 }
 
-.listItem {
-    margin: 0 0 1% 0;
-}
+.listItem {width: 50%;text-align: center;}
 
 .message {margin: 0 0 2% 0;}
+
+.removeItem {
+    color: black;
+    cursor: pointer;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--main-yellow);
+    border: black 0.1vw solid;
+    border-radius: 0.5vw;
+}
+
+.removeItem:hover {
+    background: var(--darker-yellow);
+    transition: 0.5s;
+}
+
+.listItemContainer {
+    display: flex;
+    width: 50%;
+    height: 2.5vw;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin: 0 0 2% 0;
+}

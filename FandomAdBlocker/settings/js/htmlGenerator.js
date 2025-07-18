@@ -1,7 +1,7 @@
 // Edit this variable to add a new page
 const pages = document.querySelectorAll(".page");
 const pagesNames = [
-    "#General",
+    "#GeneralSettings",
     "#AllowedList",
     "#Statistics",
     "#About",
