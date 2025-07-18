@@ -1,3 +1,7 @@
-#c39600
+Main colors
 #520143
 #ffc500
+
+Darker versions
+#430037
+#c39600

@@ -41,24 +41,50 @@ body {
     align-items: center;
     flex-direction: column;
     justify-content: flex-start;
+    background: #430037;
 }
 
 .page {
     width: 80%;
-    background: #ffc500;
+    background: #520143;
     height: 100%;
 }
 
 .sectionWrap {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    height: 20%;
+    justify-content: space-between;
+    height: 30%;
+    width: 100%;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #ffc500;
+}
+
+a:hover {
+    color: #c39600;
+    transition: 0.25s;
 }
 
 .section {
-    cursor: pointer;
-    text-decoration: none;
-    color: white;
+    background: #430037;
+    width: 100%;
+    text-align: center;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.section:hover {
+    background: #530143;
+    transition: 0.5s !important;
+}
+
+.section.active {
+    background: #520143;
 }
