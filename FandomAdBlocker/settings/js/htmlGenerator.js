@@ -4,8 +4,8 @@ const pagesNames = [
     "#General",
     "#AllowList",
     "#Statistics",
-    "#Support",
-    "#About"
+    "#About",
+    "#Support"
 ];
 let sections;
 
