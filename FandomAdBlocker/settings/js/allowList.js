@@ -2,6 +2,7 @@ const fandomInput = document.querySelector(".fandomInput");
 const message = document.querySelector(".message");
 const listSections = document.querySelectorAll(".listSection");
 const allowedLists = document.querySelectorAll(".allowedList");
+const clearAllButton = document.querySelector(".clearAllButton");
 
 // Explanation: this varaible determines which mode is user in Allowed List/Blocked cookie list
 // I used a boolean since it only has two states and perfectly fits the use case
@@ -90,6 +91,7 @@ function generateAllowedList(listType) {
                 const itemKey = event.target.getAttribute("key");
 
                 getFromChromeStorage(listKey, function(value) {
+                    // There's no need for confirmation here since it's pretty easy to add the item back
                     const updatedList = value.filter(i => i !== itemKey);
                     saveToChromeStorage(listKey, updatedList);
                     generateAllowedList(listType); // Regenerate the list after removal
@@ -115,3 +117,12 @@ chrome.storage.onChanged.addListener(function(changes, areaName) {
     }
 });
 
+clearAllButton.addEventListener("click", function() {
+    const confirmation = confirm("Are you sure you want to clear all entries in the current list?");
+    if (confirmation) {
+        const key = currentMode ? "websitesPausedOn" : "cookiesBlockedOn";
+        saveToChromeStorage(key, []);
+        generateAllowedList(currentMode); // Regenerate the list after clearing
+        showMessage("All entries cleared successfully.", "success");
+    }
+});

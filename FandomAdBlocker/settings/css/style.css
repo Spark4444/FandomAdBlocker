@@ -52,7 +52,7 @@
  .page {
      width: 80%;
      background: var(--main-purple);
-     height: 100%;
+     min-height: 100%;
      display: flex;
      flex-direction: column;
      align-items: center;
@@ -109,7 +109,7 @@
      cursor: pointer;
      width: 50%;
      text-align: center;
-     height: 100%;
+     min-height: 100%;
      display: flex;
      align-items: center;
      justify-content: center;
@@ -175,4 +175,24 @@
      align-items: center;
      flex-direction: row;
      margin: 0 0 2% 0;
+}
+
+.clearAllButton {
+    margin: 0 0 2% 0;
+    cursor: pointer;
+    color: var(--main-yellow);
+}
+
+.clearAllButton:hover {
+    color: var(--darker-yellow);
+    transition: 0.5s;
+}
+
+.aboutText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: 7vw;
+    justify-content: space-between;
 }

@@ -32,8 +32,9 @@
             <div class="listSection active"">Allowed fandoms</div>
             <div class="listSection">Blocked fandom cookies</div> 
         </div>
-        <input type="text" class="fandomInput" placeholder="Add a new fandom page to the list" >
-        <div class="message"></div>
+        <input type="text" class="fandomInput" placeholder="Add a new fandom page to the list">
+        <div class="message" style="display: none;"></div>
+        <div class="clearAllButton">Clear all on current list</div>
         <div class="list allowedList"></div>
         <div class="list allowedList" style="display: none;"></div>
     </div>
@@ -47,15 +48,16 @@
     <!-- About page -->
     <div class="page" style="display: none;">
         <div class="sectionTitle"></div>
+        <div class="aboutText">
+            <div>Fandom Ad Blocker is a browser extension designed to block ads on Fandom websites. It allows users to customize their ad-blocking experience by adding specific fandoms to an allow list or blocking cookies from certain fandoms.</div>
+            <div>For more information, visit the <a href="https://github.com/Spark4444/FandomAdBlocker" target="_blank">GitHub repository</a>.</div>
+        </div>
     </div>
 
     <!-- Support page -->
     <div class="page" style="display: none;">
         <div class="sectionTitle"></div>
-        <div class="supportText">
-             <div>Need help? Open a new issue on the <a href="https://github.com/Spark4444/FandomAdBlocker/issues" target="_blank">GitHub repository</a>.</div>
-             <div>I'll try my best to answer any issues as fast as possible.</div>
-        </div>
+        <div class="supportText">Need help? Open a new issue on the <a href="https://github.com/Spark4444/FandomAdBlocker/issues" target="_blank">GitHub repository</a>. I'll try my best to answer any issues as fast as possible.</div>
     </div>
 
     <script src="../js/functions.js"></script>
