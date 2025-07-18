@@ -1,11 +1,18 @@
+:root {
+    --main-purple: #520143;
+    --main-yellow: #ffc500;
+    --darker-purple: #430037;
+    --darker-yellow: #c39600;
+}
+
 body {
     align-items: center;
-    background: #520143;
+    background: var(--main-purple);
     color: white;
     display: flex;
     flex-direction: row;
     font-family: helvetica;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     margin: 0;
     overflow: hidden;
     width: 100vw;
@@ -41,13 +48,19 @@ body {
     align-items: center;
     flex-direction: column;
     justify-content: flex-start;
-    background: #430037;
+    background: var(--darker-purple);
+    position: fixed;
+    left: 0;
 }
 
 .page {
     width: 80%;
-    background: #520143;
+    background: var(--main-purple);
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .sectionWrap {
@@ -61,16 +74,16 @@ body {
 a {
     cursor: pointer;
     text-decoration: none;
-    color: #ffc500;
+    color: var(--main-yellow);
 }
 
 a:hover {
-    color: #c39600;
+    color: var(--darker-yellow);
     transition: 0.25s;
 }
 
 .section {
-    background: #430037;
+    background: var(--darker-purple);
     width: 100%;
     text-align: center;
     height: 20%;
@@ -81,10 +94,77 @@ a:hover {
 }
 
 .section:hover {
-    background: #530143;
+    background: var(--darker-purple);
     transition: 0.5s !important;
 }
 
 .section.active {
-    background: #520143;
+    background: var(--main-purple);
 }
+
+.sectionTitle {
+    font-weight: 600;
+    margin: 2% 0;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.sectionSelect {
+    width: 100%;
+    display: flex;
+    height: 7%;
+    flex-direction: row;
+}
+
+.listSection {
+    cursor: pointer;
+    width: 50%;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.listSection:hover {
+    background: var(--darker-purple);
+    transition: 0.5s;
+}
+
+.listSection.active {
+    background: var(--darker-purple);
+}
+
+.fandomInput {
+    background: none;
+    border: 0.1vw solid white;
+    border-radius: 3vw;
+    font-size: 1.5vw;
+    width: 40%;
+    height: 6%;
+    margin: 3%;
+    padding: 0 0 0 2%;
+    color: white;
+    outline: none;
+}
+
+.fandomInput::placeholder {
+    color: grey;
+}
+
+.list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: min-content;
+}
+
+.listItem {
+    margin: 0 0 1% 0;
+}
+
+.message {margin: 0 0 2% 0;}

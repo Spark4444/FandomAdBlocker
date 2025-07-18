@@ -2,7 +2,7 @@
 const pages = document.querySelectorAll(".page");
 const pagesNames = [
     "#General",
-    "#AllowList",
+    "#AllowedList",
     "#Statistics",
     "#About",
     "#Support"
@@ -28,6 +28,13 @@ function generateSectionsAndPages() {
     // Generate page classes based on the pagesNames array
     pages.forEach((page, index) => {
         page.classList.add(pagesNames[index].replace("#", "").toLowerCase());
+    });
+
+    const sectionTitles = document.querySelectorAll(".sectionTitle");
+
+    // Set the innerHTML of each section title based on the pagesNames array
+    sectionTitles.forEach((title, index) => {
+        title.innerHTML = pagesNames[index].replace("#", "").replace(/([A-Z])/g, ' $1').trim();
     });
 }
 

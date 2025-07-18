@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
+    <title>Fandom Ad Blocker Settings</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,31 +18,50 @@
 
     <!-- General Settings page -->
     <div class="page">
-        General Settings
+        <div class="sectionTitle"></div>
+        <div class="option">
+            <label for="enableSelfPromotion">Show Fandom self promotion ads</label>
+            <input type="checkbox" id="enableSelfPromotion" checked>
+        </div>
     </div>
 
     <!-- Allow List -->
     <div class="page" style="display: none;">
-        Allow List
+        <div class="sectionTitle"></div>
+        <div class="sectionSelect">
+            <div class="listSection active"">Allowed fandoms</div>
+            <div class="listSection">Blocked fandom cookies</div> 
+        </div>
+        <input type="text" class="fandomInput" placeholder="Add a new fandom page to the list" >
+        <div class="message"></div>
+        <div class="list"></div>
     </div>
 
     <!-- Statistics page -->
     <div class="page" style="display: none;">
-        Statistics
+        <div class="sectionTitle"></div>
+        <div class="list"></div>
     </div>
 
     <!-- About page -->
     <div class="page" style="display: none;">
-        About    
+        <div class="sectionTitle"></div>
     </div>
 
     <!-- Support page -->
     <div class="page" style="display: none;">
-        Need help?
-        Open a new issue on the <a href="https://github.com/Spark4444/FandomAdBlocker/issues" target="_blank">GitHub repository</a>
+        <div class="sectionTitle"></div>
+        <div class="supportText">
+             <div>Need help? Open a new issue on the <a href="https://github.com/Spark4444/FandomAdBlocker/issues" target="_blank">GitHub repository</a>.</div>
+             <div>I'll try my best to answer any issues as fast as possible.</div>
+        </div>
     </div>
 
+    <script src="../js/functions.js"></script>
     <script src="js/htmlGenerator.js"></script>
     <script src="js/router.js"></script>
+    <script src="js/general.js"></script>
+    <script src="js/allowList.js"></script>
+    <script src="js/statistics.js"></script>
 </body>
 </html>

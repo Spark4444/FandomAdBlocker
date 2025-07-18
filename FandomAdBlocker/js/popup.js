@@ -15,9 +15,6 @@ let cookieIcon = document.querySelector(".cookieIcon");
 let pauseIcon = document.querySelector(".pauseIcon");
 let settingsIcon = document.querySelector(".settingsIcon");
 
-// Imports
-import { getFromChromeStorage, saveToChromeStorage, checkIfAValueIsSet} from "./functions.js";
-
 // Get the varaible values from chrome storage
 getFromChromeStorage("adsBlockedTotal", function(value){
     adsBlockedTotal = checkIfAValueIsSet(value, "0");

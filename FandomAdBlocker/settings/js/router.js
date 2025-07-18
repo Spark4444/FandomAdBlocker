@@ -1,7 +1,8 @@
 // Initialize the router to set the correct page on load
 function router() {
     const hash = window.location.hash.toLowerCase();
-    
+    let unknownHash = true;
+
     pages.forEach((page, index) => {
         page.style.display = "none";
         sections[index].classList.remove("active");
@@ -11,11 +12,18 @@ function router() {
         if (page.classList.contains(hash.replace("#", ""))) {
             page.style.display = "";
             sections[index].classList.add("active");
+            unknownHash = false;
         }
     });
+    if (unknownHash) {
+        // If the hash is unknown, show the first page by default
+        window.location.hash = pagesNames[0];
+        pages[0].style.display = "";
+        sections[0].classList.add("active");
+    }
 }
 
-router(); // Call the router function to set the initial page
+router();
 
 // Add onclick event listener to each section for their respective hash
 sections.forEach(section => {
@@ -30,3 +38,6 @@ sections.forEach(section => {
         }
     });
 });
+
+// Update the page when the hash changes
+window.addEventListener("hashchange", router);
