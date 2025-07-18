@@ -45,6 +45,8 @@ body {
 
 .page {
     width: 80%;
+    background: #ffc500;
+    height: 100%;
 }
 
 .sectionWrap {
@@ -57,4 +59,6 @@ body {
 
 .section {
     cursor: pointer;
+    text-decoration: none;
+    color: white;
 }
