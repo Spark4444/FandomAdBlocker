@@ -1,0 +1,60 @@
+body {
+    align-items: center;
+    background: #520143;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    font-family: helvetica;
+    justify-content: space-evenly;
+    margin: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    user-select: text;
+    font-size: 1.5vw;
+}
+
+.topLeftLogo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 10% 0;
+}
+
+.FABlogo {width: 18%;}
+
+.LogoText {
+	display: flex;
+	font-size: 2.5vw;
+	padding: 0 0 0 10px;
+}
+
+.boldText {
+	font-weight: 600;
+}
+
+.sidebar {
+    display: flex;
+    width: 20%;
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.page {
+    width: 80%;
+}
+
+.sectionWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    height: 20%;
+}
+
+.section {
+    cursor: pointer;
+}

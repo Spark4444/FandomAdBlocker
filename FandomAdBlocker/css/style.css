@@ -1,226 +1,221 @@
 body {
-    align-items: center;
-    background: #520143;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    font-family: helvetica;
-    height: 408px;
-    justify-content: space-evenly;
-    margin: 0;
-    overflow: hidden;
-    padding: 0;
-    user-select: text;
-    width: 320px;
+	align-items: center;
+	background: #520143;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	font-family: helvetica;
+	height: 408px;
+	justify-content: space-evenly;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	user-select: text;
+	width: 320px;
 }
 
 .header {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    padding: 0 16px;
-    height: 40px;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	padding: 0 16px;
+	height: 40px;
 }
 
 .FABlogo {
-    width: 40px;
+	width: 40px;
 }
 
 .LogoText {
-    display: flex;
-    font-size: 25px;
-    padding: 0 0 0 10px;
+	display: flex;
+	font-size: 25px;
+	padding: 0 0 0 10px;
 }
 
 .boldText {
-    font-weight: 600;
+	font-weight: 600;
 }
 
 .main {
-    align-items: center;
-    background: #ffc500;
-    border-radius: 5px;
-    border: black 1.34px solid;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    height: 316px;
-    justify-content: space-evenly;
-    width: 290px;
+	align-items: center;
+	background: #ffc500;
+	border-radius: 5px;
+	border: black 1.34px solid;
+	color: black;
+	display: flex;
+	flex-direction: column;
+	height: 316px;
+	justify-content: space-evenly;
+	width: 290px;
 }
 
 .websiteName {
-    font-size: 16px;
-    font-weight: 600;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .adsCountWrap {
-    align-items: center;
-    border-radius: 5px;
-    border: black solid 1.34px;
-    display: flex;
-    flex-direction: column;
-    height: 72px;
-    justify-content: space-between;
-    padding: 5px;
-    width: 240px;
+	align-items: center;
+	border-radius: 5px;
+	border: black solid 1.34px;
+	display: flex;
+	flex-direction: column;
+	height: 72px;
+	justify-content: space-between;
+	padding: 5px;
+	width: 240px;
 }
 
 .firstSection {
-    align-items: center;
-    display: flex;
-    height: 35px;
-    justify-content: flex-start;
-    width: 240px;
+	align-items: center;
+	display: flex;
+	height: 35px;
+	justify-content: flex-start;
+	width: 240px;
 }
 
 .FABlogo2 {
-    padding: 0 5px 0 2px;
-    width: 24px;
+	padding: 0 5px 0 2px;
+	width: 24px;
 }
 
 .seperator {
-    background: black;
-    height: 1.34px;
-    width: 240px;
+	background: black;
+	height: 1.34px;
+	width: 240px;
 }
 
 .secondSection {
-    align-items: center;
-    display: flex;
-    height: 36px;
-    justify-content: space-between;
-    width: 240px;
+	align-items: center;
+	display: flex;
+	height: 36px;
+	justify-content: space-between;
+	width: 240px;
 }
 
 .adsBlcoked {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 144px;
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	width: 144px;
 }
 
 .count {
-    color: #520143;
-    padding: 0 5px 0 0;
+	color: #520143;
+	padding: 0 5px 0 0;
 }
 
 .totalAdsBlocked {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    width: 94px;
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	width: 94px;
 }
 
 .count2 {
-    color: #520143;
-    padding: 0 5px 0 0;
+	color: #520143;
+	padding: 0 5px 0 0;
 }
 
 .disableCookiesbtn {
-    align-items: center;
-    background: #c39600;
-    border-radius: 5px;
-    border: solid 1.8px;
-    cursor: pointer;
-    display: flex;
-    font-weight: 550;
-    height: 30px;
-    justify-content: center;
-    transition: 0.5s;
-    user-select: none;
-    width: 240px;
+	align-items: center;
+	background: #c39600;
+	border-radius: 5px;
+	border: solid 1.8px;
+	cursor: pointer;
+	display: flex;
+	font-weight: 550;
+	height: 30px;
+	justify-content: center;
+	transition: 0.5s;
+	user-select: none;
+	width: 240px;
 }
 
 .cookieIcon {
-    padding: 0 5px 0 0;
+	padding: 0 5px 0 0;
 }
 
 .pauseOnThisFandombtn {
-    align-items: center;
-    background: #c39600;
-    border-radius: 5px;
-    border: solid 1.8px;
-    cursor: pointer;
-    display: flex;
-    font-weight: 550;
-    height: 30px;
-    justify-content: center;
-    transition: 0.5s;
-    user-select: none;
-    width: 240px;
+	align-items: center;
+	background: #c39600;
+	border-radius: 5px;
+	border: solid 1.8px;
+	cursor: pointer;
+	display: flex;
+	font-weight: 550;
+	height: 30px;
+	justify-content: center;
+	transition: 0.5s;
+	user-select: none;
+	width: 240px;
 }
 
 .pauseIcon {
-    padding: 0 2px 0 0;
-    width: 17px;
+	padding: 0 2px 0 0;
+	width: 17px;
 }
 
 .topRightMenu {
-
-display: flex;
-
-width: 126px;
-
-align-items: center;
-
-justify-content: flex-end;
+	display: flex;
+	width: 126px;
+	align-items: center;
+	justify-content: flex-end;
 }
 
 .topLeftLogo {
-
-display: flex;
-
-align-items: center;
-
-justify-content: flex-start;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 }
 
-.disableCookiesbtn:hover, .pauseOnThisFandombtn:hover {
-    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+.disableCookiesbtn:hover,
+.pauseOnThisFandombtn:hover {
+	box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .buttons {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 128px;
-    justify-content: space-around;
-    width: 290px;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	height: 128px;
+	justify-content: space-around;
+	width: 290px;
 }
 
 .warning {
-    color: #520143;
-    font-size: 9px;
-    font-weight: 550;
+	color: #520143;
+	font-size: 9px;
+	font-weight: 550;
 }
 
 .nothingText {
-    font-size: 20px;
-    font-weight: 550;
+	font-size: 20px;
+	font-weight: 550;
 }
 
 .nothingToBlockImage {
-    width: 262px;
+	width: 262px;
 }
 
 .settingsIcon {
-    width: 19px;
-    cursor: pointer;
+	width: 19px;
+	cursor: pointer;
 }
 
 .settingsIcon:hover {
-    filter: brightness(1.5);
-    animation: rotate 1s;
+	filter: brightness(1.5);
+	animation: rotate 1s;
 }
 
 @keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(180deg);
-    }
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(180deg);
+	}
 }
