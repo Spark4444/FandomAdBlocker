@@ -14,7 +14,15 @@ function startMessageTimeout() {
     }
     messageTimeout = setTimeout(() => {
         message.innerHTML = "";
+        message.style.display = "none";
     }, 3000);
+}
+
+function showMessage(text, type) {
+    message.innerHTML = text;
+    message.style.display = "";
+    message.style.color = type === "error" ? "red" : "green";
+    startMessageTimeout();
 }
 
 // Function to validate the fandom URL input
@@ -25,9 +33,7 @@ fandomInput.addEventListener("keyup", function(event) {
         const fandomUrl = fandomInput.value.trim();
         const fandomRegex = /^(https?:\/\/)?([\w-]+\.)?fandom\.com(\/.*)?$/i;
         if (fandomRegex.test(fandomUrl)) {
-            message.innerHTML = "Success! The fandom URL is valid.";
-            message.style.color = "green";
-            startMessageTimeout();
+            showMessage("Success! The fandom URL is valid.", "success");
 
             // Extract the hostname from the URL
             const url = new URL(fandomUrl);
@@ -43,9 +49,7 @@ fandomInput.addEventListener("keyup", function(event) {
             });
         }
         else {
-            message.innerHTML = "Error! Please enter a valid fandom URL. e.g. https://www.fandom.com/";
-            message.style.color = "red";
-            startMessageTimeout();
+            showMessage("Error! Please enter a valid fandom URL. e.g. https://www.fandom.com/", "error");
         }
     }
 });
