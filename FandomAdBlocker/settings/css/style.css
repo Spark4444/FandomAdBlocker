@@ -13,7 +13,8 @@
      font-family: helvetica;
      justify-content: flex-end;
      margin: 0;
-     overflow: hidden;
+     overflow-y: auto;
+     overflow-x: hidden;
      width: 100vw;
      height: 100vh;
      padding: 0;
@@ -57,7 +58,9 @@
      flex-direction: column;
      align-items: center;
      justify-content: flex-start;
-     overflow-y: auto;
+     position: absolute;
+     top: 0;
+     right: 0;
 }
  .sectionWrap {
      display: flex;
@@ -195,4 +198,8 @@
     width: 100%;
     height: 7vw;
     justify-content: space-between;
+}
+
+.statisticItem {
+    height: 4vw;
 }

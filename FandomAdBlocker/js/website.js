@@ -9,6 +9,29 @@ let websitesPausedOn;
 // Strings
 let websiteHostName = window.location.hostname;
 
+// Element class names to delete
+// Add more ad elements as needed
+let elementNames = [
+    ".cnx",
+    ".WikiaBarWrapper",
+    ".bottom-ads-container",
+    ".top-ads-container",
+    ".top_boxad",
+    ".ad-slot-placeholder",
+    ".gpt-ad",
+    ".featured-video-player-container",
+    "#top_boxad",
+    "#mid_boxad",
+    "#incontent_boxad",
+    ".incontent_leaderboard"
+];
+
+let statistics = {};
+
+elementNames.forEach(elementName => {
+    statistics[elementName] = 0; // Initialize each element's count to 0
+});
+
 // Function to save data to Chrome storage
 function saveToChromeStorage(key, value) {
     chrome.storage.sync.set({[key]: value});
@@ -41,11 +64,13 @@ function deleteElements(...elementNames){
     elementNames.forEach(elementName => {
         if(document.querySelector(elementName)){
             document.querySelector(elementName).remove();
+            statistics[elementName]++;
             adsBlocked++;
             updateBadge();
             adsBlockedTotal++;
             saveToChromeStorage("adsBlocked", adsBlocked);
             saveToChromeStorage("adsBlockedTotal", adsBlockedTotal);
+            saveToChromeStorage("statistics", statistics);
         }
     });
 }
@@ -53,6 +78,15 @@ function deleteElements(...elementNames){
 // Get the varaible values from chrome storage
 getFromChromeStorage("adsBlockedTotal", function(value){
     adsBlockedTotal = checkIfAValueIsSet(value, "0");
+});
+
+getFromChromeStorage("statistics", function(value){
+    statistics = checkIfAValueIsSet(value, {});
+    elementNames.forEach(elementName => {
+        if(statistics[elementName] === undefined) {
+            statistics[elementName] = 0;
+        }
+    });
 });
 
 getFromChromeStorage("cookiesBlockedOn", function(value){
@@ -86,22 +120,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 function removeAdsCookies(){
     // Check if the website is paused and delete the ads
     if(!websitesPausedOn.includes(websiteHostName)){
-        // Element class names to delete
-        // Add more ad elements as needed
-        let elementNames = [
-            ".cnx",
-            ".WikiaBarWrapper",
-            ".bottom-ads-container",
-            ".top-ads-container",
-            ".top_boxad",
-            ".ad-slot-placeholder",
-            ".gpt-ad",
-            ".featured-video-player-container",
-            "#top_boxad",
-            "#mid_boxad",
-            "#incontent_boxad",
-            ".incontent_leaderboard"
-        ];
         deleteElements(...elementNames);
     }
 
