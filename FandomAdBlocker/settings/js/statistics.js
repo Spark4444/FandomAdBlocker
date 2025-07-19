@@ -2,8 +2,8 @@ const statistics = document.querySelector(".statisticsList");
 
 // Function to update the statistics display
 function updateStatistics() {
-    getFromChromeStorage("adsBlockedTotal", function(value){
-        adsBlockedTotal = checkIfAValueIsSet(value, "0");
+    getFromChromeStorage("adsBlocked", function(value){
+        adsBlockedTotal = checkIfAValueIsSet(value.adsBlockedTotal, "0");
         statistics.innerHTML = `<div class="statisticItem mainStat"><div class="textLeft">Total Ads Blocked:</div> <div class="textRight">${adsBlockedTotal}</div>`;
     });
 

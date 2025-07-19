@@ -73,6 +73,19 @@ function getUniqueId() {
     return (Date.now() + Math.random()).toString(36);
 }
 
+// Function to merge two objects based on the larger value
+function mergeObjectsBasedOnLargerValue(obj1, obj2) {
+    const merged = {...obj1};
+    for (const key in obj2) {
+        if (obj2.hasOwnProperty(key)) {
+            if (!merged[key] || obj2[key] > merged[key]) {
+                merged[key] = obj2[key];
+            }
+        }
+    }
+    return merged;
+}
+
 // Unique ID for the current tab
 const uniqueId = getUniqueId();
 
@@ -83,12 +96,10 @@ function startSavingTimeout() {
     }
     saveTimeout = setTimeout(() => {
         getFromChromeStorage("adsBlocked", function(value) {
-            const combinedAdsBlocked = {...adsBlocked, ...value};
-            saveToChromeStorage("adsBlocked", combinedAdsBlocked);
+            saveToChromeStorage("adsBlocked", mergeObjectsBasedOnLargerValue(value, adsBlocked));
         });
         getFromChromeStorage("statistics", function(value) {
-            const combinedStatistics = {...statistics, ...value};
-            saveToChromeStorage("statistics", combinedStatistics);
+            saveToChromeStorage("statistics", mergeObjectsBasedOnLargerValue(value, statistics));
         });
     }, 200);
 }

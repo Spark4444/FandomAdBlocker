@@ -27,20 +27,11 @@ let currentTabId = null;
 
 // Reset the adsBlockedTotal on extension start
 getFromChromeStorage("adsBlocked", function(value) {
-    const totalAdsBlocked = checkIfAValueIsSet(value, { adsBlockedTotal: 0 }).adsBlockedTotal;
+    const totalAdsBlocked = value.adsBlockedTotal > -1 ? value.adsBlockedTotal : 0;
     saveToChromeStorage("adsBlocked", { adsBlockedTotal: totalAdsBlocked });
 });
 
-// Set default values for all the chrome storage variables
-getFromChromeStorage("adsBlocked", function(value) {
-    adsBlocked = checkIfAValueIsSet(value, {
-        adsBlockedTotal: 0
-    });
-    if (value !== adsBlocked) {
-        saveToChromeStorage("adsBlocked", adsBlocked);
-    }
-});
-
+// Set default values for all the chrome storage variables if they are not set
 getFromChromeStorage("statistics", function(value) {
     statistics = checkIfAValueIsSet(value, {});
     if (value !== statistics) {
