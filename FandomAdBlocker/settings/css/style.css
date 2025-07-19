@@ -1,4 +1,6 @@
 :root {
+    --purple-red: #6f034c;
+    --bright-purple: #6f035a;
      --main-purple: #520143;
      --main-yellow: #ffc500;
      --darker-purple: #430037;
@@ -201,5 +203,100 @@
 }
 
 .statisticItem {
+    height: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    border: 0.1vw solid white;
+    border-radius: 1vw;
+    padding: 2%;
+    margin: 0 0 2% 0;
+    font-weight: 600;
+    background: var(--purple-red);
+}
+
+.statisticItem:hover {
+    box-shadow: 0 0 1vw white;
+    transition: 0.5s;
+}
+
+.statisticsTextWrap {
+    border: 0.1vw;
+}
+
+.statisticsTextWrap {
+    border-radius: 1vw;
+    background: var(--bright-purple);
+    border: 0.1vw solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 16vw;
+    padding: 1%;
+    margin: 0 0 4% 0;
+}
+
+.statisticsTextWrap:hover {
+    box-shadow: 0 0 1vw white;
+    transition: 0.5s;
+}
+
+.statisticsText {
+    text-align: center;
+    line-height: 160%;
+}
+
+.mainStat {
+    border: 0.1vw solid var(--main-yellow);
+}
+
+.mainStat:hover {
+    box-shadow: 0 0 1vw var(--main-yellow);
+    transition: 0.5s;
+}
+
+.statisticsHeader {
+    width: 67%;
+    border: 0.1vw solid var(--main-yellow);
+    border-radius: 1vw;
     height: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 3% 0;
+    color: var(--main-yellow);
+    background: var(--purple-red);
+    font-weight: 600;
+}
+
+.statisticsHeader:hover {
+    box-shadow: 0 0 10px var(--main-yellow);
+    transition: 0.5s;
+}
+
+.textRight {
+    color: var(--main-yellow);
+}
+
+.textLeft {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.textHighlight {
+    text-align: center;
+    background: #00000063;
+    border-radius: 0.5vw;
+    font-family: 'Courier New', monospace;
+    font-weight: normal;
+    margin: 0 0 0 3%;
+    padding: 0 3%;
+    min-width: fit-content;
+    height: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

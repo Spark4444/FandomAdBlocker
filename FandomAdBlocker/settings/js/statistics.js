@@ -4,14 +4,14 @@ const statistics = document.querySelector(".statisticsList");
 function updateStatistics() {
     getFromChromeStorage("adsBlockedTotal", function(value){
         adsBlockedTotal = checkIfAValueIsSet(value, "0");
-        statistics.innerHTML = `<div class="statisticItem">Ads blocked in total: ${adsBlockedTotal}</div>`;
+        statistics.innerHTML = `<div class="statisticItem mainStat"><div class="textLeft">Total Ads Blocked:</div> <div class="textRight">${adsBlockedTotal}</div>`;
     });
 
     getFromChromeStorage("statistics", function(value){
-        statistics.innerHTML += `<div>Each element with the amount of times it was blocked:</div>`;
+        statistics.innerHTML += `<div class="statisticsHeader">Blocked Elements Breakdown</div>`;
         Object.entries(value).forEach(([key, val]) => {
             if (typeof val === "number" || typeof val === "string" && typeof key === "string") {
-                statistics.innerHTML += `<div class="statisticItem">Element "${key}": ${val} times</div>`;
+                statistics.innerHTML += `<div class="statisticItem"><div class="textLeft">Element <div class="textHighlight">${key}</div></div> <div class="textRight">${val} times</div></div>`;
             }
         });
     });
