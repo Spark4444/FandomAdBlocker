@@ -71,6 +71,11 @@
      min-height: 23vw;
      width: 100%;
 }
+
+.sectionWrap:first-child {
+    border-top: 0.1vw solid white;
+}
+
  a {
      cursor: pointer;
      text-decoration: none;
@@ -89,6 +94,7 @@
      align-items: center;
      justify-content: center;
      flex-direction: column;
+     border-bottom: 0.1vw solid white;
 }
  .section:hover {
      background: var(--main-purple);
@@ -99,16 +105,17 @@
 }
  .sectionTitle {
      font-weight: 600;
-     margin: 2% 0;
+     margin: 3% 0;
 }
  input[type="checkbox"] {
      cursor: pointer;
 }
  .sectionSelect {
-     width: 100%;
+     width: 72%;
      display: flex;
-     min-height: 5.5vw;
+     min-height: 5vw;
      flex-direction: row;
+     border-radius: 1vw;
 }
  .listSection {
      cursor: pointer;
@@ -119,78 +126,111 @@
      align-items: center;
      justify-content: center;
 }
+
+.listSection:first-child {
+     border-radius: 1vw 0 0 1vw;
+     border: 0.1vw solid white;
+     border-right: none !important;
+}
+.listSection:last-child {
+    border-radius: 0 1vw 1vw 0;
+    border: 0.1vw solid white;
+    border-left: none !important;
+}
  .listSection:hover {
      background: var(--darker-purple);
+     color: var(--main-yellow);
+     border: 0.1vw solid var(--main-yellow);
      transition: 0.5s;
 }
  .listSection.active {
      background: var(--darker-purple);
+     color: var(--main-yellow);
+     border: var(--main-yellow) 0.1vw solid;
 }
+
  .fandomInput {
      background: none;
      border: 0.1vw solid white;
      border-radius: 3vw;
      font-size: 1.5vw;
-     width: 40%;
+     width: 57%;
      min-height: 3.5vw;
-     margin: 3%;
+     margin: 5% 0 0 0;
      padding: 0 0 0 2%;
      color: white;
      outline: none;
 }
  .fandomInput::placeholder {
-     color: grey;
+     color: white;
 }
  .list {
      width: 100%;
      display: flex;
      flex-direction: column;
      align-items: center;
-     justify-content: flex-start;
      height: min-content;
+     justify-content: flex-start;
 }
  .listItem {
-    width: 50%;
-    text-align: center;
+    width: 64%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 55%;
+    background: var(--main-purple);
+    border-radius: 0.5vw;
+    border: 0.1vw solid white;
+    padding: 0 0 0 2%;
 }
+
+.listItem:hover {
+    box-shadow: 0 0 1vw white;
+    transition: 0.25s;
+}
+
  .message {
-    margin: 0 0 2% 0;
+    margin: 2% 0 0 0;
 }
  .removeItem {
-     color: black;
+     color: var(--main-yellow);
      cursor: pointer;
      width: 20%;
-     height: 100%;
+     height: 55%;
      display: flex;
      align-items: center;
      justify-content: center;
-     background: var(--main-yellow);
-     border: black 0.1vw solid;
+     background: var(--bright-purple);
+     border: var(--main-yellow) 0.1vw solid;
      border-radius: 0.5vw;
 }
- .removeItem:hover {
-     background: var(--darker-yellow);
-     transition: 0.5s;
+ .removeItem:hover, .clearAllButton:hover {
+    background: var(--main-yellow);
+    color: var(--bright-purple);
+    border: var(--bright-purple) 0.1vw solid;
+    transition: 0.5s;
 }
  .listItemContainer {
      display: flex;
-     width: 50%;
-     height: 2.5vw;
+     width: 100%;
+     height: 6vw;
      justify-content: space-between;
      align-items: center;
      flex-direction: row;
-     margin: 0 0 2% 0;
 }
 
 .clearAllButton {
-    margin: 0 0 2% 0;
+    margin: 3% 0;
     cursor: pointer;
     color: var(--main-yellow);
-}
-
-.clearAllButton:hover {
-    color: var(--darker-yellow);
-    transition: 0.5s;
+    background: var(--bright-purple);
+    border: 0.1vw solid var(--main-yellow);
+    border-radius: 0.5vw;
+    width: 24%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3vw;
 }
 
 .aboutText {
@@ -218,7 +258,7 @@
 
 .statisticItem:hover {
     box-shadow: 0 0 1vw white;
-    transition: 0.5s;
+    transition: 0.25s;
 }
 
 .statisticsTextWrap {
@@ -240,7 +280,7 @@
 
 .statisticsTextWrap:hover {
     box-shadow: 0 0 1vw white;
-    transition: 0.5s;
+    transition: 0.25s;
 }
 
 .statisticsText {
@@ -254,7 +294,7 @@
 
 .mainStat:hover {
     box-shadow: 0 0 1vw var(--main-yellow);
-    transition: 0.5s;
+    transition: 0.25s;
 }
 
 .statisticsHeader {
@@ -273,7 +313,7 @@
 
 .statisticsHeader:hover {
     box-shadow: 0 0 10px var(--main-yellow);
-    transition: 0.5s;
+    transition: 0.25s;
 }
 
 .textRight {
@@ -299,4 +339,32 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.message {
+    animation: appearHide 3s linear;
+}
+
+.allowedList {
+    width: 56%;
+    background: var(--bright-purple);
+    border-radius: 1vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 2%;
+}
+
+@keyframes appearHide {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }

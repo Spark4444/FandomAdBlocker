@@ -81,7 +81,11 @@ function generateAllowedList(listType) {
     const listKey = listType ? "websitesPausedOn" : "cookiesBlockedOn";
     const listIndex = listType ? 0 : 1;
     getFromChromeStorage(listKey, function(value) {
-        allowedLists[listIndex].innerHTML = value.map(item => `<div class="listItemContainer"><div class="listItem">${item}</div><div class="removeItem" key="${item}">Remove</div></div>`).join("");
+        allowedLists[listIndex].innerHTML = value.map(item => `<div class="listItemContainer"><div class="listItem">${item}</div><div class="removeItem" key="${item}" type="${listType ? "websitesPausedOn" : "cookiesBlockedOn"}">Remove</div></div>`).join("");
+
+        if (value.length === 0) {
+            allowedLists[listIndex].innerHTML = `<div class="noItemContainer">No items in this list yet. Add some using the input above.</div>`;
+        }
         
         // Add event listeners to the remove buttons
         const removeItems = document.querySelectorAll(".removeItem");
@@ -89,11 +93,12 @@ function generateAllowedList(listType) {
         removeItems.forEach(item => {
             item.addEventListener("click", function(event) {
                 const itemKey = event.target.getAttribute("key");
+                const listType = event.target.getAttribute("type");
 
-                getFromChromeStorage(listKey, function(value) {
+                getFromChromeStorage(listType, function(value) {
                     // There's no need for confirmation here since it's pretty easy to add the item back
                     const updatedList = value.filter(i => i !== itemKey);
-                    saveToChromeStorage(listKey, updatedList);
+                    saveToChromeStorage(listType, updatedList);
                     generateAllowedList(listType); // Regenerate the list after removal
                 });
             });
