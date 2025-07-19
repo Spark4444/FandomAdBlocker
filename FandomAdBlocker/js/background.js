@@ -23,18 +23,34 @@ function checkIfAValueIsSet(value, defaultValue){
     }
 }
 
-// Helper function to log all contents of Chrome storage
-function logChromeStorage() {
-    chrome.storage.sync.get(null, function(items) {
-        console.log("Chrome Storage Contents:");
-        for (let key in items) {
-            console.log(`${key}:`);
-            console.log(items[key]);
-        }
-    });
-}
-
 let currentTabId = null;
+
+// Set default values for all the chrome storage variables
+getFromChromeStorage("adsBlocked", function(value) {
+    adsBlocked = checkIfAValueIsSet(value, {
+        adsBlockedTotal: 0
+    });
+    if (value !== adsBlocked) {
+        saveToChromeStorage("adsBlocked", adsBlocked);
+    }
+});
+
+getFromChromeStorage("statistics", function(value) {
+    statistics = checkIfAValueIsSet(value, {});
+    if (value !== statistics) {
+        saveToChromeStorage("statistics", statistics);
+    }
+});
+
+getFromChromeStorage("allowedList", function(value) {
+    allowedList = checkIfAValueIsSet(value, {
+        websitesPausedOn: [],
+        cookiesBlockedOn: []
+    });
+    if (value !== allowedList) {
+        saveToChromeStorage("allowedList", allowedList);
+    }
+});
 
 // Funtion set the badge text
 function setBadgeText(text) {

@@ -182,3 +182,9 @@ chrome.storage.onChanged.addListener(function(changes, areaName) {
         }
     }
 });
+
+window.addEventListener("beforeunload", function() {
+    // Clean up the adsBlocked object for the current tab before the page unloads
+    delete adsBlocked[uniqueId];
+    saveToChromeStorage("adsBlocked", adsBlocked);
+});

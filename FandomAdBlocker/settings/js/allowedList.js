@@ -43,10 +43,10 @@ fandomInput.addEventListener("keyup", function(event) {
 
 
             // Get prev allowed list from Chrome storage and add the new hostname if not already present
-            getFromChromeStorage(key, function(value) {
-                const currentList = value || [];
+            getFromChromeStorage("allowedList", function(value) {
+                const currentList = value || { websitesPausedOn: [], cookiesBlockedOn: [] };
                 // Use a set to avoid duplicates
-                saveToChromeStorage(key, [...new Set([...currentList, hostname])]);
+                saveToChromeStorage("allowedList", {...currentList, [key]: [...new Set([...currentList[key], hostname])]});
             });
         }
         else {
@@ -80,10 +80,10 @@ listSections.forEach((section, index) => {
 function generateAllowedList(listType) {
     const listKey = listType ? "websitesPausedOn" : "cookiesBlockedOn";
     const listIndex = listType ? 0 : 1;
-    getFromChromeStorage(listKey, function(value) {
-        allowedLists[listIndex].innerHTML = value.map(item => `<div class="listItemContainer"><div class="listItem">${item}</div><div class="removeItem" key="${item}" type="${listType ? "websitesPausedOn" : "cookiesBlockedOn"}">Remove</div></div>`).join("");
+    getFromChromeStorage("allowedList", function(value) {
+        allowedLists[listIndex].innerHTML = value[listKey].map(item => `<div class="listItemContainer"><div class="listItem">${item}</div><div class="removeItem" key="${item}" type="${listType ? "websitesPausedOn" : "cookiesBlockedOn"}">Remove</div></div>`).join("");
 
-        if (value.length === 0) {
+        if (value[listKey].length === 0) {
             allowedLists[listIndex].innerHTML = `<div class="noItemContainer">No items in this list yet. Add some using the input above.</div>`;
         }
         
@@ -95,10 +95,10 @@ function generateAllowedList(listType) {
                 const itemKey = event.target.getAttribute("key");
                 const listType = event.target.getAttribute("type");
 
-                getFromChromeStorage(listType, function(value) {
+                getFromChromeStorage("allowedList", function(value) {
                     // There's no need for confirmation here since it's pretty easy to add the item back
-                    const updatedList = value.filter(i => i !== itemKey);
-                    saveToChromeStorage(listType, updatedList);
+                    const updatedList = value[listType].filter(i => i !== itemKey);
+                    saveToChromeStorage("allowedList", {...value, [listType]: updatedList});
                     generateAllowedList(listType); // Regenerate the list after removal
                 });
             });
@@ -113,10 +113,8 @@ generateAllowedList(false);
 // Update the allowed list when the storage changes
 chrome.storage.onChanged.addListener(function(changes, areaName) {
     if (areaName === "sync") {
-        if (changes.websitesPausedOn) {
+        if (changes.allowedList) {
             generateAllowedList(true);
-        }
-        if (changes.cookiesBlockedOn) {
             generateAllowedList(false);
         }
     }
@@ -126,7 +124,10 @@ clearAllButton.addEventListener("click", function() {
     const confirmation = confirm("Are you sure you want to clear all entries in the current list?");
     if (confirmation) {
         const key = currentMode ? "websitesPausedOn" : "cookiesBlockedOn";
-        saveToChromeStorage(key, []);
+        getFromChromeStorage("allowedList", function(value) {
+            const updatedList = {...value, [key]: []};
+            saveToChromeStorage("allowedList", updatedList);
+        });
         generateAllowedList(currentMode); // Regenerate the list after clearing
         showMessage("All entries cleared successfully.", "success");
     }
