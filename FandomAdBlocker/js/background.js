@@ -25,6 +25,12 @@ function checkIfAValueIsSet(value, defaultValue){
 
 let currentTabId = null;
 
+// Reset the adsBlockedTotal on extension start
+getFromChromeStorage("adsBlocked", function(value) {
+    const totalAdsBlocked = checkIfAValueIsSet(value, { adsBlockedTotal: 0 }).adsBlockedTotal;
+    saveToChromeStorage("adsBlocked", { adsBlockedTotal: totalAdsBlocked });
+});
+
 // Set default values for all the chrome storage variables
 getFromChromeStorage("adsBlocked", function(value) {
     adsBlocked = checkIfAValueIsSet(value, {

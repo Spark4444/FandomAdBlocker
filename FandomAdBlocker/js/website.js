@@ -82,8 +82,14 @@ function startSavingTimeout() {
         clearTimeout(saveTimeout);
     }
     saveTimeout = setTimeout(() => {
-        saveToChromeStorage("adsBlocked", adsBlocked);
-        saveToChromeStorage("statistics", statistics);
+        getFromChromeStorage("adsBlocked", function(value) {
+            const combinedAdsBlocked = {...adsBlocked, ...value};
+            saveToChromeStorage("adsBlocked", combinedAdsBlocked);
+        });
+        getFromChromeStorage("statistics", function(value) {
+            const combinedStatistics = {...statistics, ...value};
+            saveToChromeStorage("statistics", combinedStatistics);
+        });
     }, 200);
 }
 
@@ -178,13 +184,24 @@ setInterval(removeAdsCookies, 200);
 chrome.storage.onChanged.addListener(function(changes, areaName) {
     if (areaName === "sync") {
         if (changes.allowedList) {
-            window.location.reload();
+            cleanUpAdsBlocked();
+            setTimeout(() => {
+                window.location.reload();
+            }, 200);
         }
     }
 });
 
+// Function to clean up the adsBlocked object for the current tab
+function cleanUpAdsBlocked() {
+    getFromChromeStorage("adsBlocked", function(value) {
+        delete value[uniqueId];
+        saveToChromeStorage("adsBlocked", value);
+    });
+}
+
+
 window.addEventListener("beforeunload", function() {
     // Clean up the adsBlocked object for the current tab before the page unloads
-    delete adsBlocked[uniqueId];
-    saveToChromeStorage("adsBlocked", adsBlocked);
+    cleanUpAdsBlocked();
 });
