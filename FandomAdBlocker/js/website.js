@@ -1,37 +1,4 @@
-// Numbers
-let adsBlocked = 0;
-let adsBlockedTotal;
-
-// Arrays
-let cookiesBlockedOn;
-let websitesPausedOn;
-
-// Strings
-let websiteHostName = window.location.hostname;
-
-// Element class names to delete
-// Add more ad elements as needed
-let elementNames = [
-    ".cnx",
-    ".WikiaBarWrapper",
-    ".bottom-ads-container",
-    ".top-ads-container",
-    ".top_boxad",
-    ".ad-slot-placeholder",
-    ".gpt-ad",
-    ".featured-video-player-container",
-    "#top_boxad",
-    "#mid_boxad",
-    "#incontent_boxad",
-    ".incontent_leaderboard"
-];
-
-let statistics = {};
-
-elementNames.forEach(elementName => {
-    statistics[elementName] = 0; // Initialize each element's count to 0
-});
-
+// Functions
 // Function to save data to Chrome storage
 function saveToChromeStorage(key, value) {
     chrome.storage.sync.set({[key]: value});
@@ -54,34 +21,109 @@ function checkIfAValueIsSet(value, defaultValue){
     }
 }
 
-// Function to update the badge
-function updateBadge(){
-    chrome.runtime.sendMessage({method: "updateBadge"});
+
+
+// Chrome storage variables 
+// Store ads blocked for each tab seprately and the total ads blocked
+// adsBlockedTotal is a number, everything else is a key with and an array like this:
+// [hostname, adsBlockedCount]
+let adsBlocked = {
+    adsBlockedTotal: 0
+};
+
+// Store cookies blocked on this website and websites paused as objects
+let allowedList = {
+    websitesPausedOn: [],
+    cookiesBlockedOn: []
+};
+
+// Statistics for each element
+let statistics = {};
+
+// Website variables
+const websiteHostName = window.location.hostname;
+
+// Element class names to delete
+// Add more ad elements as needed
+const elementNames = [
+    ".cnx",
+    ".WikiaBarWrapper",
+    ".bottom-ads-container",
+    ".top-ads-container",
+    ".top_boxad",
+    ".ad-slot-placeholder",
+    ".gpt-ad",
+    ".featured-video-player-container",
+    "#top_boxad",
+    "#mid_boxad",
+    "#incontent_boxad",
+    ".incontent_leaderboard"
+];
+
+let saveTimeout;
+
+
+// Initialize each element's count to 0
+elementNames.forEach(elementName => {
+    statistics[elementName] = 0;
+});
+
+// Function to get a unique ID for each ad blocked
+function getUniqueId() {
+    return (Date.now() + Math.random()).toString(36);
+}
+
+// Unique ID for the current tab
+const uniqueId = getUniqueId();
+
+// Debounce function to save data to Chrome storage to prevent MAX_WRITE_OPERATIONS_PER_MINUTE quota error
+function startSavingTimeout() {
+    if (saveTimeout) {
+        clearTimeout(saveTimeout);
+    }
+    saveTimeout = setTimeout(() => {
+        saveToChromeStorage("adsBlocked", adsBlocked);
+        saveToChromeStorage("statistics", statistics);
+    }, 200);
 }
 
 // Function to delete an element from the website
 function deleteElements(...elementNames){
     elementNames.forEach(elementName => {
+        // Check if the element exists before trying to remove it
         if(document.querySelector(elementName)){
+            // Remove the element from the DOM
             document.querySelector(elementName).remove();
+
+            // Update the statistics and adsBlocked count with the name of the element + 1
             statistics[elementName]++;
-            adsBlocked++;
-            updateBadge();
-            adsBlockedTotal++;
-            saveToChromeStorage("adsBlocked", adsBlocked);
-            saveToChromeStorage("adsBlockedTotal", adsBlockedTotal);
-            saveToChromeStorage("statistics", statistics);
+
+            // Increment the adsBlocked count for the current tab
+            adsBlocked[uniqueId][1]++;
+
+            // Update the total ads blocked count
+            adsBlocked.adsBlockedTotal++;
+
+            // Update the chrome storage data
+            startSavingTimeout();
         }
     });
 }
 
-// Get the varaible values from chrome storage
-getFromChromeStorage("adsBlockedTotal", function(value){
-    adsBlockedTotal = checkIfAValueIsSet(value, "0");
+// Get the variable values from chrome storage
+getFromChromeStorage("adsBlocked", function(value){
+    adsBlocked = checkIfAValueIsSet(value, {
+        adsBlockedTotal: 0
+    });
+
+    // Reset the adsBlocked count for the current tab if it is set or not set
+    adsBlocked[uniqueId] = [websiteHostName, 0];
 });
 
 getFromChromeStorage("statistics", function(value){
     statistics = checkIfAValueIsSet(value, {});
+
+    // Initialize each element's count to 0 if not already set
     elementNames.forEach(elementName => {
         if(statistics[elementName] === undefined) {
             statistics[elementName] = 0;
@@ -89,35 +131,28 @@ getFromChromeStorage("statistics", function(value){
     });
 });
 
-getFromChromeStorage("cookiesBlockedOn", function(value){
-    cookiesBlockedOn = checkIfAValueIsSet(value, []);
+getFromChromeStorage("allowedList", function(value) {
+    allowedList = checkIfAValueIsSet(value, {
+        websitesPausedOn: [],
+        cookiesBlockedOn: []
+    });
 });
 
-getFromChromeStorage("websitesPausedOn", function(value){
-    websitesPausedOn = checkIfAValueIsSet(value, []);
-});
-
-// Sends the status of the javascript
+// Send 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.method == "getStatus") {
         sendResponse({
             status: "active",
             hostName: window.location.hostname,
-            adsBlocked: adsBlocked,
-            adsBlockedTotal: adsBlockedTotal,
-            websitesPausedOn: websitesPausedOn,
-            cookiesBlockedOn: cookiesBlockedOn
+            adsBlocked: adsBlocked[uniqueId][1],
+            adsBlockedTotal: adsBlocked.adsBlockedTotal
         });
-    }
-
-
-    if (request.action == "updatePage") {
-        window.location.reload();
     }
 });
 
 // Function to remove ads and cookies from the website (if not paused and if cookies are blocked on this website)
 function removeAdsCookies(){
+    const { websitesPausedOn, cookiesBlockedOn } = allowedList;
     // Check if the website is paused and delete the ads
     if(!websitesPausedOn.includes(websiteHostName)){
         deleteElements(...elementNames);
@@ -136,4 +171,14 @@ function removeAdsCookies(){
 setTimeout(() => {
     removeAdsCookies();
 }, 10);
-setInterval(removeAdsCookies, 100);
+setInterval(removeAdsCookies, 200);
+
+
+// Update the page if one of the lists changes
+chrome.storage.onChanged.addListener(function(changes, areaName) {
+    if (areaName === "sync") {
+        if (changes.allowedList) {
+            window.location.reload();
+        }
+    }
+});

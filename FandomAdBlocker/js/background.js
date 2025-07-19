@@ -23,6 +23,19 @@ function checkIfAValueIsSet(value, defaultValue){
     }
 }
 
+// Helper function to log all contents of Chrome storage
+function logChromeStorage() {
+    chrome.storage.sync.get(null, function(items) {
+        console.log("Chrome Storage Contents:");
+        for (let key in items) {
+            console.log(`${key}:`);
+            console.log(items[key]);
+        }
+    });
+}
+
+let currentTabId = null;
+
 // Funtion set the badge text
 function setBadgeText(text) {
     chrome.action.setBadgeText({text: text});
@@ -32,22 +45,31 @@ function setBadgeText(text) {
 function setBadgeColor(color) {
     chrome.action.setBadgeBackgroundColor({color: color});
 }
+
+function setBadge(text, color) {
+    setBadgeText(text);
+    setBadgeColor(color);
+}
   
 // Function to remove the badge
 function removeBadge() {
     setBadgeText("");
     setBadgeColor("#00ff00");
 }
+
+// Function to set the extension icon
+function setExtensionIcon(active) {
+    const iconPath = active ? "../img/128.png" : "../img/128BlackAndWhite.png";
+    chrome.action.setIcon({ path: iconPath });
+}
   
 // Function to set the badge depending on the amount of ads blocked
 function setBadgeAds(amount, paused = false) {
     if(paused) {
-        setBadgeText("0");
-        setBadgeColor("#666666");
+        setBadge("0", "#666666");
     }
     else {
-        setBadgeText(amount.toString());
-        setBadgeColor("#00ff00");
+        setBadge(amount.toString(), "#00ff00");
         if(amount > 2){
             setBadgeColor("#7fff00");
         }
@@ -63,30 +85,27 @@ function setBadgeAds(amount, paused = false) {
     }
 }
 
+function updateBadge() {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {method: "getStatus"}, function(response) {
+                if (chrome.runtime.lastError) {
+                    removeBadge();
+                    setExtensionIcon(false);
+                }
+                else if (response.status === "active") {
+                    const { adsBlocked, adsBlockedTotal } = response;
+                    setBadgeAds(adsBlocked, false);
+                    setExtensionIcon(true);
+                }
+           });
+        });
+}
+
 // Function to set the extension icon
 function setExtensionIcon(active) {
     const iconPath = active ? "../img/128.png" : "../img/128BlackAndWhite.png";
     chrome.action.setIcon({ path: iconPath });
 }
-
-// Update the badge based on the current tab status, if the tab is not active or the content script is not running, remove the badge
-function updateBadge() {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {method: "getStatus"}, function(response) {
-            if (chrome.runtime.lastError) {
-                removeBadge();
-                setExtensionIcon(false);
-            }
-            else{
-                setBadgeAds(response.adsBlocked, response.websitesPausedOn.includes(response.hostName));
-                setExtensionIcon(true);
-            }
-        });
-    });
-}
-
-// Initial call
-updateBadge();
 
 // Listen for tab updates (changing URL or opening a new tab)
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
@@ -100,11 +119,10 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
     updateBadge();
 });
 
-// Listen for messages from content scripts and update the badge
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.method == "updateBadge") {
-        getFromChromeStorage("adsBlocked", function(value){
-            setBadgeAds(checkIfAValueIsSet(value, 0));
-        });
+chrome.storage.onChanged.addListener(function(changes, areaName) {
+    if (areaName === "sync") {
+        if (changes.adsBlocked) {
+            updateBadge();
+        }
     }
 });

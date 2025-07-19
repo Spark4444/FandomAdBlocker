@@ -1,6 +1,15 @@
+:root {
+	--purple-red: #6f034c;
+	--bright-purple: #6f035a;
+	--main-purple: #520143;
+	--main-yellow: #ffc500;
+	--darker-purple: #430037;
+	--darker-yellow: #c39600;
+}
+
 body {
 	align-items: center;
-	background: #520143;
+	background: var(--main-purple);
 	color: white;
 	display: flex;
 	flex-direction: column;
@@ -38,7 +47,7 @@ body {
 
 .main {
 	align-items: center;
-	background: #ffc500;
+	background: var(--main-yellow);
 	border-radius: 5px;
 	border: black 1.34px solid;
 	color: black;
@@ -102,7 +111,7 @@ body {
 }
 
 .count {
-	color: #520143;
+	color: var(--main-purple);
 	padding: 0 5px 0 0;
 }
 
@@ -115,13 +124,13 @@ body {
 }
 
 .count2 {
-	color: #520143;
+	color: var(--main-purple);
 	padding: 0 5px 0 0;
 }
 
-.disableCookiesbtn {
+.listButton {
 	align-items: center;
-	background: #c39600;
+	background: var(--darker-yellow);
 	border-radius: 5px;
 	border: solid 1.8px;
 	cursor: pointer;
@@ -132,25 +141,19 @@ body {
 	transition: 0.5s;
 	user-select: none;
 	width: 240px;
+}
+
+.listButton.active {
+	background: var(--bright-purple);
+    color: white;
+}
+
+.listButton.active img {
+	filter: invert(1);
 }
 
 .cookieIcon {
 	padding: 0 5px 0 0;
-}
-
-.pauseOnThisFandombtn {
-	align-items: center;
-	background: #c39600;
-	border-radius: 5px;
-	border: solid 1.8px;
-	cursor: pointer;
-	display: flex;
-	font-weight: 550;
-	height: 30px;
-	justify-content: center;
-	transition: 0.5s;
-	user-select: none;
-	width: 240px;
 }
 
 .pauseIcon {
@@ -171,8 +174,7 @@ body {
 	justify-content: flex-start;
 }
 
-.disableCookiesbtn:hover,
-.pauseOnThisFandombtn:hover {
+.listButton:hover {
 	box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -186,7 +188,7 @@ body {
 }
 
 .warning {
-	color: #520143;
+	color: var(--main-purple);
 	font-size: 9px;
 	font-weight: 550;
 }

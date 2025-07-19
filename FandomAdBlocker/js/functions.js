@@ -15,8 +15,15 @@ function logChromeStorage() {
     chrome.storage.sync.get(null, function(items) {
         console.log("Chrome Storage Contents:");
         for (let key in items) {
-            console.log(`${key}: ${items[key]}`);
+            console.log(`${key}:`);
+            console.log(items[key]);
         }
+    });
+}
+
+function clearChromeStorage() {
+    chrome.storage.sync.clear(function() {
+        console.log("Chrome storage cleared.");
     });
 }
 

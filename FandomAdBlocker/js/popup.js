@@ -1,40 +1,17 @@
-// Numbers
-let adsBlocked = 0;
-let adsBlockedTotal;
+// Count - on current page, count2 - total count
+const count = document.querySelector(".count");
+const count2 = document.querySelector(".count2");
+const websiteName = document.querySelector(".websiteName");
+const settingsIcon = document.querySelector(".settingsIcon");
+const listButtons = document.querySelectorAll(".listButton");
+const listIcons = document.querySelectorAll(".listIcon");
 
-// Arrays
-let cookiesBlockedOn;
-let websitesPausedOn;
+let buttons = {
+    cookiesButton: false,
+    pauseButton: false
+};
 
-// DOM elements
-let websiteName = document.querySelector(".websiteName");
-let count = document.querySelector(".count");
-let pauseOnThisFandombtn = document.querySelector(".pauseOnThisFandombtn");
-let disableCookiesbtn = document.querySelector(".disableCookiesbtn");
-let cookieIcon = document.querySelector(".cookieIcon");
-let pauseIcon = document.querySelector(".pauseIcon");
-let settingsIcon = document.querySelector(".settingsIcon");
-
-// Get the varaible values from chrome storage
-getFromChromeStorage("adsBlockedTotal", function(value){
-    adsBlockedTotal = checkIfAValueIsSet(value, "0");
-
-    // Update the ads blocked total count on the extension popup
-    if(window.location.href.includes("chrome-extension")){
-        let count2 = document.querySelector(".count2");
-        count2.innerHTML = adsBlockedTotal;
-    }
-});
-
-getFromChromeStorage("cookiesBlockedOn", function(value){
-    cookiesBlockedOn = checkIfAValueIsSet(value, []);
-});
-
-getFromChromeStorage("websitesPausedOn", function(value){
-    websitesPausedOn = checkIfAValueIsSet(value, []);
-});
-
-// Check if javascript of the extension is active if not switch to nothing design
+// Check if the popup is opened on a valid website
 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {method: "getStatus"}, function(response) {
         if (chrome.runtime.lastError) {
@@ -47,94 +24,94 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             document.querySelector(".main").style.height = "310px";
             document.querySelector("body").style.height = "380px";
         }
-        else{
-            let websiteHostname = response.hostName;
-            adsBlocked = response.adsBlocked;
+        else {
+            const { status, hostName, adsBlocked, adsBlockedTotal } = response;
+            if (status === "active") {
+                websiteName.innerHTML = hostName;
+                count.innerHTML = adsBlocked;
+                count2.innerHTML = adsBlockedTotal;
 
-            // Set the correct statistics on the pop up
-            websiteName.innerHTML = websiteHostname;
-            count.innerHTML = adsBlocked;
+                // Update the allowedList
+                getFromChromeStorage("allowedList", function(value) {
+                    allowedList = checkIfAValueIsSet(value, {
+                        websitesPausedOn: [],
+                        cookiesBlockedOn: []
+                    });
 
-            // Enables turned on and turned off styles for a button
-            function enableStylesForButton(button, icon, enable) {
-                if(enable){
-                    button.style.background = "#520143";
-                    button.style.color = "white";
-                    icon.style.filter = "invert(1)";
-                }
-                else{
-                    button.style.background = "";
-                    button.style.color = "";
-                    icon.style.filter = "";
-                }
-            }
+                    saveToChromeStorage("allowedList", allowedList);
 
-            // Set the correct button styles depending on the status of the website
-            if(websitesPausedOn.includes(websiteHostname)) {
-                pauseOnThisFandombtn.innerHTML = `<img src="img/play.svg" class="pauseIcon" style="padding: 0 6px 0 0;width: 15px;" draggable="false" alt="">Resume ad blocking on this fandom`;
-                pauseIcon = document.querySelector(".pauseIcon");
-                enableStylesForButton(pauseOnThisFandombtn, pauseIcon, true);
-            }
-            else{
-                pauseOnThisFandombtn.innerHTML = `<img src="img/pause.svg" class="pauseIcon" draggable="false" alt="">Pause ad blocking on this fandom`;
-            }
-
-            if(cookiesBlockedOn.includes(websiteHostname)) {
-                disableCookiesbtn.innerHTML = `<img src="img/cookie.svg" class="cookieIcon" draggable="false" alt="">Enable cookies on this fandom`;
-                cookieIcon = document.querySelector(".cookieIcon");
-                enableStylesForButton(disableCookiesbtn, cookieIcon, true);
-            }
-            else{
-                disableCookiesbtn.innerHTML = `<img src="img/cookie.svg" class="cookieIcon" draggable="false" alt="">Disable cookies on this fandom`;
-            }
-
-            // Event listener for the buttons
-            // Disable cookies on a specified website
-            disableCookiesbtn.addEventListener("click", function(event) {
-                if(websiteHostname !== undefined){
-                    if(!cookiesBlockedOn.includes(websiteHostname)) {
-                        cookiesBlockedOn.push(websiteHostname);
-                        disableCookiesbtn.innerHTML = `<img src="img/cookie.svg" class="cookieIcon" draggable="false" alt="">Enable cookies on this fandom`;
-                        cookieIcon = document.querySelector(".cookieIcon");
-                        enableStylesForButton(disableCookiesbtn, cookieIcon, true);
+                    if (allowedList.websitesPausedOn.includes(hostName)) {
+                        buttons.pauseButton = toggleButton(buttons.pauseButton, 1);
                     }
-                    else{
-                        cookiesBlockedOn = cookiesBlockedOn.filter(item => item !== websiteHostname);
-                        disableCookiesbtn.innerHTML = `<img src="img/cookie.svg" class="cookieIcon" draggable="false" alt="">Disable cookies on this fandom`;
-                        cookieIcon = document.querySelector(".cookieIcon");
-                        enableStylesForButton(disableCookiesbtn, cookieIcon, false);
+                    if (allowedList.cookiesBlockedOn.includes(hostName)) {
+                        buttons.cookiesButton = toggleButton(buttons.cookiesButton, 0);
                     }
+                });
 
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "updatePage"});
-                    saveToChromeStorage("cookiesBlockedOn", cookiesBlockedOn);
-                }
-            });
-        
-            // Pause ad blocking on a specified website
-            pauseOnThisFandombtn.addEventListener("click", function(event) {
-                if(websiteHostname !== undefined){
-                    if(!websitesPausedOn.includes(websiteHostname)) {
-                        websitesPausedOn.push(websiteHostname);
-                        pauseOnThisFandombtn.innerHTML = `<img src="img/play.svg" class="pauseIcon" draggable="false" style="padding: 0 6px 0 0;width: 15px;" alt="">Resume ad blocking on this fandom`;
-                        pauseIcon = document.querySelector(".pauseIcon")
-                        enableStylesForButton(pauseOnThisFandombtn, pauseIcon, true);
+                // Reverse the state of the buttons when clicked and return the new state
+                function toggleButton(buttonBool, index) {
+                    buttonBool = !buttonBool;
+
+                    const button1Text = buttonBool ? "Enable cookies on this fandom" : "Disable cookies on this fandom";
+                    const button2Text = buttonBool ? "Resume ad blocking on this fandom" : "Pause ad blocking on this fandom";
+
+                    const type = index === 0 ? "cookiesBlockedOn" : "websitesPausedOn";
+
+                    // Add an active class to the button if it is active, otherwise remove it
+                    getFromChromeStorage("allowedList", function(value) {
+                        allowedList = checkIfAValueIsSet(value, {
+                            websitesPausedOn: [],
+                            cookiesBlockedOn: []
+                        });
+
+                        if (buttonBool) {
+                            listButtons[index].classList.add("active");
+
+                            // Add the hostName to the allowedList if it is not already there
+                            if (!allowedList[type].includes(hostName)) {
+                                allowedList[type].push(hostName);
+                            }
+                        }
+                        else {
+                            listButtons[index].classList.remove("active");
+
+                            // Remove the hostName from the allowedList if it is there
+                            allowedList[type] = allowedList[type].filter(item => item !== hostName);
+                        }
+
+                        // Save the updated allowedList to chrome storage
+                        saveToChromeStorage("allowedList", allowedList);
+                    });
+
+                    // Add some specific styles/change src for the img depending on the button index
+                    if (index === 1) {
+                        const src = buttonBool ? "img/play.svg" : "img/pause.svg";
+                        const style = buttonBool ? "padding: 0px 6px 0px 0px; width: 15px;" : "";
+                        listButtons[index].innerHTML = `<img src="${src}" style="${style}" class="pauseIcon listIcon" draggable="false" alt="">${button2Text}`;
                     }
-                    else{
-                        websitesPausedOn = websitesPausedOn.filter(item => item !== websiteHostname);
-                        pauseOnThisFandombtn.innerHTML = `<img src="img/pause.svg" class="pauseIcon" draggable="false" alt="">Pause ad blocking on this fandom`;
-                        pauseIcon = document.querySelector(".pauseIcon")
-                        enableStylesForButton(pauseOnThisFandombtn, pauseIcon, false);
+                    else {
+                        listButtons[index].innerHTML = `<img src="img/cookie.svg" class="cookieIcon listIcon" draggable="false" alt="">${button1Text}`;
                     }
 
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "updatePage"});
-                    saveToChromeStorage("websitesPausedOn", websitesPausedOn);
+                    return buttonBool;
                 }
-            });
+
+                listButtons.forEach((button, index) => {
+                    button.addEventListener("click", function() {
+                        if (index === 0) {
+                            buttons.cookiesButton = toggleButton(buttons.cookiesButton, index);
+                        } 
+                        else if (index === 1) {
+                            buttons.pauseButton = toggleButton(buttons.pauseButton, index);
+                        }
+                    });
+                });
+            }
         }
     });
 });
 
-// Open settings page in new tab
+// Open settings page in new tab on click
 settingsIcon.addEventListener("click", function() {
     chrome.tabs.create({ url: chrome.runtime.getURL("settings/index.html") });
 });
