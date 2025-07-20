@@ -2,6 +2,28 @@
 Block pop-ups and intrusive ads across Fandom.com with FADBlock  
 [Chrome Web Store link](https://chromewebstore.google.com/detail/fadblock-%E2%80%94-block-ads-acro/lmbjbgfkcnbgkmolfnhhblgnhkmjkead)
 
+## Users & Comments
+The extension has 2k+ users and 4.2/5 rating on the Chrome Web Store.
+
+[Comments Link](https://chromewebstore.google.com/detail/fadblock-%E2%80%94-block-ads-acro/lmbjbgfkcnbgkmolfnhhblgnhkmjkead/reviews?hl=uk)
+<br><br>
+Some of the comments from users:
+
+- Niko Wand 5 stars
+> Hey this is pretty good thank you so much
+
+- Katie Wald 5 stars
+> Works like a charm. THANK YOU. After learning about Fandom's business practices (on top of their unnecessarily anti-consumer advertising), this feels great.
+
+- Jackson Smyrl 5 stars
+> Works like charm, makes fandom sites actually readable again.
+
+- Thiago Ibaldi 5 stars
+> Highly effective, it's a nice feeling not to give money for advertising to this site.
+
+- A “Kiolo” M 5 stars
+> Thank you so much for this blocker. I use it with my general ad block and it's like fandom is actually useable again. Blocks banners, those stupid autoplay videos and pop-ups.
+
 ## Features
 
 ### Core Ad Blocking
