@@ -40,7 +40,7 @@ body {
 .LogoText {
 	display: flex;
 	font-size: 1.5vw;
-	padding: 0 0 0 10px;
+	padding: 0 0 0 4%;
 }
 
 .boldText {
@@ -132,8 +132,21 @@ a:hover {
 }
 
 input[type="checkbox"] {
-	cursor: pointer;
-	width: 4%;
+    appearance: none;
+    aspect-ratio: 1;
+    background: white;
+    outline: none;
+    transition: 0.5s;
+    width: 1.2vw;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    background: var(--main-yellow);
+    background-image: url("../../img/tick.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .sectionSelect {
