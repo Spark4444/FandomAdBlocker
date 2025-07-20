@@ -66,7 +66,7 @@ body {
 .adsCountWrap {
 	align-items: center;
 	border-radius: 5px;
-	border: black solid 1.34px;
+	border: black 1.34px solid;
 	display: flex;
 	flex-direction: column;
 	height: 72px;
@@ -102,30 +102,21 @@ body {
 	width: 240px;
 }
 
-.adsBlcoked {
-	align-items: center;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	width: 144px;
-}
-
-.count {
-	color: var(--main-purple);
-	padding: 0 5px 0 0;
-}
-
+.adsBlcoked,
 .totalAdsBlocked {
 	align-items: center;
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-end;
-	width: 94px;
 }
 
-.count2 {
-	color: var(--main-purple);
-	padding: 0 5px 0 0;
+.adsBlcoked {
+	justify-content: flex-start;
+	width: 144px;
+}
+
+.totalAdsBlocked {
+	justify-content: flex-end;
+	width: 94px;
 }
 
 .listButton {
@@ -145,7 +136,7 @@ body {
 
 .listButton.active {
 	background: var(--bright-purple);
-    color: white;
+	color: white;
 }
 
 .listButton.active img {
@@ -161,16 +152,18 @@ body {
 	width: 17px;
 }
 
-.topRightMenu {
+.topRightMenu,
+.topLeftLogo {
 	display: flex;
-	width: 126px;
 	align-items: center;
+}
+
+.topRightMenu {
+	width: 126px;
 	justify-content: flex-end;
 }
 
 .topLeftLogo {
-	display: flex;
-	align-items: center;
 	justify-content: flex-start;
 }
 
@@ -210,6 +203,12 @@ body {
 .settingsIcon:hover {
 	filter: brightness(1.5);
 	animation: rotate 1s;
+}
+
+.count,
+.count2 {
+	padding: 0 5px 0 0;
+	color: var(--main-purple);
 }
 
 @keyframes rotate {

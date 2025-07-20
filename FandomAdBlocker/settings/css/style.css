@@ -87,7 +87,7 @@ body {
 }
 
 .sectionWrap .section:last-child {
-    border-radius: 0 0 0 1vw;
+	border-radius: 0 0 0 1vw;
 }
 
 a {
@@ -113,17 +113,15 @@ a:hover {
 	color: white;
 }
 
-.section:hover {
-	background: var(--main-purple);
-    color: var(--main-yellow);
-    border-left: 0.1vw solid var(--main-yellow);
-	transition: 0.25s !important;
-}
-
+.section:hover,
 .section.active {
 	background: var(--main-purple);
 	color: var(--main-yellow);
 	border-left: 0.1vw solid var(--main-yellow);
+}
+
+.section:hover {
+	transition: 0.25s !important;
 }
 
 .sectionTitle {
@@ -132,21 +130,21 @@ a:hover {
 }
 
 input[type="checkbox"] {
-    appearance: none;
-    aspect-ratio: 1;
-    background: white;
-    outline: none;
-    transition: 0.5s;
-    width: 1vw;
-    cursor: pointer;
+	appearance: none;
+	aspect-ratio: 1;
+	background: white;
+	outline: none;
+	transition: 0.5s;
+	width: 1vw;
+	cursor: pointer;
 }
 
 input[type="checkbox"]:checked {
-    background: var(--main-yellow);
-    background-image: url("../../img/tick.svg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+	background: var(--main-yellow);
+	background-image: url("../../img/tick.svg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .sectionSelect {
@@ -169,25 +167,20 @@ input[type="checkbox"]:checked {
 	justify-content: center;
 }
 
-.listSection:first-child {
-	border: 0.1vw solid white;
-}
-
+.listSection:first-child,
 .listSection:last-child {
 	border: 0.1vw solid white;
 }
 
-.listSection:hover {
-	background: var(--darker-purple);
-	color: var(--main-yellow);
-	border: 0.1vw solid var(--main-yellow);
-	transition: 0.5s;
-}
-
+.listSection:hover,
 .listSection.active {
 	background: var(--darker-purple);
 	color: var(--main-yellow);
-	border: var(--main-yellow) 0.1vw solid;
+	border: 0.1vw solid var(--main-yellow);
+}
+
+.listSection:hover {
+	transition: 0.5s;
 }
 
 .fandomInput {
@@ -298,9 +291,6 @@ input[type="checkbox"]:checked {
 
 .statisticsTextWrap {
 	border: 0.1vw;
-}
-
-.statisticsTextWrap {
 	border-radius: 1vw;
 	display: flex;
 	align-items: center;
@@ -375,42 +365,42 @@ input[type="checkbox"]:checked {
 }
 
 .footer {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    min-height: 6vw;
-    margin: 40% 0 0 0;
-    border-top: 0.1vw solid var(--bright-purple);
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	min-height: 6vw;
+	margin: 40% 0 0 0;
+	border-top: 0.1vw solid var(--bright-purple);
 }
 
 .topWrap {
-    width: 100%;
-    height: max-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+	width: 100%;
+	height: max-content;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
 }
 
 .noItemContainer {
-    height: 2.5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	height: 2.5vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .option {
-    background: var(--bright-purple);
-    border: solid 0.1vw var(--darker-purple);
-    padding: 1% 2%;
-    width: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 1vw;
-    border-radius: 1vw;
+	background: var(--bright-purple);
+	border: solid 0.1vw var(--darker-purple);
+	padding: 1% 2%;
+	width: 30%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 1vw;
+	border-radius: 1vw;
 }
 
 @keyframes appearHide {
