@@ -16,8 +16,9 @@ body {
 	font-family: helvetica;
 	justify-content: flex-end;
 	margin: 0;
-	overflow-y: auto;
+	overflow-y: scroll;
 	overflow-x: hidden;
+	scrollbar-gutter: stable;
 	width: 100vw;
 	height: 100vh;
 	padding: 0;
@@ -29,7 +30,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 20% 0;
+	margin: 20% 0 30% 0;
 }
 
 .FABlogo {
@@ -132,10 +133,11 @@ a:hover {
 
 input[type="checkbox"] {
 	cursor: pointer;
+	width: 4%;
 }
 
 .sectionSelect {
-	width: 35%;
+	width: 100%;
 	display: flex;
 	min-height: 3vw;
 	flex-direction: row;
@@ -143,6 +145,8 @@ input[type="checkbox"] {
 }
 
 .listSection {
+	border-right: none !important;
+	border-left: none !important;
 	cursor: pointer;
 	width: 50%;
 	text-align: center;
@@ -153,15 +157,11 @@ input[type="checkbox"] {
 }
 
 .listSection:first-child {
-	border-radius: 1vw 0 0 1vw;
 	border: 0.1vw solid white;
-	border-right: none !important;
 }
 
 .listSection:last-child {
-	border-radius: 0 1vw 1vw 0;
 	border: 0.1vw solid white;
-	border-left: none !important;
 }
 
 .listSection:hover {
@@ -182,17 +182,12 @@ input[type="checkbox"] {
 	border: 0.1vw solid white;
 	border-radius: 1vw;
 	font-size: 1vw;
-	width: 50%;
+	width: 40%;
 	min-height: 2.5vw;
 	margin: 5% 0 0 0;
 	padding: 0 0 0 2%;
 	color: white;
 	outline: none;
-}
-
-.fandomInput:hover {
-	box-shadow: 0 0 1vw white;
-	transition: 0.25s;
 }
 
 .fandomInput::placeholder {
@@ -215,14 +210,8 @@ input[type="checkbox"] {
 	align-items: center;
 	height: 55%;
 	background: var(--main-purple);
-	border-radius: 0.5vw;
 	border: 0.1vw solid white;
-	padding: 0 0 0 2%;
-}
-
-.listItem:hover {
-	box-shadow: 0 0 1vw white;
-	transition: 0.25s;
+	padding: 0 0 0 4%;
 }
 
 .message {
@@ -288,16 +277,11 @@ input[type="checkbox"] {
 	justify-content: space-between;
 	width: 44%;
 	border: 0.1vw solid white;
-	border-radius: 1vw;
+	border-radius: 0vw;
 	padding: 1%;
 	margin: 0 0 2% 0;
 	font-weight: 600;
 	background: var(--purple-red);
-}
-
-.statisticItem:hover {
-	box-shadow: 0 0 1vw white;
-	transition: 0.25s;
 }
 
 .statisticsTextWrap {
@@ -306,20 +290,14 @@ input[type="checkbox"] {
 
 .statisticsTextWrap {
 	border-radius: 1vw;
-	background: var(--bright-purple);
-	border: 0.1vw solid white;
+	]: var(
+	--bright-purple);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 50%;
 	height: 11vw;
 	padding: 1%;
-	margin: 0 0 4% 0;
-}
-
-.statisticsTextWrap:hover {
-	box-shadow: 0 0 1vw white;
-	transition: 0.25s;
 }
 
 .statisticsText {
@@ -329,30 +307,22 @@ input[type="checkbox"] {
 
 .mainStat {
 	border: 0.1vw solid var(--main-yellow);
-}
-
-.mainStat:hover {
-	box-shadow: 0 0 1vw var(--main-yellow);
-	transition: 0.25s;
+	margin: 3% 0;
+	width: 30%;
 }
 
 .statisticsHeader {
 	width: 20%;
 	border: 0.1vw solid var(--main-yellow);
-	border-radius: 1vw;
+	border-radius: 0vw;
 	height: 3vw;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 0 0 3% 0;
+	margin: 2% 0 2% 0;
 	color: var(--main-yellow);
 	background: var(--purple-red);
 	font-weight: 600;
-}
-
-.statisticsHeader:hover {
-	box-shadow: 0 0 10px var(--main-yellow);
-	transition: 0.25s;
 }
 
 .textRight {
@@ -389,8 +359,9 @@ input[type="checkbox"] {
 	background: var(--bright-purple);
 	border-radius: 1vw;
 	display: flex;
+	border: 0.1vw solid var(--darker-purple);
 	justify-content: space-between;
-	padding: 0.5% 2%;
+	padding: 0 1%;
 }
 
 .footer {
@@ -399,7 +370,8 @@ input[type="checkbox"] {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 12%;
+    min-height: 6vw;
+    margin: 40% 0 0 0;
     border-top: 0.1vw solid var(--bright-purple);
 }
 
@@ -410,6 +382,25 @@ input[type="checkbox"] {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+}
+
+.noItemContainer {
+    height: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.option {
+    background: var(--bright-purple);
+    border: solid 0.1vw var(--darker-purple);
+    padding: 1% 2%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 1vw;
+    border-radius: 1vw;
 }
 
 @keyframes appearHide {
