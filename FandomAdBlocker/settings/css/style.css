@@ -290,7 +290,6 @@ input[type="checkbox"]:checked {
 	justify-content: space-between;
 	width: 44%;
 	border: 0.1vw solid white;
-	border-radius: 1vw;
 	padding: 1%;
 	margin: 0 0 2% 0;
 	font-weight: 600;
@@ -326,7 +325,6 @@ input[type="checkbox"]:checked {
 .statisticsHeader {
 	width: 20%;
 	border: 0.1vw solid var(--main-yellow);
-	border-radius: 1vw;
 	height: 3vw;
 	display: flex;
 	align-items: center;
@@ -397,7 +395,7 @@ input[type="checkbox"]:checked {
 }
 
 .noItemContainer {
-    height: 2vw;
+    height: 2.5vw;
     display: flex;
     align-items: center;
     justify-content: center;

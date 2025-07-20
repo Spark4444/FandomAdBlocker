@@ -6,9 +6,6 @@ const checkboxes = {
 let options = {};
 
 getFromChromeStorage("options", function(value) {
-    // Ensure the value has a default object structure in it
-    value = checkIfAValueIsSet(value, {});
-
     Object.entries(checkboxes).forEach(([key, checkbox]) => {
         // Set the initial state of the checkbox based on the stored value
         checkbox.checked = checkIfAValueIsSet(value[key], checkbox.checked);

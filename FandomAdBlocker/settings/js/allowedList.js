@@ -64,6 +64,7 @@ fandomInput.addEventListener("input", function() {
 listSections.forEach((section, index) => {
     section.addEventListener("click", function(event) {
         message.innerHTML = ""; // Clear the message when switching sections
+        fandomInput.value = ""; // Clear the input field when switching sections
         listSections.forEach((sec, idx) => {
             sec.classList.remove("active");
             allowedLists[idx].style.display = "none";

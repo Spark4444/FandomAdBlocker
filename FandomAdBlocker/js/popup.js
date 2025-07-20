@@ -25,11 +25,16 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             document.querySelector("body").style.height = "380px";
         }
         else {
-            const { status, hostName, adsBlocked, adsBlockedTotal } = response;
+            const { status, hostName, adsBlocked } = response;
             if (status === "active") {
                 websiteName.innerHTML = hostName;
                 count.innerHTML = adsBlocked;
-                count2.innerHTML = adsBlockedTotal;
+
+                // Update the total ads blocked count
+                getFromChromeStorage("adsBlockedTotal", function(value) {
+                    value = checkIfAValueIsSet(value, "0");
+                    count2.innerHTML = value;
+                });
 
                 // Update the allowedList
                 getFromChromeStorage("allowedList", function(value) {

@@ -24,12 +24,7 @@ function checkIfAValueIsSet(value, defaultValue){
 
 
 // Chrome storage variables 
-// Store ads blocked for each tab seprately and the total ads blocked
-// adsBlockedTotal is a number, everything else is a key with and an array like this:
-// [hostname, adsBlockedCount]
-let adsBlocked = {
-    adsBlockedTotal: 0
-};
+let adsBlocked = 0;
 
 // Store cookies blocked on this website and websites paused as objects
 let allowedList = {
@@ -45,7 +40,7 @@ const websiteHostName = window.location.hostname;
 
 // Element class names to delete
 // Add more ad elements as needed
-const elementNames = [
+let elementNames = [
     ".cnx",
     ".WikiaBarWrapper",
     ".bottom-ads-container",
@@ -59,6 +54,7 @@ const elementNames = [
     "#incontent_boxad",
     ".incontent_leaderboard"
 ];
+let originalElementNames = [...elementNames]; // Store the original element names for later use
 
 let saveTimeout;
 
@@ -67,14 +63,6 @@ let saveTimeout;
 elementNames.forEach(elementName => {
     statistics[elementName] = 0;
 });
-
-// Function to get a unique ID for each ad blocked
-function getUniqueId() {
-    return (Date.now() + Math.random()).toString(36);
-}
-
-// Unique ID for the current tab
-const uniqueId = getUniqueId();
 
 // Function to merge two objects by adding the values of the same keys 
 function mergeObjects(obj1, obj2) {
@@ -93,8 +81,8 @@ function startSavingTimeout() {
         clearTimeout(saveTimeout);
     }
     saveTimeout = setTimeout(() => {
-        getFromChromeStorage("adsBlocked", function(value) {
-            saveToChromeStorage("adsBlocked", mergeObjects(value, adsBlocked));
+        getFromChromeStorage("adsBlockedTotal", function(value) {
+            saveToChromeStorage("adsBlockedTotal", adsBlocked + (value || 0));
         });
         getFromChromeStorage("statistics", function(value) {
             saveToChromeStorage("statistics", mergeObjects(value, statistics));
@@ -113,11 +101,8 @@ function deleteElements(...elementNames){
             // Update the statistics and adsBlocked count with the name of the element + 1
             statistics[elementName]++;
 
-            // Increment the adsBlocked count for the current tab
-            adsBlocked[uniqueId][1]++;
-
             // Update the total ads blocked count
-            adsBlocked.adsBlockedTotal++;
+            adsBlocked++;
 
             // Update the chrome storage data
             startSavingTimeout();
@@ -125,44 +110,24 @@ function deleteElements(...elementNames){
     });
 }
 
-// Get the variable values from chrome storage
-getFromChromeStorage("adsBlocked", function(value){
-    adsBlocked = checkIfAValueIsSet(value, {
-        adsBlockedTotal: 0
-    });
-
-    // Reset the adsBlocked count for the current tab if it is set or not set
-    adsBlocked[uniqueId] = [websiteHostName, 0];
+// Send the status of the extension to the popup and background scripts
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.method == "getStatus") {
+        sendResponse({
+                status: "active",
+                hostName: window.location.hostname,
+                adsBlocked: adsBlocked
+        });
+    }
 });
 
-getFromChromeStorage("statistics", function(value){
-    statistics = checkIfAValueIsSet(value, {});
-
-    // Initialize each element's count to 0 if not already set
-    elementNames.forEach(elementName => {
-        if(statistics[elementName] === undefined) {
-            statistics[elementName] = 0;
-        }
-    });
-});
-
+// Get the value for the allowedList from Chrome storage
 getFromChromeStorage("allowedList", function(value) {
     allowedList = checkIfAValueIsSet(value, {
         websitesPausedOn: [],
         cookiesBlockedOn: []
     });
-});
-
-// Send 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.method == "getStatus") {
-        sendResponse({
-            status: "active",
-            hostName: window.location.hostname,
-            adsBlocked: adsBlocked[uniqueId][1],
-            adsBlockedTotal: adsBlocked.adsBlockedTotal
-        });
-    }
+    saveToChromeStorage("allowedList", allowedList);
 });
 
 // Function to remove ads and cookies from the website (if not paused and if cookies are blocked on this website)
@@ -170,7 +135,20 @@ function removeAdsCookies(){
     const { websitesPausedOn, cookiesBlockedOn } = allowedList;
     // Check if the website is paused and delete the ads
     if(!websitesPausedOn.includes(websiteHostName)){
-        deleteElements(...elementNames);
+        getFromChromeStorage("options", function(value) {
+            const options = checkIfAValueIsSet(value, {});
+            options.enableSelfPromotion = checkIfAValueIsSet(options.enableSelfPromotion, true);
+            // If the option to block ads is enabled, delete the ads
+            if(!options.enableSelfPromotion){
+                // Delete discord ads if the option is enabled
+                elementNames = [...elementNames, ".DiscordChat", ".DiscordIntegratorModule"];
+                deleteElements(...elementNames);
+            } 
+            else {
+                elementNames = originalElementNames; // Reset to original element names if self-promotion is enabled
+                deleteElements(...elementNames);
+            }
+        });
     }
 
     // Check if cookies are blocked on this website and delete them
@@ -192,25 +170,8 @@ setInterval(removeAdsCookies, 200);
 // Update the page if one of the lists changes
 chrome.storage.onChanged.addListener(function(changes, areaName) {
     if (areaName === "sync") {
-        if (changes.allowedList) {
-            cleanUpAdsBlocked();
-            setTimeout(() => {
-                window.location.reload();
-            }, 200);
+        if (changes.allowedList || changes.options) {
+            window.location.reload();
         }
     }
-});
-
-// Function to clean up the adsBlocked object for the current tab
-function cleanUpAdsBlocked() {
-    getFromChromeStorage("adsBlocked", function(value) {
-        delete value[uniqueId];
-        saveToChromeStorage("adsBlocked", value);
-    });
-}
-
-
-window.addEventListener("beforeunload", function() {
-    // Clean up the adsBlocked object for the current tab before the page unloads
-    cleanUpAdsBlocked();
 });

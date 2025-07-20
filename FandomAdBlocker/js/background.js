@@ -26,9 +26,9 @@ function checkIfAValueIsSet(value, defaultValue){
 let currentTabId = null;
 
 // Reset the adsBlockedTotal on extension start
-getFromChromeStorage("adsBlocked", function(value) {
-    const totalAdsBlocked = value.adsBlockedTotal > -1 ? value.adsBlockedTotal : 0;
-    saveToChromeStorage("adsBlocked", { adsBlockedTotal: totalAdsBlocked });
+getFromChromeStorage("adsBlockedTotal", function(value) {
+    const totalAdsBlocked = value > -1 ? value : 0;
+    saveToChromeStorage("adsBlockedTotal", totalAdsBlocked);
 });
 
 // Set default values for all the chrome storage variables if they are not set
@@ -46,6 +46,13 @@ getFromChromeStorage("allowedList", function(value) {
     });
     if (value !== allowedList) {
         saveToChromeStorage("allowedList", allowedList);
+    }
+});
+
+getFromChromeStorage("options", function(value) {
+    options = checkIfAValueIsSet(value, {});
+    if (value !== options) {
+        saveToChromeStorage("options", options);
     }
 });
 
@@ -106,7 +113,7 @@ function updateBadge() {
                     setExtensionIcon(false);
                 }
                 else if (response.status === "active") {
-                    const { adsBlocked, adsBlockedTotal } = response;
+                    const { adsBlocked } = response;
                     setBadgeAds(adsBlocked, false);
                     setExtensionIcon(true);
                 }
@@ -132,9 +139,10 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
     updateBadge();
 });
 
+// Listen for when the chrome storage total ads blocked changes
 chrome.storage.onChanged.addListener(function(changes, areaName) {
     if (areaName === "sync") {
-        if (changes.adsBlocked) {
+        if (changes.adsBlockedTotal) {
             updateBadge();
         }
     }
