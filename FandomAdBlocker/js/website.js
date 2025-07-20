@@ -73,21 +73,19 @@ function getUniqueId() {
     return (Date.now() + Math.random()).toString(36);
 }
 
-// Function to merge two objects based on the larger value
-function mergeObjectsBasedOnLargerValue(obj1, obj2) {
+// Unique ID for the current tab
+const uniqueId = getUniqueId();
+
+// Function to merge two objects by adding the values of the same keys 
+function mergeObjects(obj1, obj2) {
     const merged = {...obj1};
     for (const key in obj2) {
         if (obj2.hasOwnProperty(key)) {
-            if (!merged[key] || obj2[key] > merged[key]) {
-                merged[key] = obj2[key];
-            }
+            merged[key] = (merged[key] || 0) + (obj2[key] || 0);
         }
     }
     return merged;
 }
-
-// Unique ID for the current tab
-const uniqueId = getUniqueId();
 
 // Debounce function to save data to Chrome storage to prevent MAX_WRITE_OPERATIONS_PER_MINUTE quota error
 function startSavingTimeout() {
@@ -96,10 +94,10 @@ function startSavingTimeout() {
     }
     saveTimeout = setTimeout(() => {
         getFromChromeStorage("adsBlocked", function(value) {
-            saveToChromeStorage("adsBlocked", mergeObjectsBasedOnLargerValue(value, adsBlocked));
+            saveToChromeStorage("adsBlocked", mergeObjects(value, adsBlocked));
         });
         getFromChromeStorage("statistics", function(value) {
-            saveToChromeStorage("statistics", mergeObjectsBasedOnLargerValue(value, statistics));
+            saveToChromeStorage("statistics", mergeObjects(value, statistics));
         });
     }, 200);
 }
