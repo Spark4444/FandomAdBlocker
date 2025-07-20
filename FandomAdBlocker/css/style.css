@@ -211,6 +211,14 @@ body {
 	color: var(--main-purple);
 }
 
+.logoLink {
+    display: flex;
+    align-items: center;
+    color: white;
+    justify-content: center;
+	text-decoration: none;
+}
+
 @keyframes rotate {
 	from {
 		transform: rotate(0deg);
