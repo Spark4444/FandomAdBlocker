@@ -36,3 +36,5 @@ function checkIfAValueIsSet(value, defaultValue){
         return value;
     }
 }
+
+console.log(window.innerWidth, window.innerHeight);

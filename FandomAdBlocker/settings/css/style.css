@@ -22,14 +22,14 @@ body {
 	height: 100vh;
 	padding: 0;
 	user-select: text;
-	font-size: 1.5vw;
+	font-size: 1vw;
 }
 
 .topLeftLogo {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 10% 0;
+	margin: 20% 0;
 }
 
 .FABlogo {
@@ -38,7 +38,7 @@ body {
 
 .LogoText {
 	display: flex;
-	font-size: 2.5vw;
+	font-size: 1.5vw;
 	padding: 0 0 0 10px;
 }
 
@@ -48,19 +48,20 @@ body {
 
 .sidebar {
 	display: flex;
-	width: 20%;
+	width: 15%;
 	height: 100%;
 	align-items: center;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: space-between;
 	background: var(--darker-purple);
 	position: fixed;
 	overflow-y: auto;
+	overflow-x: hidden;
 	left: 0;
 }
 
 .page {
-	width: 80%;
+	width: 85%;
 	background: var(--main-purple);
 	min-height: 100%;
 	display: flex;
@@ -76,12 +77,16 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	min-height: 20vw;
+	min-height: 16vw;
 	width: 100%;
 }
 
-.sectionWrap:first-child {
-	border-top: 0.1vw solid white;
+.sectionWrap .section:first-child {
+	border-radius: 1vw 0 0 0;
+}
+
+.sectionWrap .section:last-child {
+    border-radius: 0 0 0 1vw;
 }
 
 a {
@@ -91,7 +96,7 @@ a {
 }
 
 a:hover {
-	color: var(--darker-yellow);
+	color: var(--main-yellow);
 	transition: 0.25s;
 }
 
@@ -104,15 +109,20 @@ a:hover {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	color: white;
 }
 
 .section:hover {
 	background: var(--main-purple);
-	transition: 0.5s !important;
+    color: var(--main-yellow);
+    border-left: 0.1vw solid var(--main-yellow);
+	transition: 0.25s !important;
 }
 
 .section.active {
 	background: var(--main-purple);
+	color: var(--main-yellow);
+	border-left: 0.1vw solid var(--main-yellow);
 }
 
 .sectionTitle {
@@ -125,9 +135,9 @@ input[type="checkbox"] {
 }
 
 .sectionSelect {
-	width: 72%;
+	width: 35%;
 	display: flex;
-	min-height: 4vw;
+	min-height: 3vw;
 	flex-direction: row;
 	border-radius: 1vw;
 }
@@ -170,10 +180,10 @@ input[type="checkbox"] {
 .fandomInput {
 	background: none;
 	border: 0.1vw solid white;
-	border-radius: 3vw;
-	font-size: 1.5vw;
-	width: 57%;
-	min-height: 3.5vw;
+	border-radius: 1vw;
+	font-size: 1vw;
+	width: 50%;
+	min-height: 2.5vw;
 	margin: 5% 0 0 0;
 	padding: 0 0 0 2%;
 	color: white;
@@ -243,7 +253,7 @@ input[type="checkbox"] {
 .listItemContainer {
 	display: flex;
 	width: 100%;
-	height: 6vw;
+	height: 4vw;
 	justify-content: space-between;
 	align-items: center;
 	flex-direction: row;
@@ -256,11 +266,11 @@ input[type="checkbox"] {
 	background: var(--bright-purple);
 	border: 0.1vw solid var(--main-yellow);
 	border-radius: 0.5vw;
-	width: 24%;
+	width: 14%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 3vw;
+	height: 2.5vw;
 }
 
 .aboutText {
@@ -268,19 +278,18 @@ input[type="checkbox"] {
 	flex-direction: column;
 	align-items: flex-start;
 	width: 90%;
-	height: 10vw;
 	justify-content: space-between;
 }
 
 .statisticItem {
-	height: 2vw;
+	height: 1vw;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 80%;
+	width: 44%;
 	border: 0.1vw solid white;
 	border-radius: 1vw;
-	padding: 2%;
+	padding: 1%;
 	margin: 0 0 2% 0;
 	font-weight: 600;
 	background: var(--purple-red);
@@ -302,8 +311,8 @@ input[type="checkbox"] {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 90%;
-	height: 16vw;
+	width: 50%;
+	height: 11vw;
 	padding: 1%;
 	margin: 0 0 4% 0;
 }
@@ -328,10 +337,10 @@ input[type="checkbox"] {
 }
 
 .statisticsHeader {
-	width: 67%;
+	width: 20%;
 	border: 0.1vw solid var(--main-yellow);
 	border-radius: 1vw;
-	height: 4vw;
+	height: 3vw;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -376,12 +385,31 @@ input[type="checkbox"] {
 }
 
 .allowedList {
-	width: 56%;
+	width: 30%;
 	background: var(--bright-purple);
-	border-radius: 2vw;
+	border-radius: 1vw;
 	display: flex;
 	justify-content: space-between;
-	padding: 1% 3%;
+	padding: 0.5% 2%;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 12%;
+    border-top: 0.1vw solid var(--bright-purple);
+}
+
+.topWrap {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 @keyframes appearHide {
