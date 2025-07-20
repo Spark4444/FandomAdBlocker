@@ -82,7 +82,7 @@ function generateAllowedList(listType) {
     const listKey = listType ? "websitesPausedOn" : "cookiesBlockedOn";
     const listIndex = listType ? 0 : 1;
     getFromChromeStorage("allowedList", function(value) {
-        allowedLists[listIndex].innerHTML = value[listKey].map(item => `<div class="listItemContainer"><div class="listItem">${item}</div><div class="removeItem" key="${item}" type="${listType ? "websitesPausedOn" : "cookiesBlockedOn"}">Remove</div></div>`).join("");
+        allowedLists[listIndex].innerHTML = value[listKey].map(item => `<div class="listItemContainer"><div class="listItem">${item}</div><div class="removeItem btn" key="${item}" type="${listType ? "websitesPausedOn" : "cookiesBlockedOn"}">Remove</div></div>`).join("");
 
         if (value[listKey].length === 0) {
             allowedLists[listIndex].innerHTML = `<div class="noItemContainer">No items in this list yet. Add some using the input above.</div>`;

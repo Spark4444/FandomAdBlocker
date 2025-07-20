@@ -225,25 +225,11 @@ input[type="checkbox"]:checked {
 }
 
 .removeItem {
-	color: var(--main-yellow);
-	cursor: pointer;
-	width: 20%;
-	height: 55%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	background: var(--bright-purple);
-	border: var(--main-yellow) 0.1vw solid;
-	border-radius: 0.5vw;
+	padding: 0 4% !important;
 }
 
-.removeItem:hover,
-.clearAllButton:hover {
-	background: var(--main-yellow);
-	color: var(--bright-purple);
-	border: var(--bright-purple) 0.1vw solid;
-	transition: 0.5s;
-}
+
 
 .listItemContainer {
 	display: flex;
@@ -256,16 +242,6 @@ input[type="checkbox"]:checked {
 
 .clearAllButton {
 	margin: 3% 0;
-	cursor: pointer;
-	color: var(--main-yellow);
-	background: var(--bright-purple);
-	border: 0.1vw solid var(--main-yellow);
-	border-radius: 0.5vw;
-	width: 14%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 2.5vw;
 }
 
 .aboutText {
@@ -361,7 +337,7 @@ input[type="checkbox"]:checked {
 	display: flex;
 	border: 0.1vw solid var(--darker-purple);
 	justify-content: space-between;
-	padding: 0 1%;
+	padding: 0 2%;
 }
 
 .footer {
@@ -401,6 +377,37 @@ input[type="checkbox"]:checked {
 	justify-content: space-between;
 	height: 1vw;
 	border-radius: 1vw;
+}
+
+.clearStatisticsbtn {
+    position: fixed;
+    top: 1%;
+    right: 1%;
+}
+
+.btn {
+	color: var(--main-yellow);
+	border: 0.1vw solid var(--main-yellow);
+	border-radius: 0.5vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	height: 2vw;
+	padding: 0 2%;
+	width: max-content;
+    user-select: none;
+}
+
+.btn:hover {
+	background: var(--main-yellow);
+	color: var(--bright-purple);
+	border: var(--bright-purple) 0.1vw solid;
+	transition: 0.5s;
+}
+
+.bold {
+	font-weight: 600;
 }
 
 @keyframes appearHide {
