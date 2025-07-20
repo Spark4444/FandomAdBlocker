@@ -115,7 +115,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.method == "getStatus") {
         sendResponse({
                 status: "active",
-                hostName: window.location.hostname,
+                hostName: websiteHostName,
                 adsBlocked: adsBlocked
         });
     }
@@ -166,12 +166,38 @@ setTimeout(() => {
 }, 10);
 setInterval(removeAdsCookies, 200);
 
+// Function to check if a website's membership status changed between two arrays
+function hasWebsiteMembershipChanged(website, oldArray, newArray) {
+    // Safely handle undefined/null arrays
+    const oldList = oldArray || [];
+    const newList = newArray || [];
+    
+    // Check if the website was added to or removed from the list
+    return oldList.includes(website) !== newList.includes(website);
+}
 
-// Update the page if one of the lists changes
+
+// Update the page if one of the lists changes or options change
 chrome.storage.onChanged.addListener(function(changes, areaName) {
     if (areaName === "sync") {
-        if (changes.allowedList || changes.options) {
-            window.location.reload();
+        if (changes.allowedList) {
+            const { cookiesBlockedOn: oldCookiesBlockedOn, websitesPausedOn: oldWebsitesPausedOn } = changes.allowedList.oldValue || {};
+            const { cookiesBlockedOn: newCookiesBlockedOn, websitesPausedOn: newWebsitesPausedOn } = changes.allowedList.newValue || {};
+            
+            // Check if the current website's status changed in either list
+            if (hasWebsiteMembershipChanged(websiteHostName, oldWebsitesPausedOn, newWebsitesPausedOn) ||
+                hasWebsiteMembershipChanged(websiteHostName, oldCookiesBlockedOn, newCookiesBlockedOn)) {
+                // If the current website was added to or removed from either list, reload the page to apply the changes
+                window.location.reload();
+            }
+        }
+        else if (changes.options) {
+            const { enableSelfPromotion: oldEnableSelfPromotion } = changes.options.oldValue || {};
+            const { enableSelfPromotion: newEnableSelfPromotion } = changes.options.newValue || {};
+            if (newEnableSelfPromotion !== oldEnableSelfPromotion) {
+                // Self-promotion option changed reload the page to apply the changes
+                window.location.reload();
+            }
         }
     }
 });
