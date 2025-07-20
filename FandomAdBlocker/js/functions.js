@@ -10,17 +10,7 @@ function getFromChromeStorage(key, callback) {
     });
 }
 
-// Helper function to log all contents of Chrome storage
-function logChromeStorage() {
-    chrome.storage.sync.get(null, function(items) {
-        console.log("Chrome Storage Contents:");
-        for (let key in items) {
-            console.log(`${key}:`);
-            console.log(items[key]);
-        }
-    });
-}
-
+// Function to clear all data from Chrome storage
 function clearChromeStorage() {
     chrome.storage.sync.clear(function() {
         console.log("Chrome storage cleared.");

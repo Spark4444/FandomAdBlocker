@@ -1,6 +1,26 @@
 // Background scripts work all the time, even if the extensions popup or the active scripts arent working. 
 // It also has only 1 instance of it running at all times no matter how many tabs are open.
 
+// Listen for extension installation/update
+chrome.runtime.onInstalled.addListener(function(details) {
+    if (details.reason === "install") {
+        // Open welcome page on first install
+        chrome.tabs.create({
+            url: chrome.runtime.getURL("welcome/index.html")
+        });
+    } 
+    else if (details.reason === "update") {
+        // Open update page on extension update
+
+        // Clear all chrome storage data on update just in case to not break the extension
+        clearChromeStorage();
+
+        chrome.tabs.create({
+            url: chrome.runtime.getURL("update/index.html")
+        });
+    }
+});
+
 // Function to save data to Chrome storage
 function saveToChromeStorage(key, value) {
     chrome.storage.sync.set({[key]: value});
