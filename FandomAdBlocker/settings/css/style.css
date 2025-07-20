@@ -244,14 +244,6 @@ input[type="checkbox"]:checked {
 	margin: 3% 0;
 }
 
-.aboutText {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	width: 90%;
-	justify-content: space-between;
-}
-
 .statisticItem {
 	height: 1vw;
 	display: flex;
@@ -381,7 +373,7 @@ input[type="checkbox"]:checked {
 
 .clearStatisticsbtn {
     position: fixed;
-    top: 1%;
+    top: 1vw;
     right: 1%;
 }
 
@@ -408,6 +400,43 @@ input[type="checkbox"]:checked {
 
 .bold {
 	font-weight: 600;
+}
+
+.smallTitle {
+    margin: 3% 0;
+    font-weight: 600;
+}
+
+.itemList {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.itemListItem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0 0 4% 0;
+    width: 100%;
+    min-height: max-content;
+    text-align: left;
+}
+
+.itemHeader {
+    margin: 0 0 1% 0;
+    font-weight: 600;
+}
+
+.itemList {
+    width: 90%;
+}
+
+.sectionDescription {
+    width: 90%;
+    text-align: left;
 }
 
 @keyframes appearHide {
