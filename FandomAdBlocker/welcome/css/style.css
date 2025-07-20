@@ -42,7 +42,7 @@ body {
 .LogoText {
 	display: flex;
 	font-size: 1.8vw;
-	padding: 0 0 0 0.5%;
+	padding: 0 0 0 0.5vw;
 }
 
 .boldText {

@@ -19,24 +19,18 @@ Block pop-ups and intrusive ads across Fandom.com with FADBlock
 * **Pause Ad Blocking** - Temporarily disable ad blocking on specific Fandom sites (takes effect after refresh)
 * **Self-Promotion Filter** - Option to show or hide Fandom's own promotional content (including Discord integration ads)
 
-### Statistics & Monitoring
+### Statistics
 * **Live Statistics** - View detailed statistics on blocked ads in the popup
 * **Total Counter** - Track total ads blocked across all Fandom sites
 * **Element Breakdown** - See which types of ad elements are being blocked most frequently
 * **Local Data Storage** - All statistics are stored locally on your device for privacy
 
-### Settings & Management
+### Settings
 * **Settings Page** - Access via the gear icon in the popup
 * **Allowed List Management** - Manage sites where ad blocking is paused
 * **Cookie Block List** - Manage sites where cookies are blocked
 * **Clear Options** - Reset statistics or clear allow/block lists
 * **Privacy-First** - No data collection, everything stored locally
-
-### User Experience
-* **Clean Interface** - Modern, intuitive popup design
-* **Welcome & Update Pages** - Guided setup and update notifications
-* **Instant Feedback** - Real-time updates as ads are blocked
-* **One-Click Actions** - Easy toggle buttons for all features
 
 ## Installation
 
