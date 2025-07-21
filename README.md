@@ -80,7 +80,7 @@ git clone https://github.com/Spark4444/FandomAdBlocker
 * **Statistics Display** - See ads blocked on current page and total across all sites
 * **Disable/Enable Cookies** - Toggle cookie blocking for the current Fandom site
 * **Pause/Resume Ad Blocking** - Toggle ad blocking for the current Fandom site
-* **Settings** - Access the settings page
+* **Settings** - Access the settings page via gear icon at the top right corner of the popup
 
 ### Settings Page Features
 * **General Settings** - Configure self-promotion ad visibility
@@ -96,4 +96,4 @@ git clone https://github.com/Spark4444/FandomAdBlocker
 * Clear all data anytime from the settings page
 
 ## Current state of this project
-**Active Development** - The extension is feature-complete and actively maintained with regular updates for new ad formats and improvements.
+**Active Development** - The extension is TODO-complete and actively maintained with regular updates for new ad formats and improvements.
