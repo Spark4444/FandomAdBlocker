@@ -93,6 +93,7 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                         const src = buttonBool ? "img/play.svg" : "img/pause.svg";
                         const style = buttonBool ? "padding: 0px 6px 0px 0px; width: 15px;" : "";
                         listButtons[index].innerHTML = `<img src="${src}" style="${style}" class="pauseIcon listIcon" draggable="false" alt="">${button2Text}`;
+                        count.innerHTML = 0; // Reset the count when pausing ad blocking
                     }
                     else {
                         listButtons[index].innerHTML = `<img src="img/cookie.svg" class="cookieIcon listIcon" draggable="false" alt="">${button1Text}`;
