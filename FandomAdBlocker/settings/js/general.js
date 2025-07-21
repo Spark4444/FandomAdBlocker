@@ -5,6 +5,7 @@ const checkboxes = {
 // Store all options in an object
 let options = {};
 
+// Load options from Chrome storage and set up event listeners
 getFromChromeStorage("options", function(value) {
     Object.entries(checkboxes).forEach(([key, checkbox]) => {
         // Set the initial state of the checkbox based on the stored value

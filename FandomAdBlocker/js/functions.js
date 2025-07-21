@@ -12,9 +12,7 @@ function getFromChromeStorage(key, callback) {
 
 // Function to clear all data from Chrome storage
 function clearChromeStorage() {
-    chrome.storage.sync.clear(function() {
-        console.log("Chrome storage cleared.");
-    });
+    chrome.storage.sync.clear();
 }
 
 // Checks if a chrome storage value is set
@@ -25,4 +23,11 @@ function checkIfAValueIsSet(value, defaultValue){
     else{
         return value;
     }
+}
+
+// Function to log all the Chrome storage data
+function logChromeStorage() {
+    chrome.storage.sync.get(null, function(items) {
+        console.log("Chrome storage data:", items);
+    });
 }

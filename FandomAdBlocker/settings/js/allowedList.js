@@ -4,7 +4,7 @@ const listSections = document.querySelectorAll(".listSection");
 const allowedLists = document.querySelectorAll(".allowedList");
 const clearAllButton = document.querySelector(".clearAllButton");
 
-// Explanation: this varaible determines which mode is user in Allowed List/Blocked cookie list
+// Explanation: this variable determines which mode the user is in Allowed List/Blocked cookie list
 // I used a boolean since it only has two states and perfectly fits the use case
 let currentMode = true;
 let messageTimeout;
@@ -17,6 +17,14 @@ function startMessageTimeout() {
         message.innerHTML = "";
         message.style.display = "none";
     }, 3000);
+}
+
+function clearMessage() {
+    if (messageTimeout) {
+        clearTimeout(messageTimeout);
+        message.innerHTML = "";
+        message.style.display = "none";
+    }
 }
 
 function showMessage(text, type) {
@@ -37,8 +45,16 @@ fandomInput.addEventListener("keyup", function(event) {
             showMessage("Success! The fandom URL is valid.", "success");
 
             // Extract the hostname from the URL
-            const url = new URL(fandomUrl);
-            const hostname = url.hostname.replace(/^www\./, ""); // Remove "www."
+            let hostname;
+            if (fandomUrl.startsWith('http://') || fandomUrl.startsWith('https://')) {
+                const url = new URL(fandomUrl);
+                hostname = url.hostname.replace(/^www\./, ""); // Remove "www."
+            } 
+            else {
+                // Handle URLs without protocol by adding https://
+                const url = new URL('https://' + fandomUrl);
+                hostname = url.hostname.replace(/^www\./, ""); // Remove "www."
+            }
             const key = currentMode ? "websitesPausedOn" : "cookiesBlockedOn";
 
 
@@ -63,7 +79,7 @@ fandomInput.addEventListener("input", function() {
 // Add click event listeners to each section in the list to toggle between Allowed List and Blocked Cookie List
 listSections.forEach((section, index) => {
     section.addEventListener("click", function(event) {
-        message.innerHTML = ""; // Clear the message when switching sections
+        clearMessage(); // Clear the message when switching sections
         fandomInput.value = ""; // Clear the input field when switching sections
         listSections.forEach((sec, idx) => {
             sec.classList.remove("active");
@@ -78,6 +94,7 @@ listSections.forEach((section, index) => {
 });
 
 // Generate the allowed list based on the current mode
+// listType: true for websitesPausedOn, false for cookiesBlockedOn
 function generateAllowedList(listType) {
     const listKey = listType ? "websitesPausedOn" : "cookiesBlockedOn";
     const listIndex = listType ? 0 : 1;
@@ -100,7 +117,7 @@ function generateAllowedList(listType) {
                     // There's no need for confirmation here since it's pretty easy to add the item back
                     const updatedList = value[listType].filter(i => i !== itemKey);
                     saveToChromeStorage("allowedList", {...value, [listType]: updatedList});
-                    generateAllowedList(listType); // Regenerate the list after removal
+                    generateAllowedList(listType === "websitesPausedOn"); // Regenerate the list after removal
                 });
             });
         });

@@ -1,222 +1,222 @@
-:root {
-	--purple-red: #6f034c;
-	--bright-purple: #6f035a;
-	--main-purple: #520143;
-	--main-yellow: #ffc500;
-	--darker-purple: #430037;
-	--darker-yellow: #c39600;
-}
-
-body {
-	align-items: center;
-	background: var(--main-purple);
-	color: white;
-	display: flex;
-	flex-direction: column;
-	font-family: helvetica;
-	height: 408px;
-	justify-content: space-evenly;
-	margin: 0;
-	overflow: hidden;
-	padding: 0;
-	user-select: text;
-	width: 320px;
-}
-
-.header {
-	align-items: center;
-	display: flex;
-	justify-content: center;
-	padding: 0 16px;
-	height: 40px;
-}
-
 .FABlogo {
-	width: 40px;
-}
-
-.LogoText {
-	display: flex;
-	font-size: 25px;
-	padding: 0 0 0 10px;
-}
-
-.boldText {
-	font-weight: 600;
-}
-
-.main {
-	align-items: center;
-	background: var(--main-yellow);
-	border-radius: 5px;
-	border: black 1.34px solid;
-	color: black;
-	display: flex;
-	flex-direction: column;
-	height: 316px;
-	justify-content: space-evenly;
-	width: 290px;
-}
-
-.websiteName {
-	font-size: 16px;
-	font-weight: 600;
-}
-
-.adsCountWrap {
-	align-items: center;
-	border-radius: 5px;
-	border: black 1.34px solid;
-	display: flex;
-	flex-direction: column;
-	height: 72px;
-	justify-content: space-between;
-	padding: 5px;
-	width: 240px;
-}
-
-.firstSection {
-	align-items: center;
-	display: flex;
-	height: 35px;
-	justify-content: flex-start;
-	width: 240px;
+    width: 40px;
 }
 
 .FABlogo2 {
-	padding: 0 5px 0 2px;
-	width: 24px;
+    padding: 0 5px 0 2px;
+    width: 24px;
 }
 
-.seperator {
-	background: black;
-	height: 1.34px;
-	width: 240px;
+.LogoText {
+    display: flex;
+    font-size: 25px;
+    padding: 0 0 0 10px;
 }
 
-.secondSection {
-	align-items: center;
-	display: flex;
-	height: 36px;
-	justify-content: space-between;
-	width: 240px;
+.adsBlcoked {
+    justify-content: flex-start;
+    width: 144px;
 }
 
 .adsBlcoked,
 .totalAdsBlocked {
-	align-items: center;
-	display: flex;
-	flex-direction: row;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
 }
 
-.adsBlcoked {
-	justify-content: flex-start;
-	width: 144px;
+.adsCountWrap {
+    align-items: center;
+    border-radius: 5px;
+    border: black 1.34px solid;
+    display: flex;
+    flex-direction: column;
+    height: 72px;
+    justify-content: space-between;
+    padding: 5px;
+    width: 240px;
 }
 
-.totalAdsBlocked {
-	justify-content: flex-end;
-	width: 94px;
-}
-
-.listButton {
-	align-items: center;
-	background: var(--darker-yellow);
-	border-radius: 5px;
-	border: solid 1.8px;
-	cursor: pointer;
-	display: flex;
-	font-weight: 550;
-	height: 30px;
-	justify-content: center;
-	transition: 0.5s;
-	user-select: none;
-	width: 240px;
-}
-
-.listButton.active {
-	background: var(--bright-purple);
-	color: white;
-}
-
-.listButton.active img {
-	filter: invert(1);
-}
-
-.cookieIcon {
-	padding: 0 5px 0 0;
-}
-
-.pauseIcon {
-	padding: 0 2px 0 0;
-	width: 17px;
-}
-
-.topRightMenu,
-.topLeftLogo {
-	display: flex;
-	align-items: center;
-}
-
-.topRightMenu {
-	width: 126px;
-	justify-content: flex-end;
-}
-
-.topLeftLogo {
-	justify-content: flex-start;
-}
-
-.listButton:hover {
-	box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+.boldText {
+    font-weight: 600;
 }
 
 .buttons {
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	height: 128px;
-	justify-content: space-around;
-	width: 290px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 128px;
+    justify-content: space-around;
+    width: 290px;
 }
 
-.warning {
-	color: var(--main-purple);
-	font-size: 9px;
-	font-weight: 550;
-}
-
-.nothingText {
-	font-size: 20px;
-	font-weight: 550;
-}
-
-.nothingToBlockImage {
-	width: 262px;
-}
-
-.settingsIcon {
-	width: 19px;
-	cursor: pointer;
-}
-
-.settingsIcon:hover {
-	filter: brightness(1.5);
-	animation: rotate 1s;
+.cookieIcon {
+    padding: 0 5px 0 0;
 }
 
 .count,
 .count2 {
-	padding: 0 5px 0 0;
-	color: var(--main-purple);
+    color: var(--main-purple);
+    padding: 0 5px 0 0;
+}
+
+.firstSection {
+    align-items: center;
+    display: flex;
+    height: 35px;
+    justify-content: flex-start;
+    width: 240px;
+}
+
+.header {
+    align-items: center;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    padding: 0 16px;
+}
+
+.listButton {
+    align-items: center;
+    background: var(--darker-yellow);
+    border-radius: 5px;
+    border: solid 1.8px;
+    cursor: pointer;
+    display: flex;
+    font-weight: 550;
+    height: 30px;
+    justify-content: center;
+    transition: 0.5s;
+    user-select: none;
+    width: 240px;
+}
+
+.listButton.active {
+    background: var(--bright-purple);
+    color: white;
+}
+
+.listButton.active img {
+    filter: invert(1);
+}
+
+.listButton:hover {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .logoLink {
-    display: flex;
     align-items: center;
     color: white;
+    display: flex;
     justify-content: center;
-	text-decoration: none;
+    text-decoration: none;
+}
+
+.main {
+    align-items: center;
+    background: var(--main-yellow);
+    border-radius: 5px;
+    border: black 1.34px solid;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    height: 316px;
+    justify-content: space-evenly;
+    width: 290px;
+}
+
+.nothingText {
+    font-size: 20px;
+    font-weight: 550;
+}
+
+.nothingToBlockImage {
+    width: 262px;
+}
+
+.pauseIcon {
+    padding: 0 2px 0 0;
+    width: 17px;
+}
+
+.secondSection {
+    align-items: center;
+    display: flex;
+    height: 36px;
+    justify-content: space-between;
+    width: 240px;
+}
+
+.seperator {
+    background: black;
+    height: 1.34px;
+    width: 240px;
+}
+
+.settingsIcon {
+    cursor: pointer;
+    width: 19px;
+}
+
+.settingsIcon:hover {
+    animation: rotate 1s;
+    filter: brightness(1.5);
+}
+
+.topLeftLogo {
+    justify-content: flex-start;
+}
+
+.topRightMenu {
+    justify-content: flex-end;
+    width: 126px;
+}
+
+.topRightMenu,
+.topLeftLogo {
+    align-items: center;
+    display: flex;
+}
+
+.totalAdsBlocked {
+    justify-content: flex-end;
+    width: 94px;
+}
+
+.warning {
+    color: var(--main-purple);
+    font-size: 9px;
+    font-weight: 550;
+}
+
+.websiteName {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+:root {
+    --bright-purple: #6f035a;
+    --darker-purple: #430037;
+    --darker-yellow: #c39600;
+    --main-purple: #520143;
+    --main-yellow: #ffc500;
+    --purple-red: #6f034c;
+}
+
+body {
+    align-items: center;
+    background: var(--main-purple);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: helvetica;
+    height: 408px;
+    justify-content: space-evenly;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    user-select: text;
+    width: 320px;
 }
 
 @keyframes rotate {

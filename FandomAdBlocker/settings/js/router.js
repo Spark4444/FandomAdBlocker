@@ -23,6 +23,7 @@ function router() {
     }
 }
 
+// Call router function to initialize the page
 router();
 
 // Add onclick event listener to each section for their respective hash

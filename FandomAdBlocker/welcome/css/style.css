@@ -1,10 +1,72 @@
+.FABlogo {
+    width: 2.5vw;
+}
+
+.LogoText {
+    display: flex;
+    font-size: 1.8vw;
+    padding: 0 0 0 0.5vw;
+}
+
+.boldText {
+    font-weight: 600;
+}
+
+.header {
+    font-size: 2vw;
+    font-weight: 600;
+    margin: 0 0 5% 0;
+}
+
+.logoLink {
+    align-items: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.mainWrap {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+.subheader {
+    margin: 0 0 3% 0;
+}
+
+.topLeftLogo {
+    align-items: center;
+    display: flex;
+    left: 1%;
+    position: absolute;
+    top: 1vw;
+    width: max-content;
+}
+
+.welcomeText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+}
+
 :root {
-	--purple-red: #6f034c;
-	--bright-purple: #6f035a;
-	--main-purple: #520143;
-	--main-yellow: #ffc500;
-	--darker-purple: #430037;
-	--darker-yellow: #c39600;
+    --bright-purple: #6f035a;
+    --darker-purple: #430037;
+    --darker-yellow: #c39600;
+    --main-purple: #520143;
+    --main-yellow: #ffc500;
+    --purple-red: #6f034c;
+}
+
+a {
+    color: var(--main-yellow);
+    text-decoration: none;
 }
 
 body {
@@ -14,76 +76,14 @@ body {
     display: flex;
     flex-direction: row;
     font-family: helvetica;
+    font-size: 1vw;
+    height: 100vh;
     justify-content: flex-end;
     margin: 0;
-    overflow-y: scroll;
     overflow-x: hidden;
-    scrollbar-gutter: stable;
-    width: 100vw;
-    height: 100vh;
+    overflow-y: scroll;
     padding: 0;
+    scrollbar-gutter: stable;
     user-select: text;
-    font-size: 1vw;
-}
-
-.topLeftLogo {
-	display: flex;
-	align-items: center;
-	position: absolute;
-	left: 1%;
-	top: 1vw;
-	width: max-content;
-}
-
-.FABlogo {
-	width: 2.5vw;
-}
-
-.LogoText {
-	display: flex;
-	font-size: 1.8vw;
-	padding: 0 0 0 0.5vw;
-}
-
-.boldText {
-	font-weight: 600;
-}
-
-.mainWrap {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.header {
-    font-size: 2vw;
-    font-weight: 600;
-    margin: 0 0 5% 0;
-}
-
-.subheader {
-    margin: 0 0 3% 0;
-}
-
-.welcomeText {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    min-height: 100%;
-    position: absolute;
-    top: 0;
-}
-
-a {
-    color: var(--main-yellow);
-    text-decoration: none;
-}
-
-.logoLink {
-    display: flex;
-    align-items: center;
-    color: white;
-    justify-content: center;
+    width: 100vw;
 }

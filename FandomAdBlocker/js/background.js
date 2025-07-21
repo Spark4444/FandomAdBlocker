@@ -11,10 +11,6 @@ chrome.runtime.onInstalled.addListener(function(details) {
     } 
     else if (details.reason === "update") {
         // Open update page on extension update
-
-        // Clear all chrome storage data on update just in case to not break the extension
-        clearChromeStorage();
-
         chrome.tabs.create({
             url: chrome.runtime.getURL("update/index.html")
         });
@@ -43,45 +39,60 @@ function checkIfAValueIsSet(value, defaultValue){
     }
 }
 
-let currentTabId = null;
+// Function to clear all data from Chrome storage
+function clearChromeStorage() {
+    chrome.storage.sync.clear();
+}
 
-// Reset the adsBlockedTotal on extension start
+// Checks if a chrome storage value is set with a specific type
+function checkIfAValueIsSetWithType(value, defaultValue, type) {
+    if (value === undefined || typeof value !== type) {
+        return defaultValue;
+    } 
+    else {
+        return value;
+    }
+}
+
+// Set default values for all the chrome storage variables if they are not set
 getFromChromeStorage("adsBlockedTotal", function(value) {
+    // Don't perform type checking here as the value can be a number or string
     const totalAdsBlocked = value > -1 ? value : 0;
     saveToChromeStorage("adsBlockedTotal", totalAdsBlocked);
 });
 
-// Set default values for all the chrome storage variables if they are not set
 getFromChromeStorage("statistics", function(value) {
-    statistics = checkIfAValueIsSet(value, {});
+    const statistics = checkIfAValueIsSetWithType(value, {}, "object");
     if (value !== statistics) {
         saveToChromeStorage("statistics", statistics);
     }
 });
 
 getFromChromeStorage("allowedList", function(value) {
-    allowedList = checkIfAValueIsSet(value, {
+    const allowedList = checkIfAValueIsSetWithType(value, {
         websitesPausedOn: [],
         cookiesBlockedOn: []
-    });
+    }, "object");
     if (value !== allowedList) {
         saveToChromeStorage("allowedList", allowedList);
     }
 });
 
 getFromChromeStorage("options", function(value) {
-    options = checkIfAValueIsSet(value, {});
+    const options = checkIfAValueIsSetWithType(value, {
+        enableSelfPromotion: true
+    }, "object");
     if (value !== options) {
         saveToChromeStorage("options", options);
     }
 });
 
-// Funtion set the badge text
+// Function to set the badge text
 function setBadgeText(text) {
     chrome.action.setBadgeText({text: text});
 }
   
-// Function set the badge background color
+// Function to set the badge background color
 function setBadgeColor(color) {
     chrome.action.setBadgeBackgroundColor({color: color});
 }
@@ -125,6 +136,7 @@ function setBadgeAds(amount, paused = false) {
     }
 }
 
+// Function to update the badge based on current tab status
 function updateBadge() {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {method: "getStatus"}, function(response) {
@@ -139,12 +151,6 @@ function updateBadge() {
                 }
            });
         });
-}
-
-// Function to set the extension icon
-function setExtensionIcon(active) {
-    const iconPath = active ? "../img/128.png" : "../img/128BlackAndWhite.png";
-    chrome.action.setIcon({ path: iconPath });
 }
 
 // Listen for tab updates (changing URL or opening a new tab)

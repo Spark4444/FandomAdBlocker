@@ -9,6 +9,7 @@ const pagesNames = [
 ];
 let sections;
 
+// Function to generate sections and pages dynamically based on pagesNames
 function generateSectionsAndPages() {
     const sectionWrap = document.querySelector(".sectionWrap");
 
@@ -21,8 +22,7 @@ function generateSectionsAndPages() {
 
     sections = document.querySelectorAll(".section");
 
-
-
+    // Get all page elements
     const pages = document.querySelectorAll(".page");
 
     // Generate page classes based on the pagesNames array

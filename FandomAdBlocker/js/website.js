@@ -25,6 +25,7 @@ function checkIfAValueIsSet(value, defaultValue){
 
 // Chrome storage variables 
 let adsBlocked = 0;
+let totalAdsBlockedBefore = 0;
 
 // Store cookies blocked on this website and websites paused as objects
 let allowedList = {
@@ -35,8 +36,8 @@ let allowedList = {
 // Statistics for each element
 let statistics = {};
 
-// Website variables
-const websiteHostName = window.location.hostname;
+// Get the hostname of the current website and remove "www." if it exists
+const websiteHostName = window.location.hostname.replace(/^www\./, "");
 
 // Element class names to delete
 // Add more ad elements as needed
@@ -82,7 +83,11 @@ function startSavingTimeout() {
     }
     saveTimeout = setTimeout(() => {
         getFromChromeStorage("adsBlockedTotal", function(value) {
-            saveToChromeStorage("adsBlockedTotal", adsBlocked + (value || 0));
+            // When updating the total ads blocked, we need to ensure that the value doesn't get doubled.
+            // So we subtract the previous total ads blocked before adding the new value to ensure it is accurate.
+            const newAdsBlocked = adsBlocked - totalAdsBlockedBefore;
+            saveToChromeStorage("adsBlockedTotal", newAdsBlocked + (value || 0));
+            totalAdsBlockedBefore = adsBlocked; // Update the previous total ads blocked
         });
         getFromChromeStorage("statistics", function(value) {
             saveToChromeStorage("statistics", mergeObjects(value, statistics));
@@ -195,7 +200,7 @@ chrome.storage.onChanged.addListener(function(changes, areaName) {
             const { enableSelfPromotion: oldEnableSelfPromotion } = changes.options.oldValue || {};
             const { enableSelfPromotion: newEnableSelfPromotion } = changes.options.newValue || {};
             if (newEnableSelfPromotion !== oldEnableSelfPromotion) {
-                // Self-promotion option changed reload the page to apply the changes
+                // Self-promotion option changed, reload the page to apply the changes
                 window.location.reload();
             }
         }
