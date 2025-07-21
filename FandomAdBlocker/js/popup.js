@@ -101,6 +101,7 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                     return buttonBool;
                 }
 
+                // Add click event listeners to the buttons
                 listButtons.forEach((button, index) => {
                     button.addEventListener("click", function() {
                         if (index === 0) {
@@ -110,6 +111,27 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                             buttons.pauseButton = toggleButton(buttons.pauseButton, index);
                         }
                     });
+                });
+
+                // Event listener for chrome storage changes, update the total count and normal count
+                chrome.storage.onChanged.addListener(function(changes, areaName) {
+                    if (areaName === "sync") {
+                        if (changes.adsBlockedTotal) {
+                            count2.innerHTML = changes.adsBlockedTotal.newValue;
+
+                            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                                chrome.tabs.sendMessage(tabs[0].id, {method: "getStatus"}, function(response) {
+                                    if (chrome.runtime.lastError) {
+                                        count.innerHTML = "0";
+                                    }
+                                    else {
+                                        count.innerHTML = response.adsBlocked;
+                                    }
+                                });
+                            });
+                        }
+                    }
+                
                 });
             }
         }
