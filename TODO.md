@@ -1,0 +1,1 @@
+1. Add a how to pin the extension to the toolbar section in the welcome page.
