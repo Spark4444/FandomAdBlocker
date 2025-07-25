@@ -41,7 +41,7 @@
     align-items: center;
     display: flex;
     left: 1%;
-    position: absolute;
+    position: fixed;
     top: 1vw;
     width: max-content;
 }
@@ -53,6 +53,7 @@
     min-height: 100%;
     position: absolute;
     top: 0;
+    padding: 2% 0;
 }
 
 :root {
@@ -86,4 +87,9 @@ body {
     scrollbar-gutter: stable;
     user-select: text;
     width: 100vw;
+}
+
+.tutorialImg {
+    width: 45vw;
+    border: 0.2vw solid var(--darker-yellow);
 }
