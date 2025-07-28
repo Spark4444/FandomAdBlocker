@@ -1,21 +1,107 @@
 .FABlogo {
-    width: 2.5vw;
+    width: 40px;
+}
+
+.FABlogo2 {
+    padding: 0 5px 0 2px;
+    width: 24px;
 }
 
 .LogoText {
     display: flex;
-    font-size: 1.8vw;
-    padding: 0 0 0 0.5vw;
+    font-size: 25px;
+    padding: 0 0 0 10px;
+}
+
+.adsBlcoked {
+    justify-content: flex-start;
+    width: 144px;
+}
+
+.adsBlcoked,
+.totalAdsBlocked {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.adsCountWrap {
+    align-items: center;
+    border-radius: 5px;
+    border: black 1.34px solid;
+    display: flex;
+    flex-direction: column;
+    height: 72px;
+    justify-content: space-between;
+    padding: 5px;
+    width: 240px;
 }
 
 .boldText {
     font-weight: 600;
 }
 
+.buttons {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 128px;
+    justify-content: space-around;
+    width: 290px;
+}
+
+.cookieIcon {
+    padding: 0 5px 0 0;
+}
+
+.count,
+.count2 {
+    color: var(--main-purple);
+    padding: 0 5px 0 0;
+}
+
+.firstSection {
+    align-items: center;
+    display: flex;
+    height: 35px;
+    justify-content: flex-start;
+    width: 240px;
+}
+
 .header {
-    font-size: 2vw;
-    font-weight: 600;
-    margin: 0 0 5% 0;
+    align-items: center;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    padding: 0 16px;
+}
+
+.listButton {
+    align-items: center;
+    background: var(--darker-yellow);
+    border-radius: 5px;
+    border: solid 1.8px;
+    cursor: pointer;
+    display: flex;
+    font-weight: 550;
+    height: 30px;
+    justify-content: center;
+    transition: 0.5s;
+    user-select: none;
+    width: 240px;
+}
+
+.listButton.active {
+    background: var(--bright-purple);
+    color: white;
+}
+
+.listButton.active img {
+    filter: invert(1);
+}
+
+.listButton:hover {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .logoLink {
@@ -23,37 +109,89 @@
     color: white;
     display: flex;
     justify-content: center;
+    text-decoration: none;
 }
 
-.mainWrap {
+.main {
+    align-items: center;
+    background: var(--main-yellow);
+    border-radius: 5px;
+    border: black 1.34px solid;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    height: 316px;
+    justify-content: space-evenly;
+    width: 290px;
+}
+
+.nothingText {
+    font-size: 20px;
+    font-weight: 550;
+}
+
+.nothingToBlockImage {
+    width: 262px;
+}
+
+.pauseIcon {
+    padding: 0 2px 0 0;
+    width: 17px;
+}
+
+.secondSection {
     align-items: center;
     display: flex;
-    height: 100%;
-    justify-content: center;
-    width: 100%;
+    height: 36px;
+    justify-content: space-between;
+    width: 240px;
 }
 
-.subheader {
-    margin: 0 0 3% 0;
+.seperator {
+    background: black;
+    height: 1.34px;
+    width: 240px;
+}
+
+.settingsIcon {
+    cursor: pointer;
+    width: 19px;
+}
+
+.settingsIcon:hover {
+    animation: rotate 1s;
+    filter: brightness(1.5);
 }
 
 .topLeftLogo {
-    align-items: center;
-    display: flex;
-    left: 1%;
-    position: absolute;
-    top: 1vw;
-    width: max-content;
+    justify-content: flex-start;
 }
 
-.welcomeText {
+.topRightMenu {
+    justify-content: flex-end;
+    width: 126px;
+}
+
+.topRightMenu,
+.topLeftLogo {
+    align-items: center;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100%;
-    position: absolute;
-    top: 0;
-    padding: 2% 0;
+}
+
+.totalAdsBlocked {
+    justify-content: flex-end;
+    width: 94px;
+}
+
+.warning {
+    color: var(--main-purple);
+    font-size: 9px;
+    font-weight: 550;
+}
+
+.websiteName {
+    font-size: 16px;
+    font-weight: 600;
 }
 
 :root {
@@ -65,31 +203,28 @@
     --purple-red: #6f034c;
 }
 
-a {
-    color: var(--main-yellow);
-    text-decoration: none;
-}
-
 body {
     align-items: center;
     background: var(--main-purple);
     color: white;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     font-family: helvetica;
-    font-size: 1vw;
-    height: 100vh;
-    justify-content: flex-end;
+    height: 408px;
+    justify-content: space-evenly;
     margin: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow: hidden;
     padding: 0;
-    scrollbar-gutter: stable;
     user-select: text;
-    width: 100vw;
+    width: 320px;
 }
 
-.tutorialImg {
-    width: 45vw;
-    border: 0.2vw solid var(--darker-yellow);
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(180deg);
+	}
 }
