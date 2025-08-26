@@ -96,4 +96,4 @@ git clone https://github.com/Spark4444/FandomAdBlocker
 * Clear all data anytime from the settings page
 
 ## Current state of this project
-**Active Development** - The extension is TODO-complete and actively maintained with regular updates for new ad formats and improvements.
+finished
