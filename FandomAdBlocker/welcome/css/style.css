@@ -44,6 +44,7 @@
     position: fixed;
     top: 1vw;
     width: max-content;
+    user-select: none;
 }
 
 .welcomeText {

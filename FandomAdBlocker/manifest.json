@@ -1,10 +1,10 @@
 {
     "manifest_version": 3,
     "name": "FADBlock — block ads across the fandoms",
-    "version": "2.5.1",
+    "version": "2.5.3",
     "description": "Block pop-ups and intrusive ads across Fandom with FADBlock",
     "action": {
-        "default_popup": "index.html"
+        "default_popup": "popup/index.html"
     },
     "permissions": [
       "storage"
@@ -15,7 +15,10 @@
     "content_scripts": [
         {
           "matches": ["*://*.fandom.com/*"],
-          "js": ["js/website.js"]
+          "js": [
+            "js/functions.js",
+            "js/website.js"
+          ]
         }
       ],
      "icons": {

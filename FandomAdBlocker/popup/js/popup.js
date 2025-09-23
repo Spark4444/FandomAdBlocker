@@ -19,7 +19,7 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             document.querySelector(".main").innerHTML = `
             <div class="nothingText">Nothing to block here!</div>
             <div class="seperator"></div>
-            <img src="img/disabledSite.png" class="nothingToBlockImage" draggable="false" alt="nothing to block image">
+            <img src="../img/disabledSite.png" class="nothingToBlockImage" draggable="false" alt="nothing to block image">
             `;
             document.querySelector(".main").style.height = "310px";
             document.querySelector("body").style.height = "380px";
@@ -90,13 +90,13 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 
                     // Add some specific styles/change src for the img depending on the button index
                     if (index === 1) {
-                        const src = buttonBool ? "img/play.svg" : "img/pause.svg";
+                        const src = buttonBool ? "../img/play.svg" : "../img/pause.svg";
                         const style = buttonBool ? "padding: 0px 6px 0px 0px; width: 15px;" : "";
                         listButtons[index].innerHTML = `<img src="${src}" style="${style}" class="pauseIcon listIcon" draggable="false" alt="">${button2Text}`;
                         count.innerHTML = 0; // Reset the count when pausing ad blocking
                     }
                     else {
-                        listButtons[index].innerHTML = `<img src="img/cookie.svg" class="cookieIcon listIcon" draggable="false" alt="">${button1Text}`;
+                        listButtons[index].innerHTML = `<img src="../img/cookie.svg" class="cookieIcon listIcon" draggable="false" alt="">${button1Text}`;
                     }
 
                     return buttonBool;

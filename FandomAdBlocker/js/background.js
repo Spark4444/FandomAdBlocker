@@ -1,5 +1,7 @@
 // Background scripts work all the time, even if the extensions popup or the active scripts arent working. 
 // It also has only 1 instance of it running at all times no matter how many tabs are open.
+// Import the functions file to use the functions in it
+importScripts("functions.js");
 
 // Listen for extension installation/update
 chrome.runtime.onInstalled.addListener(function(details) {
@@ -16,33 +18,6 @@ chrome.runtime.onInstalled.addListener(function(details) {
         });
     }
 });
-
-// Function to save data to Chrome storage
-function saveToChromeStorage(key, value) {
-    chrome.storage.sync.set({[key]: value});
-}
-
-// Function to get data from Chrome storage
-function getFromChromeStorage(key, callback) {
-    chrome.storage.sync.get([key], function(result) {
-        callback(result[key]);
-    });
-}
-
-// Checks if a chrome storage value is set
-function checkIfAValueIsSet(value, defaultValue){
-    if(value == undefined){
-        return defaultValue;
-    }
-    else{
-        return value;
-    }
-}
-
-// Function to clear all data from Chrome storage
-function clearChromeStorage() {
-    chrome.storage.sync.clear();
-}
 
 // Checks if a chrome storage value is set with a specific type
 function checkIfAValueIsSetWithType(value, defaultValue, type) {
