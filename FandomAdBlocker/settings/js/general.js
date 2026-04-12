@@ -19,9 +19,11 @@ let options = {};
 
 // Load options from Chrome storage and set up event listeners
 getFromChromeStorage("options", function(value) {
+    value = checkIfAValueIsSet(value, undefined);
+    
     Object.entries(checkboxes).forEach(([key, checkbox]) => {
         // Set the initial state of the checkbox based on the stored value
-        checkbox.checked = checkIfAValueIsSet(value[key], checkbox.checked);
+        checkbox.checked = checkIfAValueIsSet(value[key], true);
 
         // Initialize the options object with the checkbox state
         options[key] = checkbox.checked;

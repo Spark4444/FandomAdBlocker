@@ -16,7 +16,8 @@
         {
           "matches": ["*://*.fandom.com/*"],
           "js": [
-            "js/functions.js",
+            "js/shared/functions.js",
+            "js/shared/optionsMap.js",
             "js/website.js"
           ]
         }

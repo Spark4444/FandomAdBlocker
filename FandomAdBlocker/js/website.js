@@ -14,23 +14,19 @@ let statistics = {};
 // Get the hostname of the current website and remove "www." if it exists
 const websiteHostName = window.location.hostname.replace(/^www\./, "");
 
-// Element class names to delete
+// Element class names to delete.
 // Add more ad elements as needed
-// TODO: Add descriptions as an array ["selector", "description"] and display the description in the statistics page for the element name to provide more context about the element.
 let elementNames = [
-    ".cnx",
-    ".WikiaBarWrapper",
-    ".bottom-ads-container",
-    ".top-ads-container",
-    ".top_boxad",
-    ".ad-slot-placeholder",
-    ".gpt-ad",
-    ".featured-video-player-container",
+    ".top_leaderboard-odyssey-wrapper",
     "#incontent_player_container",
-    "#top_boxad",
+    ".fandom-ad-wrapper",
+    ".bottom-ads-container",
+    "#floor_adhesion_wrapper",
+    "#rail-boxad-wrapper",
     "#mid_boxad",
-    "#incontent_boxad",
-    ".incontent_leaderboard"
+    ".sticky-modules-wrapper",
+    // Mobile Version Ads
+    "#top_boxad"
 ];
 
 let saveTimeout;
@@ -119,20 +115,20 @@ function removeAdsCookies(){
         getFromChromeStorage("options", function(value) {
             const options = checkIfAValueIsSet(value, {});
 
-            // Map the options to their corresponding element names to delete for better readability and maintainability instead of having a long if statement for each option
-            const optionsMap = {
-                selfPromotionSidebar: [".DiscordChat", ".DiscordIntegratorModule"],
-                joinTheConversation: ["#article-discussions"],
-                sidebar: [".page__right-rail"],
-                bottomNotificationsBanner: [".notifications-placeholder"],
-                relatedContentAdsSidebar: [".railModule.rail-module"],
-                recentImagesSidebar: [".rail-recentImages-module"]
-            };
-            
             // Go through each option and if it is enabled then delete the corresponding elements for that option
             Object.entries(optionsMap).forEach(([option, elementNames]) => {
+                // Check if the option is either true or undefined if underfined set it to true
                 if (options[option]) {
                     deleteElements(...elementNames);
+                }
+                else if (options[option] === undefined){
+                    deleteElements(...elementNames);
+                    options[option] = true
+                }
+
+                // Save the new options
+                if (options !== value) {
+                    saveToChromeStorage("options", options);
                 }
             });
 

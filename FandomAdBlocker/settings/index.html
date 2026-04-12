@@ -27,22 +27,24 @@
     <!-- General Settings page -->
     <div class="page">
         <div class="sectionTitle"></div>
+        <div class="pageDescription">You can use tihs page to customize which "ads" and promotional content you want ot block/unlock</div>
         <div class="optionsWrap">
             <optionSection>Sidebar</optionSection>
-            <genOption id="selfPromotionSidebar" description="Don't show Discord server promotions ads." type="checkbox" checked>Fandom Self-Promotion Ads</genOption>
-            <genOption id="recentImagesSidebar" type="checkbox" description="Don't show the recent images section that shows recently uploaded media files in sidebar." checked>Recent Images Sidebar</genOption>
-            <genOption id="relatedContentAdsSidebar" type="checkbox" description="Don't show promotional content for related Fandom things including books, audiobooks, and similar." checked>Related Content Ads</genOption>
-            <genOption id="sidebar" type="checkbox" description="Don't show the entire sidebar which usually has the ads." checked>Complete Sidebar</genOption>
+            <genOption id="selfPromotionSidebar" description="Don't show Discord server promotions ads." type="checkbox" checked>Fandom self-Promotion ads</genOption>
+            <genOption id="recentImagesSidebar" type="checkbox" description="Don't show the recent images section that shows recently uploaded media files in sidebar." checked>Recent images sidebar</genOption>
+            <genOption id="relatedContentAdsSidebar" type="checkbox" description="Don't show promotional content for related Fandom things including books, audiobooks, and similar." checked>Related content ads</genOption>
+            <genOption id="sidebar" type="checkbox" description="Don't show the entire sidebar which usually has the ads." checked>Complete sidebar</genOption>
             <optionSection>Footer</optionSection>
-            <genOption id="joinTheConversation" type="checkbox" description="Don't show the join conversation footer located at the bottom." checked>Join Conversation Footer</genOption>
+            <genOption id="joinTheConversation" type="checkbox" description="Don't show the join conversation footer located at the bottom." checked>Join conversation footer</genOption>
             <optionSection>Banners</optionSection>
-            <genOption id="bottomNotificationsBanner" type="checkbox" description="Don't show the notification banner at the bottom that usually has the login prompt." checked>Bottom notification Banner</genOption>
+            <genOption id="bottomNotificationsBanner" type="checkbox" description="Don't show the notification banner at the bottom that usually has the login prompt." checked>Bottom notification banner</genOption>
         </div>
     </div>
     
     <!-- Allowed List -->
     <div class="page" style="display: none;">
         <div class="sectionTitle"></div>
+        <div class="pageDescription">You can add fandoms on this page that will have ad blocking disabled/cookie blocking enabled</div>
         <div class="sectionSelect">
             <div class="listSection active">Allowed fandoms</div>
             <div class="listSection">Blocked fandom cookies</div> 
@@ -92,7 +94,7 @@
             </div>
             <div class="itemListItem">
                 <div class="itemHeader">Cookie Blocking</div>
-                <div class="itemContent">Block cookies from specific fandoms to enhance privacy and reduce tracking.</div>
+                <div class="itemContent">Block cookies from specific fandoms to improve privacy and reduce tracking.</div>
             </div>
             <div class="itemListItem">
                 <div class="itemHeader">Statistics</div>
@@ -147,7 +149,8 @@
         </div>
     </div>
 
-    <script src="../js/functions.js"></script>
+    <script src="../js/shared/functions.js"></script>
+    <script src="../js/shared/optionsMap.js"></script>
     <script src="js/htmlGenerator.js"></script>
     <script src="js/router.js"></script>
     <script src="js/general.js"></script>

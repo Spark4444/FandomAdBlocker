@@ -1,7 +1,7 @@
 // Background scripts work all the time, even if the extensions popup or the active scripts arent working. 
 // It also has only 1 instance of it running at all times no matter how many tabs are open.
 // Import the functions file to use the functions in it
-importScripts("functions.js");
+importScripts("shared/functions.js");
 
 // Listen for extension installation/update
 chrome.runtime.onInstalled.addListener(function(details) {

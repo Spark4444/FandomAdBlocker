@@ -174,10 +174,10 @@
 }
 
 .mainStat {
-    border: 0.1vw solid var(--main-yellow);
-    height: 2vw;
-    margin: 3% 0;
-    width: 30%;
+    border: 0.1vw solid var(--main-yellow) !important;
+    height: 2vw !important;
+    margin: 3% 0 !important;
+    width: 30% !important;
 }
 
 .message {
@@ -310,11 +310,12 @@
     border: 0.1vw solid white;
     display: flex;
     font-weight: 600;
-    height: 1vw;
+    height: 6vw;
     justify-content: space-between;
     margin: 0 0 2% 0;
     padding: 1%;
     width: 44%;
+    flex-direction: column;
 }
 
 .statisticsHeader {
@@ -447,8 +448,32 @@ body {
     font-size: 1.2vw;
 }
 
+.statisticsTop {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.statisticsBottom {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
 .topOptionsWrap > label {
     color: var(--main-yellow);
+}
+
+.bottomTextRight {
+    width: 75%;
+    text-align: right;
+}
+
+.pageDescription {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 2% 0;
 }
 
 input[type="checkbox"] {

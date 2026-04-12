@@ -19,3 +19,8 @@ function checkIfAValueIsSet(value, defaultValue){
         return value;
     }
 }
+
+// Clear all chrome storage data (used for debugging)
+function clearChromeStorage() {
+    chrome.storage.sync.clear();
+}
