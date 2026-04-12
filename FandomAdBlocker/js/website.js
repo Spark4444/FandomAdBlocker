@@ -16,6 +16,7 @@ const websiteHostName = window.location.hostname.replace(/^www\./, "");
 
 // Element class names to delete
 // Add more ad elements as needed
+// TODO: Add descriptions as an array ["selector", "description"] and display the description in the statistics page for the element name to provide more context about the element.
 let elementNames = [
     ".cnx",
     ".WikiaBarWrapper",
@@ -25,12 +26,12 @@ let elementNames = [
     ".ad-slot-placeholder",
     ".gpt-ad",
     ".featured-video-player-container",
+    "#incontent_player_container",
     "#top_boxad",
     "#mid_boxad",
     "#incontent_boxad",
     ".incontent_leaderboard"
 ];
-let originalElementNames = [...elementNames]; // Store the original element names for later use
 
 let saveTimeout;
 
@@ -117,17 +118,25 @@ function removeAdsCookies(){
     if(!websitesPausedOn.includes(websiteHostName)){
         getFromChromeStorage("options", function(value) {
             const options = checkIfAValueIsSet(value, {});
-            options.enableSelfPromotion = checkIfAValueIsSet(options.enableSelfPromotion, true);
-            // If the option to block ads is enabled, delete the ads
-            if(!options.enableSelfPromotion){
-                // Delete discord ads if the option is enabled
-                elementNames = [...elementNames, ".DiscordChat", ".DiscordIntegratorModule"];
-                deleteElements(...elementNames);
-            } 
-            else {
-                elementNames = originalElementNames; // Reset to original element names if self-promotion is enabled
-                deleteElements(...elementNames);
-            }
+
+            // Map the options to their corresponding element names to delete for better readability and maintainability instead of having a long if statement for each option
+            const optionsMap = {
+                selfPromotionSidebar: [".DiscordChat", ".DiscordIntegratorModule"],
+                joinTheConversation: ["#article-discussions"],
+                sidebar: [".page__right-rail"],
+                bottomNotificationsBanner: [".notifications-placeholder"],
+                relatedContentAdsSidebar: [".railModule.rail-module"],
+                recentImagesSidebar: [".rail-recentImages-module"]
+            };
+            
+            // Go through each option and if it is enabled then delete the corresponding elements for that option
+            Object.entries(optionsMap).forEach(([option, elementNames]) => {
+                if (options[option]) {
+                    deleteElements(...elementNames);
+                }
+            });
+
+            deleteElements(...elementNames);
         });
     }
 
@@ -172,10 +181,8 @@ chrome.storage.onChanged.addListener(function(changes, areaName) {
             }
         }
         else if (changes.options) {
-            const { enableSelfPromotion: oldEnableSelfPromotion } = changes.options.oldValue || {};
-            const { enableSelfPromotion: newEnableSelfPromotion } = changes.options.newValue || {};
-            if (newEnableSelfPromotion !== oldEnableSelfPromotion) {
-                // Self-promotion option changed, reload the page to apply the changes
+            if (changes.options.newValue !== changes.options.oldValue) {
+                // If the options changed, reload the page to apply the changes
                 window.location.reload();
             }
         }

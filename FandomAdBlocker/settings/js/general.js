@@ -7,7 +7,8 @@ document.querySelectorAll(".option").forEach(option => {
     if (checkbox) {
         checkboxes[checkbox.id] = checkbox;
 
-        if (checkbox.id.endsWith("Sidebar") && checkbox.id !== "enableSidebar") {
+        // If the checkbox id ends with "Sidebar" but does not start with "sidebar" then it is a sidebar related option that should be toggled when the "sidebar" option is toggled so we store it in the sideBarOptions array for easy access later
+        if (checkbox.id.endsWith("Sidebar") && checkbox.id.startsWith("sidebar") !== true) {
             sideBarOptions.push(checkbox.id);
         }
     }
@@ -28,9 +29,9 @@ getFromChromeStorage("options", function(value) {
 
         // Add an event listener to update the options when the checkbox state changes
         checkbox.addEventListener("change", function() {
-            if (key == "enableSidebar") {
-                // If the "enableSidebar" option is changed, update the state of all sidebar-related options to match it
-                // Since all the sidebar options are encompased in the sidebar if the sidebar is disabled then they will not be displayed regardless of their individual settings 
+            if (key == "sidebar" && this.checked === true) {
+                // If the "Sidebar" option is changed, update the state of all sidebar-related options to match it
+                // Since all the sidebar options are encompased in the sidebar if the sidebar is disabled then they will not be displayed regardless of their individual settings
                 // So it makes sense to disable them in the settings as well to avoid confusion
                 sideBarOptions.forEach(sideBarOption => {
                     checkboxes[sideBarOption].checked = this.checked;
