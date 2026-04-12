@@ -1,3 +1,7 @@
+* {
+    outline: none;
+}
+
 .FABlogo {
     width: 15%;
 }
@@ -197,10 +201,12 @@
     border-radius: 1vw;
     border: solid 0.1vw var(--darker-purple);
     display: flex;
-    height: 1vw;
+    height: 5vw;
     justify-content: space-between;
     padding: 1% 2%;
     width: 30%;
+    margin: 0 0 2% 0;
+    flex-direction: column;
 }
 
 .page {
@@ -259,6 +265,7 @@
 
 .sectionTitle {
     font-weight: 600;
+    font-size: 2vw;
     margin: 3% 0;
 }
 
@@ -420,6 +427,29 @@ body {
     width: 100vw;
 }
 
+.optionsWrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.topOptionsWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.optionSection {
+    margin: 0 0 2% 0;
+}
+
+.topOptionsWrap > label {
+    color: var(--main-yellow);
+}
+
 input[type="checkbox"] {
     appearance: none;
     aspect-ratio: 1;
@@ -428,6 +458,10 @@ input[type="checkbox"] {
     outline: none;
     transition: 0.5s;
     width: 1vw;
+}
+
+input[type="checkbox"]:hover {
+    background: var(--darker-yellow);
 }
 
 input[type="checkbox"]:checked {

@@ -13,7 +13,7 @@ function updateStatistics() {
             statistics.innerHTML = `<div class="bold noStatistics">No statistics available yet. Open a new fandom page to see statistics here.</div>`;
         }
         else {
-            statistics.innerHTML += `<div class="statisticsHeader">Blocked Elements Breakdown</div>`;
+            statistics.innerHTML += `<div class="statisticsHeader">Blocked Elements:</div>`;
             Object.entries(value).forEach(([key, val]) => {
                 if (typeof val === "number" || typeof val === "string" && typeof key === "string") {
                     statistics.innerHTML += `<div class="statisticItem"><div class="textLeft">Element <div class="textHighlight">${key}</div></div> <div class="textRight">${val} times</div></div>`;
