@@ -20,7 +20,25 @@ function checkIfAValueIsSet(value, defaultValue){
     }
 }
 
-// Clear all chrome storage data (used for debugging)
+// Debugging functions for logging and clearing Chrome storage data
 function clearChromeStorage() {
     chrome.storage.sync.clear();
+}
+
+function logSettingsData() {
+    getFromChromeStorage("options", function(value) {
+        console.log("Options:", value);
+    });
+}
+
+function logStatisticsData() {
+    getFromChromeStorage("statistics", function(value) {
+        console.log("Statistics:", value);
+    });
+}
+
+function logAllowedListData() {
+    getFromChromeStorage("allowedList", function(value) {
+        console.log("Allowed List:", value);
+    });
 }

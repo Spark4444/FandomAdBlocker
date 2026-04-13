@@ -37,6 +37,12 @@ elementNames.forEach(elementName => {
     statistics[elementName] = 0;
 });
 
+Object.entries(optionsMap).forEach(([option, elementNames]) => {
+    elementNames.forEach(elementName => {
+        statistics[elementName] = 0;
+    });
+});
+
 // Function to merge two objects by adding the values of the same keys 
 function mergeObjects(obj1, obj2) {
     const merged = {...obj1};

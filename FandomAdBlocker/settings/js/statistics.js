@@ -2,16 +2,16 @@ const statistics = document.querySelector(".statisticsList");
 const clearStatisticsbtn = document.querySelector(".clearStatisticsbtn");
 // Object with all the descriptions for regular blockers
 const  descriptionsMap = {
-    ".top_leaderboard-odyssey-wrapper": "Ad banner at the top",
-    "#incontent_player_container": "Video ad container that plays the annoying video ads",
-    ".fandom-ad-wrapper": "Center ad banner that is usually in the middle of the page, there are usually multiple of these on the page",
-    ".bottom-ads-container": "Ad banner at the bottom of the page",
-    "#floor_adhesion_wrapper": "Sticky ad banner at the bottom of the page that stays at the bottom when scrolling",
-    "#rail-boxad-wrapper": "Top ad in the sidebar",
-    "#mid_boxad": "Middle ad container in the sidebar",
-    ".sticky-modules-wrapper": "bottom ad in the sidebar that is sticky and stays at the bottom of the sidebar when scrolling",
+    ".top_leaderboard-odyssey-wrapper": "Ad banner at the top.",
+    "#incontent_player_container": "Video ad container that plays the annoying video ads.",
+    ".fandom-ad-wrapper": "Center ad banner that is usually in the middle of the page, there are usually multiple of these on the page.",
+    ".bottom-ads-container": "Ad banner at the bottom of the page.",
+    "#floor_adhesion_wrapper": "Sticky ad banner at the bottom of the page that stays at the bottom when scrolling.",
+    "#rail-boxad-wrapper": "Top ad in the sidebar.",
+    "#mid_boxad": "Middle ad container in the sidebar.",
+    ".sticky-modules-wrapper": "Bottom ad in the sidebar that is sticky and stays at the bottom of the sidebar when scrolling.",
     // Mobile Version Ads
-    "#top_boxad": "Top ad container on mobile devices",
+    "#top_boxad": "Top ad container on mobile devices.",
 };
 
 // Function to update the statistics display
@@ -41,7 +41,7 @@ function updateStatistics() {
                     Object.entries(optionsMap).forEach(([key2, val2]) => {
                         val2.forEach(element => {
                             if (element === key) {
-                                description = `${document.querySelector(`label[for="${key2}"]`).innerHTML} selector`;
+                                description = `${document.querySelector(`label[for="${key2}"]`).innerHTML} selector (button in general settings).`;
                             }
                         });
                     });

@@ -201,7 +201,7 @@
     border-radius: 1vw;
     border: solid 0.1vw var(--darker-purple);
     display: flex;
-    height: 5vw;
+    height: 6vw;
     justify-content: space-between;
     padding: 1% 2%;
     width: 30%;
@@ -496,6 +496,10 @@ input[type="checkbox"]:checked {
     background-repeat: no-repeat;
     background-size: contain;
     background-color: var(--main-yellow);
+}
+
+.option.biggerOption {
+    height: 10vw;
 }
 
 @keyframes appearHide {

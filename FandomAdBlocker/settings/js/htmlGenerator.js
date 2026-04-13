@@ -39,9 +39,16 @@ function generateSectionsAndPages() {
 }
 
 // Function that returns an HTML string for an option element with the given parameters
-function option(name, id, description, type = "checkbox", checked = false) {
+// Options explained:
+// name: the name of the option to be displayed next to the checkbox
+// id: the id attribute for the checkbox input
+// description: a brief description of the option
+// biggerOption: whether the option should be displayed as a bigger option if it has a longer description
+// type: the type of the input (e.g. checkbox, radio)
+// checked: whether the checkbox should be checked by default
+function option(name, id, description, biggerOption = false, type = "checkbox", checked = false) {
     return `
-        <div class="option">
+        <div class="option ${biggerOption ? "biggerOption" : ""}">
             <div class="topOptionsWrap">
                 <label for="${id}">${name.replace(/([A-Z])/g, ' $1').trim()}</label>
                 <input type="${type}" id="${id}" ${checked ? "checked" : ""}>
@@ -72,8 +79,9 @@ function generateOptions() {
             const type = element.getAttribute("type");
             const checked = element.checked;
             const description = element.getAttribute("description");
+            const biggerOption = element.hasAttribute("biggerOption");
 
-            newOptions += option(label, id, description, type, checked);
+            newOptions += option(label, id, description, biggerOption, type, checked);
         }
     });
 
