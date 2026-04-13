@@ -42,3 +42,15 @@ function logAllowedListData() {
         console.log("Allowed List:", value);
     });
 }
+
+function sumUpTotalStatistics() {
+    getFromChromeStorage("statistics", function(value) {
+        let total = 0;
+        Object.values(value).forEach(count => {
+            if (typeof count === "number") {
+                total += count;
+            }
+        });
+        console.log("Total statistics count:", total);
+    });
+}

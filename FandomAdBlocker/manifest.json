@@ -10,7 +10,7 @@
       "storage"
     ],
     "background": {
-      "service_worker": "js/background.js"
+      "service_worker": "js/background/main.js"
     },
     "content_scripts": [
         {
@@ -18,7 +18,11 @@
           "js": [
             "js/shared/functions.js",
             "js/shared/optionsMap.js",
-            "js/website.js"
+            "js/website/globalVariables.js",
+            "js/website/statistics.js",
+            "js/website/allowedList.js",
+            "js/website/main.js",
+            "js/website/reload.js"
           ]
         }
       ],

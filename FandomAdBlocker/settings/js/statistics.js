@@ -32,8 +32,12 @@ function updateStatistics() {
         }
         else {
             statistics.innerHTML += `<div class="statisticsHeader">Blocked Elements</div>`;
+            
+            // Sort the statistics in descending order based on the count of blocked elements
+            const sortedStatistics = Object.entries(value).sort((a, b) => b[1] - a[1]);
+
             // Go through all the statistics and map them for display
-            Object.entries(value).forEach(([key, val]) => {
+            sortedStatistics.forEach(([key, val]) => {
                 let description = descriptionsMap[key];
 
                 // If description doesnt exist take display the corresponding button name instead to not repeat the same description twice
