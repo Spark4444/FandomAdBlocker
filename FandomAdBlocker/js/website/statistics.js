@@ -21,33 +21,39 @@ function initializeStatistics() {
     });
 }
 
-// Function to merge two objects by adding the values of the same keys 
-function mergeObjects(obj1, obj2) {
-    const merged = {...obj1};
-    for (const key in obj2) {
-        if (obj2.hasOwnProperty(key)) {
-            merged[key] = (merged[key] || 0) + (obj2[key] || 0);
-        }
-    }
-    return merged;
+// Function to reset local statistics after they've been sent to background
+function resetLocalStatistics() {
+    Object.keys(statistics).forEach(key => {
+        statistics[key] = 0;
+    });
 }
 
-// Debounce function to save data to Chrome storage to prevent MAX_WRITE_OPERATIONS_PER_MINUTE quota error
+// Debounce function to send statistics to background script to prevent MAX_WRITE_OPERATIONS_PER_MINUTE quota error
 function startSavingTimeout() {
     if (saveTimeout) {
         clearTimeout(saveTimeout);
     }
     saveTimeout = setTimeout(() => {
-        getFromChromeStorage("adsBlockedTotal", function(value) {
-            // When updating the total ads blocked, we need to ensure that the value doesn't get doubled.
-            // So we subtract the previous total ads blocked before adding the new value to ensure it is accurate.
-            const newAdsBlocked = adsBlocked - totalAdsBlockedBefore;
-            saveToChromeStorage("adsBlockedTotal", newAdsBlocked + (value || 0));
-            totalAdsBlockedBefore = adsBlocked; // Update the previous total ads blocked
-        });
-        getFromChromeStorage("statistics", function(value) {
-            saveToChromeStorage("statistics", mergeObjects(value, statistics));
-        });
+        // Calculate the new ads blocked since last update
+        const newAdsBlocked = adsBlocked - totalAdsBlockedBefore;
+        
+        // Only send message if there are new statistics to report
+        if (newAdsBlocked > 0 || Object.keys(statistics).some(key => statistics[key] > 0)) {
+            const messageData = {
+                method: "updateStatistics",
+                statistics: { ...statistics }, // Send a copy of current statistics
+                adsBlocked: newAdsBlocked
+            };
+            
+            // Send message to background script to update statistics
+            chrome.runtime.sendMessage(messageData, function(response) {
+                if (response && response.success) {
+                    // Reset local counters after successful update
+                    resetLocalStatistics();
+                    totalAdsBlockedBefore = adsBlocked;
+                }
+            });
+        }
     }, 1000);
 }
 

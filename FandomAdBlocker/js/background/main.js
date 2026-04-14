@@ -29,4 +29,4 @@ function checkIfAValueIsSetWithType(value, defaultValue, type) {
     }
 }
 
-importScripts("chromeStorage.js", "badge.js");
+importScripts("chromeStorage.js", "badge.js", "stack.js");
