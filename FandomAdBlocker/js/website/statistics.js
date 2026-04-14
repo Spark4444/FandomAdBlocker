@@ -19,7 +19,6 @@ function initializeStatistics() {
     allElementNames.forEach(elementName => {
         statistics[elementName] = 0;
     });
-    console.log(statistics);
 }
 
 // Function to merge two objects by adding the values of the same keys 
@@ -49,7 +48,7 @@ function startSavingTimeout() {
         getFromChromeStorage("statistics", function(value) {
             saveToChromeStorage("statistics", mergeObjects(value, statistics));
         });
-    }, 200);
+    }, 1000);
 }
 
 // Function to increment statistics for an element

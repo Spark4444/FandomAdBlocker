@@ -5,5 +5,6 @@ const optionsMap = {
     sidebar: [".page__right-rail"],
     bottomNotificationsBanner: [".notifications-placeholder"],
     relatedContentAdsSidebar: [".railModule.rail-module"],
-    recentImagesSidebar: [".rail-recentImages-module"]
+    recentImagesSidebar: [".rail-recentImages-module"],
+    cookiesBanner: [".onetrust-pc-dark-filter.ot-fade-in", "#onetrust-banner-sdk"]
 };

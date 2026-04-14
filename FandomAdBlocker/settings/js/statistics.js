@@ -81,10 +81,10 @@ chrome.storage.onChanged.addListener(function(changes, areaName) {
 
 // Clear statistics button functionality
 clearStatisticsbtn.addEventListener("click", function() {
+    // Settimeout wrap to prevent the violation of of click handler event taking more then 50ms
     const confirmation = confirm("Are you sure you want to clear all statistics?");
     if (confirmation) {
         saveToChromeStorage("statistics", {});
         saveToChromeStorage("adsBlockedTotal", 0);
-        updateStatistics(); // Refresh the statistics display after clearing
     }
 });
