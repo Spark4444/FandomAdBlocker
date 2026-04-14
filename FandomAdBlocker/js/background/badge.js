@@ -83,7 +83,7 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
 // Listen for when the chrome storage total ads blocked changes
 chrome.storage.onChanged.addListener(function(changes, areaName) {
     if (areaName === "sync") {
-        if (changes.adsBlockedTotal) {
+        if (changes.statistics) {
             updateBadge();
         }
     }

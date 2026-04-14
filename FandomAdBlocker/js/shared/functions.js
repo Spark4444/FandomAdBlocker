@@ -20,6 +20,17 @@ function checkIfAValueIsSet(value, defaultValue){
     }
 }
 
+// Function to sum up all the statistics for the total ads blocked count
+function sumUpStatistics(statistics) {
+    let total = 0;
+    Object.values(statistics).forEach(value => {
+        if (typeof value === "number") {
+            total += value;
+        }
+    });
+    return total;
+}
+
 // Debugging functions for logging and clearing Chrome storage data
 function clearChromeStorage() {
     chrome.storage.sync.clear();

@@ -31,9 +31,9 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 count.innerHTML = adsBlocked;
 
                 // Update the total ads blocked count
-                getFromChromeStorage("adsBlockedTotal", function(value) {
-                    value = checkIfAValueIsSet(value, "0");
-                    count2.innerHTML = value;
+                getFromChromeStorage("statistics", function(value) {
+                    value = checkIfAValueIsSet(value, {});
+                    count2.innerHTML = sumUpStatistics(value) ? sumUpStatistics(value) : "0";
                 });
 
                 // Update the allowedList
@@ -117,8 +117,8 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 // Event listener for chrome storage changes, update the total count and normal count
                 chrome.storage.onChanged.addListener(function(changes, areaName) {
                     if (areaName === "sync") {
-                        if (changes.adsBlockedTotal) {
-                            count2.innerHTML = changes.adsBlockedTotal.newValue;
+                        if (changes.statistics) {
+                            count2.innerHTML = changes.statistics.newValue ? sumUpStatistics(changes.statistics.newValue) : "0";
 
                             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                                 chrome.tabs.sendMessage(tabs[0].id, {method: "getStatus"}, function(response) {

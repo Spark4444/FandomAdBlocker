@@ -1,6 +1,5 @@
 // Chrome storage variables for ad blocking statistics
 let adsBlocked = 0;
-let totalAdsBlockedBefore = 0;
 
 // Statistics for each element
 let statistics = {};
@@ -34,15 +33,12 @@ function startSavingTimeout() {
         clearTimeout(saveTimeout);
     }
     saveTimeout = setTimeout(() => {
-        // Calculate the new ads blocked since last update
-        const newAdsBlocked = adsBlocked - totalAdsBlockedBefore;
         
         // Only send message if there are new statistics to report
-        if (newAdsBlocked > 0 || Object.keys(statistics).some(key => statistics[key] > 0)) {
+        if (Object.keys(statistics).some(key => statistics[key] > 0)) {
             const messageData = {
                 method: "updateStatistics",
                 statistics: { ...statistics }, // Send a copy of current statistics
-                adsBlocked: newAdsBlocked
             };
             
             // Send message to background script to update statistics
@@ -50,11 +46,10 @@ function startSavingTimeout() {
                 if (response && response.success) {
                     // Reset local counters after successful update
                     resetLocalStatistics();
-                    totalAdsBlockedBefore = adsBlocked;
                 }
             });
         }
-    }, 1000);
+    }, 500);
 }
 
 // Function to increment statistics for an element

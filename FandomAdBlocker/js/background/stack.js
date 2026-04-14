@@ -1,6 +1,5 @@
 // Stack to accumulate statistics updates before saving to chrome storage
 let statisticsStack = {};
-let totalAdsBlockedStack = 0;
 
 // Timeout for debounced saving
 let stackSaveTimeout = null;
@@ -17,16 +16,6 @@ function mergeStatistics(target, source) {
 // Function to process the accumulated stack and update chrome storage
 function processStackAndSave() {
     // Only proceed if there's data to save
-    // Update total ads blocked
-    if (totalAdsBlockedStack > 0) {
-        getFromChromeStorage("adsBlockedTotal", function(currentTotal) {
-            console.log(currentTotal, totalAdsBlockedStack);
-            const newTotal = (currentTotal || 0) + totalAdsBlockedStack;
-            saveToChromeStorage("adsBlockedTotal", newTotal);
-            totalAdsBlockedStack = 0;
-        });
-    }
-
     // Update statistics
     if (Object.keys(statisticsStack).length > 0) {
         getFromChromeStorage("statistics", function(currentStats) {
@@ -39,15 +28,10 @@ function processStackAndSave() {
 }
 
 // Function to add statistics update to the stack
-function addToStack(statistics, adsBlocked) {
+function addToStack(statistics) {
     // Add statistics to the stack
     if (statistics && typeof statistics === "object") {
         mergeStatistics(statisticsStack, statistics);
-    }
-
-    // Add ads blocked count to the stack
-    if (adsBlocked && typeof adsBlocked === "number" && adsBlocked > 0) {
-        totalAdsBlockedStack += adsBlocked;
     }
 
     // Start or restart the debounced save
@@ -73,7 +57,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.method === "updateStatistics") {
         try {
             // Add the update to the stack
-            addToStack(request.statistics, request.adsBlocked);
+            addToStack(request.statistics);
             
             // Send success response back to content script
             sendResponse({ success: true });
