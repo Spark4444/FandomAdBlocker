@@ -7,34 +7,40 @@ const clearAllButton = document.querySelector(".clearAllButton");
 // Explanation: this variable determines which mode the user is in Allowed List/Blocked cookie list
 // I used a boolean since it only has two states and perfectly fits the use case
 let currentMode = true;
+let allowedList = {
+    websitesPausedOn: [],
+    cookiesBlockedOn: []
+};
 let messageTimeout;
-
-/** Start a timeout to hide the message after a delay */
-function startMessageTimeout() {
-    if (messageTimeout) {
-        clearTimeout(messageTimeout);
-    }
-    messageTimeout = setTimeout(() => {
-        message.innerHTML = "";
-        message.style.display = "none";
-    }, 3000);
-}
+let messageTimeout2;
 
 /** Clear the message immediately */
 function clearMessage() {
-    if (messageTimeout) {
-        clearTimeout(messageTimeout);
-        message.innerHTML = "";
-        message.style.display = "none";
-    }
+    clearTimeout(messageTimeout);
+    clearTimeout(messageTimeout2);
+    message.innerHTML = "";
+    message.classList.remove("hideMessage");
+    message.style.display = "none";
 }
 
 /** Show a message with the specified text and type (error or success) */
 function showMessage(text, type) {
+    clearTimeout(messageTimeout);
+    clearTimeout(messageTimeout2);
+
     message.innerHTML = text;
     message.style.display = "";
     message.style.color = type === "error" ? "red" : "green";
-    startMessageTimeout();
+
+    messageTimeout = setTimeout(() => {
+        message.classList.add("hideMessage");
+    }, 1500);
+
+    messageTimeout2 = setTimeout(() => {
+        message.innerHTML = "";
+        message.style.display = "none";
+        message.classList.remove("hideMessage");
+    }, 2450);
 }
 
 // Function to validate the fandom URL input
@@ -43,8 +49,9 @@ fandomInput.addEventListener("keyup", function(event) {
     if (key === "enter") {
         // *://*.fandom.com/* regex
         const fandomUrl = fandomInput.value.trim();
+        const isAlreadyInList = currentMode ? allowedList.websitesPausedOn.includes(fandomUrl) : allowedList.cookiesBlockedOn.includes(fandomUrl);
         const fandomRegex = /^(https?:\/\/)?([\w-]+\.)?fandom\.com(\/.*)?$/i;
-        if (fandomRegex.test(fandomUrl)) {
+        if (fandomRegex.test(fandomUrl) && !isAlreadyInList) {
             showMessage("Success! The fandom URL is valid.", "success");
 
             // Extract the hostname from the URL
@@ -68,8 +75,11 @@ fandomInput.addEventListener("keyup", function(event) {
                 saveToChromeStorage("allowedList", {...currentList, [key]: [...new Set([...currentList[key], hostname])]});
             });
         }
-        else {
+        else if (!isAlreadyInList) {
             showMessage("Error! Please enter a valid fandom URL. e.g. https://www.fandom.com/", "error");
+        }
+        else {
+            showMessage("Error! This fandom URL is already in the list.", "error");
         }
     }
 });
@@ -108,6 +118,7 @@ function generateAllowedList(listType) {
             cookiesBlockedOn: []
         });
 
+        allowedList = value;
         allowedLists[listIndex].innerHTML = value[listKey].map(item => `<div class="listItemContainer"><div class="listItem">${item}</div><div class="removeItem btn" key="${item}" type="${listType ? "websitesPausedOn" : "cookiesBlockedOn"}">Remove</div></div>`).join("");
 
         if (value[listKey].length === 0) {
@@ -148,14 +159,19 @@ chrome.storage.onChanged.addListener(function(changes, areaName) {
 });
 
 clearAllButton.addEventListener("click", function() {
-    const confirmation = confirm("Are you sure you want to clear all entries in the current list?");
-    if (confirmation) {
-        const key = currentMode ? "websitesPausedOn" : "cookiesBlockedOn";
-        getFromChromeStorage("allowedList", function(value) {
-            const updatedList = {...value, [key]: []};
-            saveToChromeStorage("allowedList", updatedList);
+    const isEmpty = currentMode ? allowedList.websitesPausedOn.length === 0 : allowedList.cookiesBlockedOn.length === 0;
+    if (isEmpty) {
+        showMessage("The list is already empty.", "error");
+    }
+    else {
+        confirmModal("Are you sure you want to clear all entries in the current list?", "Clear", "Cancel", function() {
+            const key = currentMode ? "websitesPausedOn" : "cookiesBlockedOn";
+            getFromChromeStorage("allowedList", function(value) {
+                const updatedList = {...value, [key]: []};
+                saveToChromeStorage("allowedList", updatedList);
+            });
+            generateAllowedList(currentMode); // Regenerate the list after clearing
+            showMessage("All entries cleared successfully.", "success");
         });
-        generateAllowedList(currentMode); // Regenerate the list after clearing
-        showMessage("All entries cleared successfully.", "success");
     }
 });

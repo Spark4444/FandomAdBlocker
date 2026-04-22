@@ -1,5 +1,8 @@
 /** Initialize the router to set the correct page on load */
 function router() {
+    // Simulate a click on the confirm modal cancel button
+    cancelButton.click();
+
     const hash = window.location.hash.toLowerCase();
     let unknownHash = true;
 
