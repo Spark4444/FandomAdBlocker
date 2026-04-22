@@ -3,6 +3,8 @@ const textElement = modal.querySelector(".modalText");
 const confirmButton = modal.querySelector(".confirmButton");
 const cancelButton = modal.querySelector(".cancelButton");
 
+dragWindow(modal);
+
 let hideTimeout;
 
 function startHideTimeout() {

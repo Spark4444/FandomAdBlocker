@@ -28,8 +28,8 @@ function showMessage(text, type) {
     clearTimeout(messageTimeout);
     clearTimeout(messageTimeout2);
 
-    message.innerHTML = text;
     message.style.display = "";
+    message.innerHTML = text;
     message.style.color = type === "error" ? "red" : "green";
 
     messageTimeout = setTimeout(() => {

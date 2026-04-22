@@ -503,16 +503,29 @@ input[type="checkbox"]:checked {
     height: 10vw;
 }
 
+.confirmModalGrab {
+    width: 100%;
+    height: 2vw;
+    cursor: grab;
+    background: var(--main-yellow);
+    border-radius: 0.2vw;
+    margin-bottom: 0.4vw;
+    border-radius: 0.9vw 0.9vw 0 0;
+}
+
+.confirmModalGrab:active {
+    cursor: grabbing;
+}
+
 .confirmModal {
-    padding: 1%;
     width: 18%;
     position: fixed;
     top: 1%;
     right: 1%;
-    height: 6.5vw;
     border: var(--main-yellow) 0.1vw solid;
     background: var(--darker-purple);
     animation: appear 0.3s linear;
+    border-radius: 1vw;
 }
 
 .hide {
@@ -528,7 +541,8 @@ input[type="checkbox"]:checked {
 }
 
 .modalContent {
-    height: 100%;
+    padding: 4%;
+    height: 7vw;
     display: flex;
     flex-direction: column;
     align-items: center;
