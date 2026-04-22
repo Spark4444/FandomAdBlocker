@@ -4,7 +4,7 @@ let allowedList = {
     cookiesBlockedOn: []
 };
 
-// Initialize allowed list from Chrome storage
+/** Initialize allowed list from Chrome storage */
 function initializeAllowedList() {
     getFromChromeStorage("allowedList", function(value) {
         allowedList = checkIfAValueIsSet(value, {
@@ -15,17 +15,17 @@ function initializeAllowedList() {
     });
 }
 
-// Check if the current website is paused
+/** Check if the current website is paused */
 function isWebsitePaused() {
     return allowedList.websitesPausedOn.includes(websiteHostName);
 }
 
-// Check if cookies should be blocked on the current website
+/** Check if cookies should be blocked on the current website */
 function shouldBlockCookies() {
     return allowedList.cookiesBlockedOn.includes(websiteHostName);
 }
 
-// Function to remove cookies from the current website
+/** Function to remove cookies from the current website */
 function removeCookies() {
     if (shouldBlockCookies()) {
         document.cookie.split(';').forEach(function(c) { 

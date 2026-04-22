@@ -19,7 +19,7 @@ chrome.runtime.onInstalled.addListener(function(details) {
     }
 });
 
-// Checks if a chrome storage value is set with a specific type
+/** Checks if a chrome storage value is set with a specific type */
 function checkIfAValueIsSetWithType(value, defaultValue, type) {
     if (value === undefined || typeof value !== type) {
         return defaultValue;

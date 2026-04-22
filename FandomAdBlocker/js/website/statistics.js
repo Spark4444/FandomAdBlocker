@@ -7,7 +7,7 @@ let statistics = {};
 // Save timeout for debouncing
 let saveTimeout;
 
-// Initialize statistics for all possible elements (avoid duplicates)
+/** Initialize statistics for all possible elements (avoid duplicates) */
 function initializeStatistics() {
     const allElementNames = new Set([
         ...elementNames,
@@ -20,14 +20,14 @@ function initializeStatistics() {
     });
 }
 
-// Function to reset local statistics after they've been sent to background
+/** Function to reset local statistics after they've been sent to background */
 function resetLocalStatistics() {
     Object.keys(statistics).forEach(key => {
         statistics[key] = 0;
     });
 }
 
-// Debounce function to send statistics to background script to prevent MAX_WRITE_OPERATIONS_PER_MINUTE quota error
+/** Debounce function to send statistics to background script to prevent MAX_WRITE_OPERATIONS_PER_MINUTE quota error */
 function startSavingTimeout() {
     if (saveTimeout) {
         clearTimeout(saveTimeout);
@@ -52,7 +52,7 @@ function startSavingTimeout() {
     }, 500);
 }
 
-// Function to increment statistics for an element
+/** Function to increment statistics for an element */
 function incrementElementStatistics(elementName) {
     statistics[elementName]++;
     adsBlocked++;

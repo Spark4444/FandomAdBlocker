@@ -1,4 +1,4 @@
-// Function to delete an element from the website
+/** Function to delete an element from the website */
 function deleteElements(...elementNames) {
     elementNames.forEach(elementName => {
         // Use querySelectorAll to get all matching elements
@@ -30,7 +30,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
 });
 
-// Function to remove ads from the website (if not paused)
+/** Function to remove ads from the website (if not paused) */
 function removeAds() {
     // Check if the website is paused and delete the ads
     if (!isWebsitePaused()) {
@@ -60,7 +60,7 @@ function removeAds() {
     }
 }
 
-// Function to remove ads and cookies from the website (if not paused and if cookies are blocked on this website)
+/** Function to remove ads and cookies from the website (if not paused and if cookies are blocked on this website) */
 function removeAdsCookies() {
     removeAds();
     removeCookies();

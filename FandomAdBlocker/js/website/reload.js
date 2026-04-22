@@ -1,4 +1,4 @@
-// Function to check if a website's membership status changed between two arrays
+/** Function to check if a website's membership status changed between two arrays */
 function hasWebsiteMembershipChanged(website, oldArray, newArray) {
     // Safely handle undefined/null arrays
     const oldList = oldArray || [];

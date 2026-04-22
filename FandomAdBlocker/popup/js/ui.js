@@ -8,7 +8,7 @@ const listIcons = document.querySelectorAll(".listIcon");
 const main = document.querySelector(".main");
 const body = document.querySelector("body");
 
-// DIsplay the no ui ui
+/** Display the no ui ui */
 function nothingToBlock() {
     main.innerHTML = `
         <div class="nothingText">Nothing to block here!</div>
@@ -20,7 +20,7 @@ function nothingToBlock() {
 }
 
 
-// Reverse the state of the buttons when clicked and return the new state
+/** Reverse the state of the buttons when clicked and return the new state */
 function toggleButton(buttonBool, index) {
     buttonBool = !buttonBool;
 
@@ -69,13 +69,13 @@ function toggleButton(buttonBool, index) {
     return buttonBool;
 }
 
-// Update the hostname and ads blocked count in the UI
+/** Update the hostname and ads blocked count in the UI */
 function updateHostNameAndAdsBlocked(hostname, adsBlocked) {
     websiteName.innerHTML = hostname;
     count.innerHTML = adsBlocked;
 }
 
-// Function to initialize the UI with the correct values and event listeners
+/** Function to initialize the UI with the correct values and event listeners */
 function initializeUI() {
 
     // Update the total ads blocked count

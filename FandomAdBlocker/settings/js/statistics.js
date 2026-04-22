@@ -14,7 +14,7 @@ const  descriptionsMap = {
     "#top_boxad": "Top ad container on mobile devices.",
 };
 
-// Function to update the statistics display
+/** Function to update the statistics display */
 function updateStatistics() {
     // Get the statistics from storage
     getFromChromeStorage("statistics", function(value){

@@ -9,7 +9,7 @@ const pagesNames = [
 ];
 let sections;
 
-// Function to generate sections and pages dynamically based on pagesNames
+/** Function to generate sections and pages dynamically based on pagesNames */
 function generateSectionsAndPages() {
     const sectionWrap = document.querySelector(".sectionWrap");
 
@@ -38,14 +38,15 @@ function generateSectionsAndPages() {
     });
 }
 
-// Function that returns an HTML string for an option element with the given parameters
-// Options explained:
-// name: the name of the option to be displayed next to the checkbox
-// id: the id attribute for the checkbox input
-// description: a brief description of the option
-// biggerOption: whether the option should be displayed as a bigger option if it has a longer description
-// type: the type of the input (e.g. checkbox, radio)
-// checked: whether the checkbox should be checked by default
+/** Function that returns an HTML string for an option element with the given parameters.
+ * Options explained:
+ * name: the name of the option to be displayed next to the checkbox
+ * id: the id attribute for the checkbox input
+ * description: a brief description of the option
+ * biggerOption: whether the option should be displayed as a bigger option if it has a longer description
+ * type: the type of the input (e.g. checkbox, radio)
+ * checked: whether the checkbox should be checked by default
+ */
 function option(name, id, description, biggerOption = false, type = "checkbox", checked = false) {
     return `
         <div class="option ${biggerOption ? "biggerOption" : ""}">
@@ -58,13 +59,14 @@ function option(name, id, description, biggerOption = false, type = "checkbox", 
     `;
 }
 
+/** Function that returns an HTML string for a section element with the given name. */
 function section(name) {
     return `
         <div class="optionSection">${name} options</div>
     `;
 }
 
-// Function to generate options dynamically based on the option elements in the HTML
+/** Function to generate options dynamically based on the option elements in the HTML */
 function generateOptions() {
     let newOptions = "";
     const options = document.querySelectorAll("genOption, optionSection");
@@ -89,7 +91,7 @@ function generateOptions() {
     optionsWrap.innerHTML = newOptions;
 }
 
-// HTML page generator
+/** HTML page generator */
 function generatePageLayout() {
     generateSectionsAndPages();
     generateOptions();

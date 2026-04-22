@@ -9,6 +9,7 @@ const clearAllButton = document.querySelector(".clearAllButton");
 let currentMode = true;
 let messageTimeout;
 
+/** Start a timeout to hide the message after a delay */
 function startMessageTimeout() {
     if (messageTimeout) {
         clearTimeout(messageTimeout);
@@ -19,6 +20,7 @@ function startMessageTimeout() {
     }, 3000);
 }
 
+/** Clear the message immediately */
 function clearMessage() {
     if (messageTimeout) {
         clearTimeout(messageTimeout);
@@ -27,6 +29,7 @@ function clearMessage() {
     }
 }
 
+/** Show a message with the specified text and type (error or success) */
 function showMessage(text, type) {
     message.innerHTML = text;
     message.style.display = "";
@@ -93,8 +96,9 @@ listSections.forEach((section, index) => {
     });
 });
 
-// Generate the allowed list based on the current mode
-// listType: true for websitesPausedOn, false for cookiesBlockedOn
+/** Generate the allowed list based on the current mode.
+ * listType: true for websitesPausedOn, false for cookiesBlockedOn
+ */
 function generateAllowedList(listType) {
     const listKey = listType ? "websitesPausedOn" : "cookiesBlockedOn";
     const listIndex = listType ? 0 : 1;

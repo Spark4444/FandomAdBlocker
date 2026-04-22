@@ -1,4 +1,4 @@
-// Initialize the router to set the correct page on load
+/** Initialize the router to set the correct page on load */
 function router() {
     const hash = window.location.hash.toLowerCase();
     let unknownHash = true;

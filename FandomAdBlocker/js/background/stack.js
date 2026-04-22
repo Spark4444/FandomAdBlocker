@@ -4,7 +4,7 @@ let statisticsStack = {};
 // Timeout for debounced saving
 let stackSaveTimeout = null;
 
-// Function to merge statistics objects by adding values for the same keys
+/** Function to merge statistics objects by adding values for the same keys */
 function mergeStatistics(target, source) {
     for (const key in source) {
         if (source.hasOwnProperty(key)) {
@@ -13,7 +13,7 @@ function mergeStatistics(target, source) {
     }
 }
 
-// Function to process the accumulated stack and update chrome storage
+/** Function to process the accumulated stack and update chrome storage */
 function processStackAndSave() {
     // Only proceed if there's data to save
     // Update statistics
@@ -27,7 +27,7 @@ function processStackAndSave() {
     }
 }
 
-// Function to add statistics update to the stack
+/** Function to add statistics update to the stack */
 function addToStack(statistics) {
     // Add statistics to the stack
     if (statistics && typeof statistics === "object") {
@@ -38,7 +38,7 @@ function addToStack(statistics) {
     startStackSaveTimeout();
 }
 
-// Function to start the debounced save timeout
+/** Function to start the debounced save timeout */
 function startStackSaveTimeout() {
     // Clear existing timeout if it exists
     if (stackSaveTimeout) {
@@ -70,7 +70,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
 });
 
-// Function to force immediate save (can be called when extension is closing)
+/** Function to force immediate save (can be called when extension is closing) */
 function forceStackSave() {
     if (stackSaveTimeout) {
         clearTimeout(stackSaveTimeout);
